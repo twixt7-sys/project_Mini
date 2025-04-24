@@ -1,16 +1,16 @@
-import __init__ as db
+from . import Base, Mapped, mapped_column, Integer, DateTime, relationship, Column, ForeignKey, dt
 
-class Like(db.Model):
+class Like(Base):
     __tablename__ = 'likes'
     # Table Creation via Annotated Declarative Mapping
     # Attributes:
-    id: db.Mapped[int] = db.mapped_column(db.Integer, primary_key=True)
-    liked_at: db.Mapped[db.DateTime] = db.mapped_column(db.DateTime, default=db.dt.now(db.dt.timezone.utc))
+    id: Mapped[int] = mapped_column(Integer, primary_key=True)
+    liked_at: Mapped[DateTime] = mapped_column(DateTime, default=dt.now(dt.timezone.utc))
     
     # Foregin Keys:
-    user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
-    post_id = db.Column(db.Integer, db.ForeignKey('posts.id'), nullable=False)
+    user_id = Column(Integer, ForeignKey('users.id'), nullable=False)
+    post_id = Column(Integer, ForeignKey('posts.id'), nullable=False)
     
     # Relationships:
-    user = db.relationship('User', backref='likes', lazy=True)
-    post = db.relationship('Post', backref='likes', lazy=True)
+    user = relationship('User', backref='likes', lazy=True)
+    post = relationship('Post', backref='likes', lazy=True)

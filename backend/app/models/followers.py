@@ -1,7 +1,8 @@
-import __init__ as db
+from . import Table, Column, Integer, ForeignKey
+
 
 # imperative mapping
-followers = db.Table('followers',
-    db.Column('follower_id', db.Integer, db.ForeignKey('users.id'), primary_key=True),
-    db.Column('followed_id', db.Integer, db.ForeignKey('users.id'), primary_key=True)
+followers = Table('followers',
+    Column('follower_id', Integer, ForeignKey('users.id'), primary_key=True),
+    Column('followed_id', Integer, ForeignKey('users.id'), primary_key=True)
 )
