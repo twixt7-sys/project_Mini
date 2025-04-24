@@ -5,7 +5,6 @@ from .comment import Comment
 from .like import Like
 from .followers import followers
 
-from app.extensions import Base
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 from sqlalchemy import Column, Integer, String, ForeignKey, DateTime, Text, Table
 import datetime as dt
@@ -20,6 +19,8 @@ models = [
 	"User", "Post", "Comment", "Like", "followers"
 ]
 
+if __name__ == "__main__":
+    pass
 '''
 type_map: Dict[Type[Any], TypeEngine[Any]] = {
     bool: types.Boolean(),

@@ -1,5 +1,8 @@
-from . import Base, Mapped, mapped_column, Integer, DateTime, relationship, Column, ForeignKey, dt
+from sqlalchemy import Column, Integer, Text, DateTime, ForeignKey
+from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column, relationship
+from datetime import datetime as dt
 
+from ..extensions import Base
 class Like(Base):
     __tablename__ = 'likes'
     # Table Creation via Annotated Declarative Mapping

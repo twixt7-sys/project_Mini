@@ -1,6 +1,8 @@
-from . import Base, Mapped, mapped_column, String, Integer, DateTime, relationship, Column, ForeignKey, Text, dt
+from sqlalchemy import Column, Integer, Text, DateTime, ForeignKey, String
+from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column, relationship
+from datetime import datetime as dt
 
-
+from ..extensions import Base
 class Post(Base):
     __tablename__ = 'posts'
     # Table Creation via Annotated Declarative Mapping

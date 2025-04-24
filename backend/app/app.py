@@ -1,5 +1,5 @@
 from flask import Flask
-import models as m
+from extensions import models as m
 
 app = Flask(__name__)
 
@@ -10,10 +10,11 @@ def home():
 
 @app.route('/pingmodels')
 def hello():
-    s: str = []
-    for model in m.models:
-        s += f'{model.__name__} is loaded\n'
-    return s
+    result = []
+    for s in m:
+        if s:
+            result.append(f"{s} is running! \n ")
+    return result.__str__() + "Models are running!"
 
 if __name__ == '__main__':
     app.run(debug=True)
