@@ -2,8 +2,9 @@ import __init__ as db
 
 class User(db.Base):
   __tablename__ = 'users'
-
-  # Mapped Attributes:
+  # Table creation via Annotated Declarative Mapping
+  
+  # Attributes:
   id: db.Mapped[int] = db.mapped_column(db.Integer, primary_key=True) #autoincrement??
   username: db.Mapped[str] = db.mapped_column(db.String(80), unique=True, nullable=False)
   email: db.Mapped[str] = db.mapped_column(db.String(80), unique=True, nullable=False)
