@@ -1,6 +1,6 @@
 from sqlalchemy import Column, Integer, Text, DateTime, ForeignKey, String
 from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column, relationship
-from datetime import datetime as dt
+from datetime import datetime, timezone
 
 from extensions import Base
 class User(Base):
@@ -12,7 +12,7 @@ class User(Base):
   username: Mapped[str] = mapped_column(String(80), unique=True, nullable=False)
   email: Mapped[str] = mapped_column(String(80), unique=True, nullable=False)
   password: Mapped[str] = mapped_column(String(80), nullable=False)
-  created_at: Mapped[DateTime] = mapped_column(DateTime, default=dt.now(dt.timezone.utc))
+  created_at: Mapped[DateTime] = mapped_column(DateTime, default=datetime.now())
   
   #relationships:
   posts = relationship('Post', backref='user', lazy=True)
