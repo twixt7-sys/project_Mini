@@ -10,7 +10,7 @@ models = [
 load_dotenv()
 
 mapper_registry = registry()
-Base = mapper_registry.generate_base()
+Base: DeclarativeBase = mapper_registry.generate_base()
 
 DB_USER = os.getenv('DB_USER')
 DB_PASS = os.getenv('DB_PASS')
