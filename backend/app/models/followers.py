@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, Text, DateTime, ForeignKey, Table
+from sqlalchemy import Column, Integer, ForeignKey, Table
 
 
 # imperative mapping
