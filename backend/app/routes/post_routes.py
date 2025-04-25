@@ -1,5 +1,5 @@
 from flask import Blueprint, request, jsonify
-from ..extensions import SessionLocal
+from extensions import SessionLocal
 from models import post as p
 
 post_bp = Blueprint('posts', __name__, url_prefix='/posts') #post routes

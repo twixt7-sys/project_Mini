@@ -1,4 +1,4 @@
-from app.routes.post_routes import post_bp
+from routes.post_routes import post_bp
 from flask import Flask
 from .extensions import models, Base, engine
 

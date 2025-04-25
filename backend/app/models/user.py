@@ -2,7 +2,7 @@ from sqlalchemy import Column, Integer, Text, DateTime, ForeignKey, String
 from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column, relationship
 from datetime import datetime as dt
 
-from ..extensions import Base
+from extensions import Base
 class User(Base):
   __tablename__ = 'users'
   # Table creation via Annotated Declarative Mapping
