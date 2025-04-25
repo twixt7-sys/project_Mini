@@ -1,3 +1,5 @@
+import os
+from dotenv import load_dotenv
 from sqlalchemy import create_engine
 from sqlalchemy.orm import DeclarativeBase, registry, sessionmaker, scoped_session
 
@@ -5,15 +7,16 @@ models = [
 	"User", "Post", "Comment", "Like", "followers"
 ]
 
+load_dotenv()
+
 mapper_registry = registry()
 Base = mapper_registry.generate_base()
 
-# ⚙️ MySQL config — update with your actual creds
-DB_USER = 'your_mysql_user'
-DB_PASS = 'your_mysql_password'
-DB_HOST = 'localhost'
-DB_PORT = '3306'
-DB_NAME = 'mini_db'
+DB_USER = os.getenv('DB_USER')
+DB_PASS = os.getenv('DB_PASS')
+DB_HOST = os.getenv('DB_HOST')
+DB_PORT = os.getenv('DB_PORT')
+DB_NAME = os.getenv('DB_NAME')
 
 DATABASE_URL = f"mysql+mysqlconnector://{DB_USER}:{DB_PASS}@{DB_HOST}:{DB_PORT}/{DB_NAME}"
 
