@@ -13,7 +13,3 @@ class Like(Base):
     # Foregin Keys:
     user_id = Column(Integer, ForeignKey('users.id'), nullable=False)
     post_id = Column(Integer, ForeignKey('posts.id'), nullable=False)
-    
-    # Relationships:
-    user = relationship('User', backref='likes', lazy=True)
-    post = relationship('Post', backref='likes', lazy=True)

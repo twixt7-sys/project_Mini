@@ -18,7 +18,3 @@ class Comment(Base):
     # Mapped Foreign Keys:
     user_id: Mapped[int] = mapped_column(Integer, ForeignKey('users.id'), nullable=False)
     post_id: Mapped[int] = mapped_column(Integer, ForeignKey('posts.id'), nullable=False)
-
-    # Relationships:
-    user = relationship('User', backref='comments', lazy=True)
-    post = relationship('Post', backref='comments', lazy=True)

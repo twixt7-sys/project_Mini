@@ -1,6 +1,6 @@
 from routes.post_routes import post_bp
 from flask import Flask
-from extensions import models, Base, engine
+from extensions import Base, engine
 
 def create_app():
     app = Flask(__name__)
