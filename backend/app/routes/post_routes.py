@@ -9,14 +9,17 @@ post_bp = Blueprint('posts', __name__, url_prefix='/posts') #post routes
 def get_posts():
     with SessionLocal() as session:
         posts = session.query(p.Post).all()
-        return jsonify([{
-            'id': post.id,
-            'content': post.content,
-            'image_url': post.image_url,
-            'created_at': post.created_at,
-            'updated_at': post.updated_at,
-            'user_id': post.user_id
-        } for post in posts])
+        if posts: return jsonify([{
+				'id': post.id,
+				'content': post.content,
+				'image_url': post.image_url,
+				'created_at': post.created_at,
+				'updated_at': post.updated_at,
+				'user_id': post.user_id
+			} for post in posts])
+        else:
+            return jsonify({'message': 'No posts found'}), 404
+
 
 # Get a single post
 @post_bp.route('/<int:post_id>', methods=['GET'])
