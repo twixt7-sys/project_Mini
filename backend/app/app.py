@@ -1,4 +1,5 @@
 from routes.post_routes import post_bp
+from routes.user_routes import user_bp
 from flask import Flask
 from extensions import Base, engine
 
@@ -7,6 +8,7 @@ def create_app():
     
     # Register blueprints
     app.register_blueprint(post_bp)
+    app.register_blueprint(user_bp)
     
     # Initialize database
     Base.metadata.create_all(engine)

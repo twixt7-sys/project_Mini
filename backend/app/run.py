@@ -1,4 +1,4 @@
-from flask import Blueprint, request, jsonify
+from flask import request, jsonify
 from extensions import SessionLocal
 
 from app import create_app

@@ -9,20 +9,15 @@ class PostSchema(Schema):
 	user_id = fields.Integer(required=True)
 	image_url = fields.String(load_default=None, dump_default=None)
 
-post_bp = Blueprint('posts', __name__, url_prefix='/posts')  # post routes
+# post routes blueprint
+post_bp = Blueprint('posts', __name__, url_prefix='/posts')  
 
 # GET all posts
 @post_bp.route('/', methods=['GET'])
 def get_posts():
 	with SessionLocal() as session:
 		posts = session.query(p.Post).all()
-		return jsonify([{
-			'id': post.id,
-			'content': post.content,
-			'image_url': post.image_url,
-			'created_at': post.created_at,
-			'user_id': post.user_id
-		} for post in posts])
+		return jsonify(posts)
 
 
 # GET a single post by ID
