@@ -7,7 +7,7 @@ from marshmallow import Schema, fields, ValidationError
 class PostSchema(Schema):
 	content = fields.String(required=True)
 	user_id = fields.Integer(required=True)
-	image_url = fields.String(missing=None)  # optional
+	image_url = fields.String(load_default=None, dump_default=None)
 
 post_bp = Blueprint('posts', __name__, url_prefix='/posts')  # post routes
 
@@ -22,7 +22,7 @@ def get_posts():
 			'image_url': post.image_url,
 			'created_at': post.created_at,
 			'user_id': post.user_id
-		} for post in posts])  # returns [] if empty
+		} for post in posts])
 
 
 # GET a single post by ID
@@ -54,7 +54,7 @@ def create_post():
 		new_post = p.Post(
 			content=valid_data['content'],
 			user_id=valid_data['user_id'],
-			image_url=valid_data.get('image_url')  # might be None
+			image_url=valid_data.get('image_url')
 		)
 		session.add(new_post)
 		session.commit()

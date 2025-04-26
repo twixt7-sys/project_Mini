@@ -14,7 +14,7 @@ class Post(Base):
 
     # Foreign key:
     user_id = Column(Integer, ForeignKey('users.id'), nullable=False)
-    
+
     #Relationships:
     comments = relationship('Comment', backref='post', lazy=True)
     likes = relationship('Like', backref='post', lazy=True)

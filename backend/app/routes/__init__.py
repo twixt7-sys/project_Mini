@@ -1,0 +1,1 @@
+from .post_routes import post_bp
