@@ -1,73 +1,89 @@
 from flask import Blueprint, request, jsonify
 from extensions import SessionLocal
 from models import post as p
+from marshmallow import Schema, fields, ValidationError
 
-post_bp = Blueprint('posts', __name__, url_prefix='/posts') #post routes
+# Marshmallow schema for input validation
+class PostSchema(Schema):
+	content = fields.String(required=True)
+	user_id = fields.Integer(required=True)
+	image_url = fields.String(load_default=None, dump_default=None)
 
-# Get all posts
+# post routes blueprint
+post_bp = Blueprint('posts', __name__, url_prefix='/posts')  
+
+# GET all posts
 @post_bp.route('/', methods=['GET'])
 def get_posts():
-    with SessionLocal() as session:
-        posts = session.query(p.Post).all()
-        if posts: return jsonify([{
-				'id': post.id,
-				'content': post.content,
-				'image_url': post.image_url,
-				'created_at': post.created_at,
-				'updated_at': post.updated_at,
-				'user_id': post.user_id
-			} for post in posts])
-        else:
-            return jsonify({'message': 'No posts found'}), 404
+	with SessionLocal() as session:
+		posts = session.query(p.Post).all()
+		return jsonify(posts)
 
 
-# Get a single post
+# GET a single post by ID
 @post_bp.route('/<int:post_id>', methods=['GET'])
 def get_post(post_id):
 	with SessionLocal() as session:
 		post = session.get(p.Post, post_id)
 		if not post:
-			return jsonify({'error': 'Post not found'}), 404
+			return jsonify({'error': f'Post with id {post_id} not found'}), 404
 		return jsonify({
 			'id': post.id,
-			'title': post.title,
-			'content': post.content
+			'content': post.content,
+			'image_url': post.image_url,
+			'created_at': post.created_at,
+			'user_id': post.user_id
 		})
 
-# POST create new post
+
+# POST create a new post
 @post_bp.route('/', methods=['POST'])
 def create_post():
 	data = request.get_json()
+	try:
+		valid_data = PostSchema().load(data)
+	except ValidationError as err:
+		return jsonify({'errors': err.messages}), 400
+
 	with SessionLocal() as session:
 		new_post = p.Post(
-			title=data.get('title'),
-			content=data.get('content')
+			content=valid_data['content'],
+			user_id=valid_data['user_id'],
+			image_url=valid_data.get('image_url')
 		)
 		session.add(new_post)
 		session.commit()
 		session.refresh(new_post)
-		return jsonify({'id': new_post.id}), 201
+		return jsonify({
+			'id': new_post.id,
+			'content': new_post.content,
+			'image_url': new_post.image_url,
+			'created_at': new_post.created_at,
+			'user_id': new_post.user_id
+		}), 201
 
-# PUT update post
+
+# PUT update a post
 @post_bp.route('/<int:post_id>', methods=['PUT'])
 def update_post(post_id):
 	data = request.get_json()
 	with SessionLocal() as session:
 		post = session.get(p.Post, post_id)
 		if not post:
-			return jsonify({'error': 'Post not found'}), 404
-		post.title = data.get('title', post.title)
+			return jsonify({'error': f'Post with id {post_id} not found'}), 404
 		post.content = data.get('content', post.content)
+		post.image_url = data.get('image_url', post.image_url)
 		session.commit()
 		return jsonify({'message': 'Post updated'})
 
-# DELETE post
+
+# DELETE a post
 @post_bp.route('/<int:post_id>', methods=['DELETE'])
 def delete_post(post_id):
 	with SessionLocal() as session:
 		post = session.get(p.Post, post_id)
 		if not post:
-			return jsonify({'error': 'Post not found'}), 404
+			return jsonify({'error': f'Post with id {post_id} not found'}), 404
 		session.delete(post)
 		session.commit()
 		return jsonify({'message': 'Post deleted'})

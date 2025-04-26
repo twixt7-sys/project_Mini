@@ -11,11 +11,10 @@ class Post(Base):
     content: Mapped[str] = mapped_column(Text, nullable=False)
     image_url: Mapped[str] = mapped_column(String(255), nullable=True)
     created_at: Mapped[DateTime] = mapped_column(DateTime, default=datetime.now())
-    updated_at: Mapped[DateTime] = mapped_column(DateTime, default=datetime.now(), onupdate=datetime.now())
-    
+
     # Foreign key:
     user_id = Column(Integer, ForeignKey('users.id'), nullable=False)
-    
+
     #Relationships:
     comments = relationship('Comment', backref='post', lazy=True)
     likes = relationship('Like', backref='post', lazy=True)
