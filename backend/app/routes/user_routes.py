@@ -3,6 +3,7 @@ from extensions import SessionLocal
 from models import user as u
 from marshmallow import Schema, fields, ValidationError
 
+
 # Marshmallow schema for input validation
 class UserSchema(Schema):
     username = fields.String(required=True)
