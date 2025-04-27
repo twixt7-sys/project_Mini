@@ -17,7 +17,8 @@ post_bp = Blueprint('posts', __name__, url_prefix='/posts')
 def get_posts():
 	with SessionLocal() as session:
 		posts = session.query(p.Post).all()
-		return jsonify(posts)
+		result = PostSchema(many=True).dump(posts)
+		return jsonify(result)
 
 
 # GET a single post by ID
@@ -67,12 +68,17 @@ def create_post():
 @post_bp.route('/<int:post_id>', methods=['PUT'])
 def update_post(post_id):
 	data = request.get_json()
+	try:
+		valid_data = PostSchema(partial=True).load(data)
+	except ValidationError as err:
+		return jsonify({'errors': err.messages}), 400
+
 	with SessionLocal() as session:
 		post = session.get(p.Post, post_id)
 		if not post:
 			return jsonify({'error': f'Post with id {post_id} not found'}), 404
-		post.content = data.get('content', post.content)
-		post.image_url = data.get('image_url', post.image_url)
+		post.content = valid_data.get('content', post.content)
+		post.image_url = valid_data.get('image_url', post.image_url)
 		session.commit()
 		return jsonify({'message': 'Post updated'})
 

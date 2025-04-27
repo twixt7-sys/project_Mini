@@ -1,1 +1,1 @@
-JWT_SECRET_KEY = 'your-secret-key'
+JWT_SECRET_KEY = 'jf9s8f3h28fhf2h3f8h2f8h92fh92h3f9h239fh923hf9283hf92'
