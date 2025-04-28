@@ -27,3 +27,10 @@ class User(Base):
   secondaryjoin='User.id==followers.c.followed_id',
   backref='followers'
   )
+  
+  def to_dict(self):
+        return {
+            'id': self.id,
+            'username': self.username,
+            'email': self.email
+        }

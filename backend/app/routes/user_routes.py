@@ -25,7 +25,7 @@ def get_user(user_id):
     user = db.query(u.User).get(user_id)
     return jsonify(user)
 
-@user_bp.route('/', methods=['POST'])
+@user_bp.route('/create', methods=['POST'])
 def create_user():
     db = SessionLocal()
     data = request.get_json()
@@ -39,7 +39,7 @@ def create_user():
     db.add(new_user)
     db.commit()
     db.refresh(new_user)
-    return jsonify(new_user), 201
+    return jsonify(new_user.to_dict()), 201
 
 @user_bp.route('/<int:user_id>', methods=['PUT'])
 def update_user(user_id):
