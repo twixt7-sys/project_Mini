@@ -12,9 +12,5 @@ app = create_app()
 def home():
 	return jsonify({
 		"endpoints": {"posts": "/posts", "users": "/users"},
-		"message": "App served. Welcome to the API."
+		"message": "App served. Welcome to the API. [testing live changes]"
 	})
-
-# --- Remove this block ---
-# if __name__ == '__main__':
-# 	app.run(debug=True)
