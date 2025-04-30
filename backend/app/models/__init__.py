@@ -5,19 +5,7 @@ from .comment import Comment
 from .like import Like
 from .followers import followers
 
-from sqlalchemy.orm import Mapped, mapped_column, relationship
-from sqlalchemy import Column, Integer, String, ForeignKey, DateTime, Text, Table
-import datetime as dt
 
-__all__ = [
-	"User", "Post", "Comment", "Like", "followers",
-	"Base", "Mapped", "mapped_column", "relationship",
-	"Column", "Integer", "String", "ForeignKey", "DateTime", "dt"
-]
-
-models = [
-	"User", "Post", "Comment", "Like", "followers"
-]
 
 if __name__ == "__main__":
     pass
