@@ -13,18 +13,21 @@ class UserSchema(Schema):
 # user routes blueprint
 user_bp = Blueprint('users', __name__, url_prefix='/users')
 
+# Tested and working
 @user_bp.route('/', methods=['GET'])
 def get_users():
     db = SessionLocal()
-    users = db.query(u.User).all()
-    return jsonify(users)
+    users: list[u.User] = db.query(u.User).all()
+    return jsonify([user.to_dict() for user in users])
 
+# Tested and working
 @user_bp.route('/<int:user_id>', methods=['GET'])
 def get_user(user_id):
     db = SessionLocal()
-    user = db.query(u.User).get(user_id)
-    return jsonify(user)
+    user: u.User = db.query(u.User).get(user_id)
+    return jsonify(user.to_dict())
 
+# Tested and working
 @user_bp.route('/create', methods=['POST'])
 def create_user():
     db = SessionLocal()
@@ -41,6 +44,7 @@ def create_user():
     db.refresh(new_user)
     return jsonify(new_user.to_dict()), 201
 
+# TO TEST
 @user_bp.route('/<int:user_id>', methods=['PUT'])
 def update_user(user_id):
     db = SessionLocal()
