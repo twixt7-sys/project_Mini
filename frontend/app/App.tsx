@@ -1,11 +1,11 @@
 import React from 'react'
 import { AuthProvider } from './context/AuthContext'
-import Navigation from './navigation'
+import RootNavigator from './navigation/RootNavigator' // or however you're structuring screens
 
 const App = () => {
 	return (
 		<AuthProvider>
-			<Navigation />
+			<RootNavigator />
 		</AuthProvider>
 	)
 }
