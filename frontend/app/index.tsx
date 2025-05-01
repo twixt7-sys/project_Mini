@@ -31,5 +31,5 @@ const styles = StyleSheet.create({
     fontSize: 25,
     fontFamily: 'pixeloperator',
     color: '#fff',
-  },
+  }
 });
