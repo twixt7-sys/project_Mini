@@ -10,7 +10,7 @@ const RegisterScreen = () => {
 
 	const handleRegister = () => {
 		if (!email || !password || !username) return
-		register(username, email, password)
+		register({username, email, password})
 	}
 
 	return (
