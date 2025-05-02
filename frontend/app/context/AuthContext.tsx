@@ -3,13 +3,14 @@ import React, { createContext, useState, useEffect, ReactNode } from 'react'
 type AuthContextType = {
 	userToken: string | null
 	login: (token: string) => void
-	signOut: () => void
+	logout: () => void
+
 }
 
 export const AuthContext = createContext<AuthContextType>({
 	userToken: null,
 	login: () => {},
-	signOut: () => {},
+	logout: () => {},
 })
 
 type Props = {
@@ -24,7 +25,7 @@ export const AuthProvider: React.FC<Props> = ({ children }) => {
 		// optionally persist the token with AsyncStorage here
 	}
 
-	const signOut = () => {
+	const logout = () => {
 		setUserToken(null)
 		// clear persisted token
 	}
@@ -35,7 +36,7 @@ export const AuthProvider: React.FC<Props> = ({ children }) => {
 	}, [])
 
 	return (
-		<AuthContext.Provider value={{ userToken, login, signOut }}>
+		<AuthContext.Provider value={{ userToken, login, logout }}>
 			{children}
 		</AuthContext.Provider>
 	)
