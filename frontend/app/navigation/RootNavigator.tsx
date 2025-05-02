@@ -8,9 +8,9 @@ import { AuthContext } from '../context/AuthContext'
 // Screens
 import LoginScreen from '../screens/LoginScreen'
 import RegisterScreen from '../screens/RegisterScreen'
-import FeedScreen from '../screens/FeedScreen'
+import FeedScreen from '../screens/FeedScreen' //homescreen
 import ProfileScreen from '../screens/ProfileScreen'
-import PostDetailsScreen from '../screens/PostDetailsScreen'
+import PostDetailsScreen from '../screens/PostDetailScreen'
 
 const Stack = createStackNavigator()
 
