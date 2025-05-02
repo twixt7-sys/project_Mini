@@ -5,6 +5,7 @@ type AuthContextType = {
 	login: (token: string) => void
 	logout: () => void
 	register: (user: { username: string; email: string; password: string }) => void
+	user?: {username: string; email: string	}
 }
 
 export const AuthContext = createContext<AuthContextType>({
@@ -12,6 +13,7 @@ export const AuthContext = createContext<AuthContextType>({
 	login: () => {},
 	logout: () => {},
 	register: () => {},
+	user: undefined,
 })
 
 type Props = {
@@ -42,13 +44,20 @@ export const AuthProvider: React.FC<Props> = ({ children }) => {
 		}
 	}
 
+	const user = {
+		username: 'exampleUser',
+		email: '	example@example.com',
+	}
+
+	// optional: retrieve token from storage on first load
+
 	// optional: retrieve token from storage on first load
 	useEffect(() => {
 		// retrieveTokenFromStorage()
 	}, [])
 
 	return (
-		<AuthContext.Provider value={{ userToken, login, logout, register }}>
+		<AuthContext.Provider value={{ userToken, login, logout, register, user }}>
 			{children}
 		</AuthContext.Provider>
 	)
