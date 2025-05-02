@@ -8,7 +8,7 @@ import { AuthContext } from '../context/AuthContext'
 // Screens
 import LoginScreen from '../screens/LoginScreen'
 import RegisterScreen from '../screens/RegisterScreen'
-import FeedScreen from '../screens/FeedScreen' //homescreen
+import HomeScreen from '../screens/homescreen'
 import ProfileScreen from '../screens/ProfileScreen'
 import PostDetailsScreen from '../screens/PostDetailScreen'
 
@@ -23,7 +23,7 @@ const RootNavigator = () => {
         {user ? (
           // If the user is authenticated, show the app's main flow
           <>
-            <Stack.Screen name="Feed" component={FeedScreen} />
+            <Stack.Screen name="Feed" component={HomeScreen} />
             <Stack.Screen name="Profile" component={ProfileScreen} />
             <Stack.Screen name="PostDetails" component={PostDetailsScreen} />
           </>
