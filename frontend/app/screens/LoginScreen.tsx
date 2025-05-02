@@ -9,7 +9,7 @@ const LoginScreen = () => {
 
 	const handleLogin = () => {
 		if (!email || !password) return
-		login(email, password)
+		login(email)
 	}
 
 	return (
