@@ -1,10 +1,15 @@
 import React from 'react'
 import { View, Text, StyleSheet } from 'react-native'
+import { Post } from '../types/Post'
 
-const PostCard = ({ post }) => {
+type PostCardProps = {
+	post: Post
+}
+
+const PostCard: React.FC<PostCardProps> = ({ post }) => {
 	return (
 		<View style={styles.card}>
-			<Text style={styles.username}>{post.author.username}</Text>
+			<Text style={styles.username}>{post.author}</Text>
 			<Text style={styles.content}>{post.content}</Text>
 		</View>
 	)

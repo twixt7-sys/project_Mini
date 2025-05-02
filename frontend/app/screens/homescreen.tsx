@@ -3,14 +3,7 @@ import { View, ScrollView, RefreshControl } from 'react-native'
 import { AuthContext } from '../context/AuthContext'
 import { getPosts } from '../services/post'
 import PostCard from '../components/PostCard'
-
-// define the type of a single post
-type Post = {
-	id: string
-	title: string
-	content: string
-	// add any other fields your PostCard uses
-}
+import { Post } from '../types/Post'
 
 const HomeScreen = () => {
 	const { userToken } = useContext(AuthContext)
@@ -18,6 +11,7 @@ const HomeScreen = () => {
 	const [refreshing, setRefreshing] = useState(false)
 
 	const fetchPosts = async () => {
+		if (!userToken) return
 		try {
 			const data = await getPosts(userToken)
 			setPosts(data)
