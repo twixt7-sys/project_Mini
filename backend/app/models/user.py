@@ -3,10 +3,11 @@ from sqlalchemy.orm import Mapped, mapped_column, relationship
 from datetime import datetime
 
 from extensions import Base
+
 class User(Base):
   __tablename__ = 'users'
   # Table creation via Annotated Declarative Mapping
-  
+
   # Attributes:
   id: Mapped[int] = mapped_column(Integer, primary_key=True) #autoincrement??
   username: Mapped[str] = mapped_column(String(80), unique=True, nullable=False)
@@ -30,7 +31,7 @@ class User(Base):
 
   def to_dict(self):
         return {
-            'id': self.id,
-            'username': self.username,
-            'email': self.email
+          'id': self.id,
+          'username': self.username,
+          'email': self.email
         }

@@ -23,6 +23,7 @@
       "favicon": "./assets/images/favicon.png"
     },
     "plugins": [
+      "expo-linear-gradient",
       "expo-router",
       [
         "expo-splash-screen",
