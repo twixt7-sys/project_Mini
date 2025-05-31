@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Text, View, Button, Image, StyleSheet } from 'react-native';
 import 'expo-router/entry';
 import { useNavigation } from '@react-navigation/native';
@@ -7,18 +7,16 @@ import { router } from 'expo-router';
 const HomeScreen = () => {
 
   const navigator = useNavigation();
-
+  useEffect(() => {
+    setTimeout(() => {
+      router.push('/screens/homescreen');
+    }, 2000);
+  }, []);
   return (
     <View style={styles.container}>
       <Image
-        source={require('../../assets/images/Mini Logo.png')} // Replace with your logo URL
+        source={require('../assets/images/Mini Logo.png')} // Replace with your logo URL
         style={styles.logo}
-      />
-      <Button
-        title="Go to Profile"
-        onPress={() => {
-          router.push('/screens/homescreen');
-        }}
       />
     </View>
   );

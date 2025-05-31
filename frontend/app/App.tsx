@@ -11,3 +11,8 @@ const App = () => {
 }
 
 export default App
+
+// This is the main entry point of the app, where we wrap our navigation in the AuthProvider
+// to provide authentication context to all screens.
+
+
