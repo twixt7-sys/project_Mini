@@ -5,8 +5,10 @@ from models import post as p
 from models import user as u
 from routes.post_routes import post_bp
 from marshmallow import Schema, fields, ValidationError
+from flask_cors import CORS
 
 app = create_app()
+CORS(app)
 
 @app.route('/')
 def home():

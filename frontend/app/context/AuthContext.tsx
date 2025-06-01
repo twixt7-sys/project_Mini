@@ -1,10 +1,11 @@
 import React, { createContext, useState, useEffect, ReactNode } from 'react'
+import { loginUser, registerUser } from '../services/auth'
 
 type AuthContextType = {
 	userToken: string | null
 	login: (email: string, password: string) => Promise<void>
 	logout: () => void
-	register: (user: { username: string; email: string; password: string }) => void
+	register: (user: { username: string; email: string; password: string; confirmPassword: string }) => Promise<void>
 	user?: {username: string; email: string	}
 }
 
@@ -12,7 +13,7 @@ export const AuthContext = createContext<AuthContextType>({
 	userToken: null,
 	login: () => Promise.resolve(),
 	logout: () => {},
-	register: () => {},
+	register: () => Promise.resolve(),
 	user: undefined,
 })
 
@@ -24,31 +25,30 @@ export const AuthProvider: React.FC<Props> = ({ children }) => {
 	const [userToken, setUserToken] = useState<string | null>(null)
 
 	const login = async (email: string, password: string) => {
-	try {
-		// const response = await api.login({ email, password })
-		// const token = response.token
-		const token = 'mockedToken' // Replace with real token
-		setUserToken(token)
-		// await AsyncStorage.setItem('userToken', token)
-	} catch (error) {
-		console.error('Login failed', error)
-	}
-}
-
-	const logout = () => {
-		setUserToken(null)
-		// clear persisted token
-	}
-
-	const register = async (user: { username: string; email: string; password: string }) => {
 		try {
-			// make API call to register the user
-			// const response = await api.register(user)
-			// setUserToken(response.token)
-			// optionally persist the token with AsyncStorage here
+			const data = await loginUser(email, password)
+			const token = data.token
+			setUserToken(token)
+			// optionally persist token in AsyncStorage
+		} catch (error) {
+			console.error('Login failed', error)
+		}
+	}
+
+	const register = async (user: { username: string; email: string; password: string; confirmPassword: string }) => {
+		try {
+			const data = await registerUser(user)
+			const token = data.token
+			setUserToken(token)
+			// optionally persist token in AsyncStorage
 		} catch (error) {
 			console.error('Registration failed', error)
 		}
+	}
+
+		const logout = () => {
+		setUserToken(null)
+		// clear persisted token
 	}
 
 	const user = {

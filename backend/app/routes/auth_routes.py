@@ -4,6 +4,7 @@ from flask_jwt_extended import create_access_token, jwt_required, get_jwt_identi
 from models import User as u
 from extensions import SessionLocal
 from marshmallow import Schema, fields, ValidationError
+from flask_jwt_extended import get_jwt
 
 # Marshmallow schema for input validation
 class UserSchema(Schema):
@@ -30,7 +31,6 @@ def register():
         return jsonify(err.messages), 400
 
     username = result['username']
-
     email = result['email']
     password = result['password']
     confirm_password = result['confirm_password']
@@ -42,7 +42,7 @@ def register():
 
     db = SessionLocal()
     user = u.User(username=username, email=email, password=hashed_password)
-    
+
     db.add(user)
     db.commit()
     db.refresh(user)
@@ -84,6 +84,10 @@ def login():
 @auth_bp.route('/logout', methods=['POST'])
 @jwt_required()
 def logout():
+    jti = get_jwt()['jti']
+    db = SessionLocal()
+    db.query(jwt.Blacklist).filter_by(jti=jti).delete()
+    db.commit()
     return jsonify({'message': 'User logged out'}), 200
 
 # User profile route

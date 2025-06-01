@@ -17,11 +17,12 @@ const RegisterScreen = () => {
 	const [username, setUsername] = useState('')
 	const [email, setEmail] = useState('')
 	const [password, setPassword] = useState('')
+	const [confirmPassword, setConfirmPassword] = useState('')
 	const [showPassword, setShowPassword] = useState(false)
 
 	const handleRegister = () => {
 		if (!email || !password || !username) return
-		register({ username, email, password })
+		register({ username, email, password, confirmPassword })
 	}
 
 	return (
@@ -57,6 +58,24 @@ const RegisterScreen = () => {
 					secureTextEntry={!showPassword}
 					value={password}
 					onChangeText={setPassword}
+				/>
+				<TouchableOpacity onPress={() => setShowPassword(!showPassword)}>
+					<Ionicons
+						name={showPassword ? 'eye-off' : 'eye'}
+						size={22}
+						color='#333'
+					/>
+				</TouchableOpacity>
+			</View>
+
+			<View style={styles.passwordContainer}>
+				<TextInput
+					style={styles.passwordInput}
+					placeholder='confirm password'
+					placeholderTextColor='#aaa'
+					secureTextEntry={!showPassword}
+					value={confirmPassword}
+					onChangeText={setConfirmPassword}
 				/>
 				<TouchableOpacity onPress={() => setShowPassword(!showPassword)}>
 					<Ionicons
@@ -117,7 +136,7 @@ const styles = StyleSheet.create({
 		borderRadius: 25,
 		paddingHorizontal: 15,
 		paddingVertical: 10,
-		marginBottom: 50,
+		marginBottom: 15,
 		flexDirection: 'row',
 		alignItems: 'center',
 		justifyContent: 'space-between',
@@ -132,6 +151,7 @@ const styles = StyleSheet.create({
 		width: '40%',
 		paddingVertical: 12,
 		alignItems: 'center',
+		marginTop: 50,
 		marginBottom: 10,
 		shadowColor: '#000',
 		shadowOffset: { width: 0, height: 2 },
