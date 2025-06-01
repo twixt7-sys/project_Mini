@@ -2,7 +2,7 @@ import React, { createContext, useState, useEffect, ReactNode } from 'react'
 
 type AuthContextType = {
 	userToken: string | null
-	login: (token: string) => void
+	login: (email: string, password: string) => Promise<void>
 	logout: () => void
 	register: (user: { username: string; email: string; password: string }) => void
 	user?: {username: string; email: string	}
@@ -10,7 +10,7 @@ type AuthContextType = {
 
 export const AuthContext = createContext<AuthContextType>({
 	userToken: null,
-	login: () => {},
+	login: () => Promise.resolve(),
 	logout: () => {},
 	register: () => {},
 	user: undefined,
@@ -23,10 +23,17 @@ type Props = {
 export const AuthProvider: React.FC<Props> = ({ children }) => {
 	const [userToken, setUserToken] = useState<string | null>(null)
 
-	const login = (token: string) => {
+	const login = async (email: string, password: string) => {
+	try {
+		// const response = await api.login({ email, password })
+		// const token = response.token
+		const token = 'mockedToken' // Replace with real token
 		setUserToken(token)
-		// optionally persist the token with AsyncStorage here
+		// await AsyncStorage.setItem('userToken', token)
+	} catch (error) {
+		console.error('Login failed', error)
 	}
+}
 
 	const logout = () => {
 		setUserToken(null)

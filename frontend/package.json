@@ -27,6 +27,7 @@
     "expo-dev-client": "~5.1.8",
     "expo-font": "~13.3.1",
     "expo-haptics": "~14.1.4",
+    "expo-linear-gradient": "~14.1.4",
     "expo-linking": "~7.1.4",
     "expo-module-scripts": "^4.1.6",
     "expo-router": "~5.0.5",
@@ -38,17 +39,18 @@
     "react": "19.0.0",
     "react-dom": "19.0.0",
     "react-native": "0.79.2",
+    "react-native-bouncy-checkbox": "^4.1.2",
     "react-native-gesture-handler": "~2.24.0",
     "react-native-reanimated": "~3.17.4",
     "react-native-safe-area-context": "5.4.0",
     "react-native-screens": "~4.10.0",
     "react-native-web": "^0.20.0",
     "react-native-webview": "13.13.5",
-    "tamagui": "^1.126.4",
-    "expo-linear-gradient": "~14.1.4"
+    "tamagui": "^1.126.4"
   },
   "devDependencies": {
     "@babel/core": "^7.25.2",
+    "@tsconfig/react-native": "^3.0.5",
     "@types/jest": "^29.5.12",
     "@types/react": "^18.3.12",
     "@types/react-test-renderer": "^18.3.0",

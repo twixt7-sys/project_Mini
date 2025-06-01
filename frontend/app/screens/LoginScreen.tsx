@@ -2,14 +2,16 @@ import React, { useState, useContext } from 'react'
 import {
 	View,
 	Text,
+	Image,
 	TextInput,
 	TouchableOpacity,
 	StyleSheet,
-	SafeAreaView,
-	CheckBox,
+	SafeAreaView
 } from 'react-native'
+import BouncyCheckbox from "react-native-bouncy-checkbox";
 import { AuthContext } from '../context/AuthContext'
 import { Ionicons } from '@expo/vector-icons'
+import { router } from 'expo-router';
 
 const LoginScreen = () => {
 	const { login } = useContext(AuthContext)
@@ -19,18 +21,19 @@ const LoginScreen = () => {
 	const [agree, setAgree] = useState(false)
 
 	const handleLogin = () => {
+		router.push('/screens/HomeScreen')
 		if (!email || !password || !agree) return
-		login(email)
+		login(email, password)
 	}
 
 	return (
 		<SafeAreaView style={styles.container}>
-			<View style={styles.logo}>
-				<Text style={styles.logoText}>M</Text>
-			</View>
-
+			<Image
+				source={require('../../assets/images/Mini Logo.png')}
+				style={styles.logo}
+				resizeMode="contain"
+			/>
 			<Text style={styles.header}>Log-in</Text>
-
 			<TextInput
 				style={styles.input}
 				placeholder='email or username'
@@ -58,7 +61,15 @@ const LoginScreen = () => {
 			</View>
 
 			<View style={styles.checkboxContainer}>
-				<CheckBox value={agree} onValueChange={setAgree} />
+				<BouncyCheckbox
+					size={25}
+					fillColor="#5c6fb0"
+					unFillColor="#FFFFFF"
+					iconStyle={{ borderColor: "red" }}
+					innerIconStyle={{ borderWidth: 3 }}
+					textStyle={{ fontFamily: "JosefinSans-Regular" }}
+					onPress={(isChecked: boolean) => {console.log(isChecked)}}
+				/>
 				<Text style={styles.checkboxLabel}>
 					I agree to the{' '}
 					<Text style={styles.link}>terms and conditions.</Text>
@@ -69,7 +80,7 @@ const LoginScreen = () => {
 				<Text style={styles.buttonText}>Log-in</Text>
 			</TouchableOpacity>
 
-			<TouchableOpacity style={styles.buttonSecondary}>
+			<TouchableOpacity style={styles.buttonSecondary} onPress={() => router.push('/screens/RegisterScreen')}>
 				<Text style={styles.buttonText}>Register</Text>
 			</TouchableOpacity>
 
@@ -92,18 +103,13 @@ const styles = StyleSheet.create({
 		paddingHorizontal: 20,
 	},
 	logo: {
-		width: 100,
-		height: 100,
-		borderRadius: 50,
+		width: 150,
+		height: 150,
+		borderRadius: 100,
 		backgroundColor: '#1c2b59',
 		alignItems: 'center',
 		justifyContent: 'center',
-		marginBottom: 20,
-	},
-	logoText: {
-		fontSize: 60,
-		color: '#cdd8f7',
-		fontWeight: 'bold',
+		marginBottom: 50,
 	},
 	header: {
 		fontSize: 28,
@@ -113,19 +119,21 @@ const styles = StyleSheet.create({
 	},
 	input: {
 		width: '60%',
+		height: 50,
 		backgroundColor: '#cdd8f7',
-		borderRadius: 20,
+		borderRadius: 25,
 		paddingHorizontal: 15,
 		paddingVertical: 10,
 		marginBottom: 15,
 	},
 	passwordContainer: {
 		width: '60%',
+		height: 50,
 		backgroundColor: '#cdd8f7',
-		borderRadius: 20,
+		borderRadius: 25,
 		paddingHorizontal: 15,
 		paddingVertical: 10,
-		marginBottom: 10,
+		marginBottom: 15,
 		flexDirection: 'row',
 		alignItems: 'center',
 		justifyContent: 'space-between',
@@ -137,10 +145,10 @@ const styles = StyleSheet.create({
 	checkboxContainer: {
 		flexDirection: 'row',
 		alignItems: 'center',
-		marginBottom: 20,
+		marginBottom: 50,
 	},
 	checkboxLabel: {
-		marginLeft: 8,
+		marginLeft: 1,
 		color: '#1c2b59',
 	},
 	link: {
@@ -165,7 +173,11 @@ const styles = StyleSheet.create({
 		width: '40%',
 		paddingVertical: 12,
 		alignItems: 'center',
-		marginBottom: 10,
+		marginBottom: 25,
+		shadowColor: '#000',
+		shadowOffset: { width: 0, height: 2 },
+		shadowOpacity: 0.2,
+		shadowRadius: 4,
 	},
 	buttonText: {
 		color: '#fff',
@@ -173,7 +185,8 @@ const styles = StyleSheet.create({
 	},
 	orText: {
 		marginVertical: 5,
-		color: '#333',
+		color: '#1c2b59',
+		marginBottom: 25,
 	},
 	googleButton: {
 		flexDirection: 'row',
