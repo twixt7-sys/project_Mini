@@ -8,12 +8,14 @@ type PostCardProps = {
 
 const PostCard: React.FC<PostCardProps> = ({ post }) => {
 	return (
-		<View style={styles.card}>
-			<Text style={styles.author}>{post.author}</Text>
-			<Text style={styles.title}>{post.title}</Text>
-			<Text style={styles.content}>{post.content}</Text>
+		<View>
 			<View style={styles.timestampContainer}>
 				<Text style={styles.timestamp}>{post.createdAt}</Text>
+			</View>
+			<View style={styles.card}>
+				<Text style={styles.author}>{post.author}</Text>
+				<Text style={styles.title}>{post.title}</Text>
+				<Text style={styles.content}>{post.content}</Text>
 			</View>
 		</View>
 	)
@@ -51,18 +53,20 @@ const styles = StyleSheet.create({
 	},
 	timestamp: {
 		fontSize: 11,
-		color: '#888',
+		color: '#FFF',
 		textAlign: 'center',
 	},
 	timestampContainer: {
-		backgroundColor: '#333',
+		backgroundColor: '#ccdaff',
 		padding: 8,
 		borderTopWidth: 1,
 		borderTopColor: '#e0e0e0',
 		alignItems: 'center',
+		alignSelf: 'flex-end',
 		borderRadius: 18,
 		width: 100,
-		yOffset: 10
+		transform: [{ translateX: -28 }, { translateY: 40 }],
+		zIndex: 1
 	}
 })
 
