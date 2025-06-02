@@ -13,7 +13,8 @@ export const loginUser = async (email: string, password: string) => {
 	return await response.json()
 }
 
-export const registerUser = async (user: { username: string; email: string; password: string; confirmPassword: string}) => {
+export const registerUser = async (user: { username: string; email: string; password: string; confirm_password: string}) => {
+	console.log("About to call fetch")
 	const response = await fetch(`${BASE_URL}/auth/register`, {
 		method: 'POST',
 		headers: {
@@ -21,6 +22,11 @@ export const registerUser = async (user: { username: string; email: string; pass
 		},
 		body: JSON.stringify(user),
 	})
+	console.log("Fetch returned:", response.status)
+	console.log("Status:", response.status)
+	const text = await response.text()
+	console.log("Raw response:", text)
 	if (!response.ok) throw new Error('Registration failed')
+	alert("Registration successful! (auth service)")
 	return await response.json()
 }

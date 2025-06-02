@@ -5,7 +5,7 @@ type AuthContextType = {
 	userToken: string | null
 	login: (email: string, password: string) => Promise<void>
 	logout: () => void
-	register: (user: { username: string; email: string; password: string; confirmPassword: string }) => Promise<void>
+	register: (user: { username: string; email: string; password: string; confirm_password: string }) => Promise<void>
 	user?: {username: string; email: string	}
 }
 
@@ -35,11 +35,12 @@ export const AuthProvider: React.FC<Props> = ({ children }) => {
 		}
 	}
 
-	const register = async (user: { username: string; email: string; password: string; confirmPassword: string }) => {
+	const register = async (user: { username: string; email: string; password: string; confirm_password: string }) => {
 		try {
 			const data = await registerUser(user)
 			const token = data.token
 			setUserToken(token)
+			alert("Registration successful! (auth context)")
 			// optionally persist token in AsyncStorage
 		} catch (error) {
 			console.error('Registration failed', error)
@@ -69,3 +70,5 @@ export const AuthProvider: React.FC<Props> = ({ children }) => {
 		</AuthContext.Provider>
 	)
 }
+
+export default AuthProvider

@@ -1,13 +1,7 @@
 from flask import request, jsonify
-from extensions import SessionLocal
 from app import create_app
-from routes.post_routes import post_bp
-from flask_cors import CORS
-from flask_jwt_extended import JWTManager
-from routes.auth_routes import auth_bp
 
 app = create_app()
-CORS(app)
 
 @app.route('/')
 def home():

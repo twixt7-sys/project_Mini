@@ -4,7 +4,8 @@ from flask_jwt_extended import create_access_token, jwt_required, get_jwt_identi
 from models import User as u
 from extensions import SessionLocal
 from marshmallow import Schema, fields, ValidationError
-from flask_jwt_extended import get_jwt
+from flask_jwt_extended import get_jwt, jwt_required, get_jwt_identity
+from extensions import jwt
 
 # Marshmallow schema for input validation
 class UserSchema(Schema):
@@ -41,7 +42,7 @@ def register():
     hashed_password = generate_password_hash(password)
 
     db = SessionLocal()
-    user = u.User(username=username, email=email, password=hashed_password)
+    user = u(username=username, email=email, password=hashed_password)
 
     db.add(user)
     db.commit()
@@ -67,7 +68,7 @@ def login():
 
     db = SessionLocal()
     
-    user = db.query(u.User).filter_by(username=username).first()
+    user = db.query(u).filter_by(username=username).first()
     if not user or not check_password_hash(user.password, password):
         return jsonify({'message': 'Invalid credentials'}), 401
     access_token = create_access_token(identity={'username': user.username})
@@ -104,7 +105,7 @@ def profile():
         'username': user.username,
         'email': user.email
     }), 200
-    
+
 # User update route
 @auth_bp.route('/update', methods=['PUT'])
 @jwt_required()

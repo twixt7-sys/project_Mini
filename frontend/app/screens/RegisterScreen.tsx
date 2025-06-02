@@ -17,12 +17,17 @@ const RegisterScreen = () => {
 	const [username, setUsername] = useState('')
 	const [email, setEmail] = useState('')
 	const [password, setPassword] = useState('')
-	const [confirmPassword, setConfirmPassword] = useState('')
+	const [confirm_password, setConfirmPassword] = useState('')
 	const [showPassword, setShowPassword] = useState(false)
 
 	const handleRegister = () => {
+		if (password !== confirm_password) {
+			alert("Passwords do not match.")
+			return
+		}
 		if (!email || !password || !username) return
-		register({ username, email, password, confirmPassword })
+		alert("Registration successful!")
+		register({ username, email, password, confirm_password })
 	}
 
 	return (
@@ -74,7 +79,7 @@ const RegisterScreen = () => {
 					placeholder='confirm password'
 					placeholderTextColor='#aaa'
 					secureTextEntry={!showPassword}
-					value={confirmPassword}
+					value={confirm_password}
 					onChangeText={setConfirmPassword}
 				/>
 				<TouchableOpacity onPress={() => setShowPassword(!showPassword)}>
