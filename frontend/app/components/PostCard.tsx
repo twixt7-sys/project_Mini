@@ -12,17 +12,19 @@ const PostCard: React.FC<PostCardProps> = ({ post }) => {
 			<Text style={styles.author}>{post.author}</Text>
 			<Text style={styles.title}>{post.title}</Text>
 			<Text style={styles.content}>{post.content}</Text>
-			<Text style={styles.timestamp}>{post.createdAt}</Text>
+			<View style={styles.timestampContainer}>
+				<Text style={styles.timestamp}>{post.createdAt}</Text>
+			</View>
 		</View>
 	)
 }
 
 const styles = StyleSheet.create({
 	card: {
-		backgroundColor: '#f9f9ff', // slightly tinted white
+		backgroundColor: '#f9f9ff',
 		padding: 16,
 		marginHorizontal: 16,
-		marginBottom: 12,
+		marginBottom: 30,
 		borderRadius: 20,
 		shadowColor: '#000',
 		shadowOpacity: 0.1,
@@ -50,8 +52,18 @@ const styles = StyleSheet.create({
 	timestamp: {
 		fontSize: 11,
 		color: '#888',
-		textAlign: 'right',
+		textAlign: 'center',
 	},
+	timestampContainer: {
+		backgroundColor: '#333',
+		padding: 8,
+		borderTopWidth: 1,
+		borderTopColor: '#e0e0e0',
+		alignItems: 'center',
+		borderRadius: 18,
+		width: 100,
+		yOffset: 10
+	}
 })
 
 export default PostCard

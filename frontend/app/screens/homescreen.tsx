@@ -57,8 +57,9 @@ const HomeScreen = () => {
 				<ProfileHeader />
 
 				{dummyPosts.map((post) => (
-					<PostCard key={post.id} post={post} />
+					<PostCard key={post.id} post={post}/>
 				))}
+
 			</ScrollView>
 
 			<TouchableOpacity style={styles.fab}>
@@ -87,6 +88,7 @@ const styles = StyleSheet.create({
 		shadowOpacity: 0.25,
 		shadowRadius: 3.84,
 	},
+
 })
 
 export default HomeScreen
