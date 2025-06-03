@@ -22,14 +22,16 @@ const ProfileHeader = () => {
 
 const styles = StyleSheet.create({
 	container: {
+		position: 'absolute',
 		flexDirection: 'row',
 		alignItems: 'center',
-		backgroundColor: '#aab8ff', // soft bluish background
+		backgroundColor: '#aab8ff',
 		padding: 20,
 		paddingTop: 40,
 		borderBottomLeftRadius: 30,
 		borderBottomRightRadius: 30,
 		marginBottom: 12,
+		zIndex: 2
 	},
 	avatarCircle: {
 		width: 70,

@@ -11,12 +11,13 @@ import { Ionicons } from '@expo/vector-icons'
 import PostCard from '../components/PostCard'
 import { Post } from '../types/Post'
 import ProfileHeader from '../components/ProfileHeader'
+import Svg, { Path } from 'react-native-svg'
 
 const dummyPosts: Post[] = [
 	{
 		id: '1',
 		title: 'Dummy Title 1',
-		content: 'First dummy post content here.',
+		content: 'This is my first dummy post.',
 		author: 'username',
 		createdAt: '2025-06-01',
 	},
@@ -29,6 +30,27 @@ const dummyPosts: Post[] = [
 	},
 	{
 		id: '3',
+		title: 'Dummy Title 3',
+		content: 'Third dummy post content here.',
+		author: 'username',
+		createdAt: '2025-06-01',
+	},
+	{
+		id: '4',
+		title: 'Dummy Title 1',
+		content: 'This is my first dummy post.',
+		author: 'username',
+		createdAt: '2025-06-01',
+	},
+	{
+		id: '5',
+		title: 'Dummy Title 2',
+		content: 'Second dummy post content here.',
+		author: 'username',
+		createdAt: '2025-06-01',
+	},
+	{
+		id: '6',
 		title: 'Dummy Title 3',
 		content: 'Third dummy post content here.',
 		author: 'username',
@@ -56,6 +78,8 @@ const HomeScreen = () => {
 				}>
 				<ProfileHeader />
 
+				<View style={{height:120}}></View>
+
 				{dummyPosts.map((post) => (
 					<PostCard key={post.id} post={post}/>
 				))}
@@ -72,7 +96,7 @@ const HomeScreen = () => {
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
-		backgroundColor: '#dae6f4', // soft pastel background
+		backgroundColor: '#314a73', // soft pastel background
 		paddingHorizontal: 16,
 	},
 	fab: {

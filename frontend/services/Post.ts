@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-import { Post } from '../types/Post'
+import { Post } from '../app/types/Post'
 import { BASE_URL } from './config'
 
 const API_URL = BASE_URL + '/posts'

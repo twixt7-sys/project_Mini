@@ -1,7 +1,7 @@
 import React from 'react'
 import { View, Text, StyleSheet } from 'react-native'
 import { Post } from '../types/Post'
-import Svg, { Path } from 'react-native-svg'
+import Svg, { Path, Mask, Defs, LinearGradient, Stop } from 'react-native-svg'
 
 type PostCardProps = {
 	post: Post
@@ -16,22 +16,62 @@ const PostCard: React.FC<PostCardProps> = ({ post }) => {
 			<View style={styles.card}>
 				<Text style={styles.author}>{post.author}</Text>
 				<Text style={styles.title}>{post.title}</Text>
-				<Text style={styles.content}>{post.content}</Text>
+				<View style={styles.contentContainer}>
+					<Text style={styles.content}>{post.content}</Text>
+				</View>
+				<View style={styles.statsContainer}>
+					<Text style={{ color: '#ffffff', fontWeight: 'bold' }}>H: 999</Text>
+					<Text style={{ color: '#ffffff', fontWeight: 'bold' }}>C: 999</Text>
+					<Text style={{ color: '#ffffff', fontWeight: 'bold' }}>V: 999</Text>
+				</View>
 			</View>
-			<View style={styles.heartButtonContainer}>
+			<View style={styles.buttonsContainer}>
+				<View style={styles.commentButtonContainer}>
+				<View style={styles.commentButton}>
+					<Svg width={15} height={15} viewBox="0 0 15 15" fill="none">
+						<Defs>
+							<LinearGradient
+								id="commentGradient"
+								x1="7.5"
+								y1="15"
+								x2="7.5"
+								y2="0"
+								gradientUnits="userSpaceOnUse"
+							>
+								<Stop offset="0" stopColor="#19561B" />
+								<Stop offset="1" stopColor="#42A545" />
+							</LinearGradient>
+						</Defs>
+						<Path
+							d="M0 6C0 2.68629 2.68629 0 6 0H9C12.3137 0 15 2.68629 15 6V9C15 12.3137 12.3137 15 9 15H1C0.447715 15 0 14.5523 0 14V6Z"
+							stroke="url(#commentGradient)"
+							strokeWidth={2}
+						/>
+					</Svg>
+				</View>
+				</View>
+				<View style={styles.heartButtonContainer}>
 				<View style={styles.heartButton}>
-					<svg width="28" height="24" viewBox="0 0 28 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-						<mask id="path-1-inside-1_29_627" fill="white">
-							<path d="M2.7162 3.20712C5.76202 0.168111 10.6953 0.173627 13.7344 3.21944L14.0254 2.94286C17.0866 0.183483 21.8079 0.280659 24.7518 3.23107C27.6958 6.18159 27.7823 10.903 25.016 13.9581L24.7395 14.2492L17.2492 21.7228L17.0619 21.9C16.745 22.1856 16.4007 22.4241 16.0377 22.6143C14.1499 23.6036 11.7628 23.3029 10.1781 21.7149L2.70458 14.2246C-0.33432 11.1789 -0.329267 6.24616 2.7162 3.20712Z"/>
-						</mask>
-							<path d="M2.7162 3.20712L-0.815375 -0.332361L-0.81559 -0.332147L2.7162 3.20712ZM13.7344 3.21944L10.1949 6.75102L13.6416 10.2054L17.1788 6.84378L13.7344 3.21944ZM14.0254 2.94286L10.6777 -0.771051L10.6287 -0.726902L10.5809 -0.681476L14.0254 2.94286ZM24.7518 3.23107L28.2913 -0.300511L28.2912 -0.30059L24.7518 3.23107ZM25.016 13.9581L28.6411 17.4019L28.6823 17.3585L28.7225 17.3141L25.016 13.9581ZM24.7395 14.2492L28.2711 17.7887L28.3184 17.7415L28.3645 17.693L24.7395 14.2492ZM17.2492 21.7228L20.6857 25.3546L20.7339 25.3091L20.7808 25.2623L17.2492 21.7228ZM17.0619 21.9L20.4094 25.6141L20.4544 25.5735L20.4984 25.5319L17.0619 21.9ZM16.0377 22.6143L13.7169 18.1855L13.7169 18.1855L16.0377 22.6143ZM10.1781 21.7149L6.63866 25.2465L6.63883 25.2466L10.1781 21.7149ZM2.70458 14.2246L6.24406 10.693L6.24406 10.693L2.70458 14.2246ZM2.7162 3.20712L6.24778 6.74661C7.33879 5.65803 9.1063 5.66001 10.1949 6.75102L13.7344 3.21944L17.2738 -0.312138C12.2844 -5.31275 4.18524 -5.32181 -0.815375 -0.332361L2.7162 3.20712ZM13.7344 3.21944L17.1788 6.84378L17.4698 6.5672L14.0254 2.94286L10.5809 -0.681476L10.2899 -0.404897L13.7344 3.21944ZM14.0254 2.94286L17.373 6.65678C18.4667 5.67095 20.1592 5.70718 21.2124 6.76273L24.7518 3.23107L28.2912 -0.30059C23.4566 -5.14587 15.7066 -5.30399 10.6777 -0.771051L14.0254 2.94286ZM24.7518 3.23107L21.2123 6.76265C22.2655 7.81812 22.298 9.51057 21.3096 10.6022L25.016 13.9581L28.7225 17.3141C33.2666 12.2954 33.1261 4.54507 28.2913 -0.300511L24.7518 3.23107ZM25.016 13.9581L21.391 10.5144L21.1145 10.8055L24.7395 14.2492L28.3645 17.693L28.6411 17.4019L25.016 13.9581ZM24.7395 14.2492L21.2079 10.7097L13.7176 18.1833L17.2492 21.7228L20.7808 25.2623L28.2711 17.7887L24.7395 14.2492ZM17.2492 21.7228L13.8127 18.0909L13.6254 18.2682L17.0619 21.9L20.4984 25.5319L20.6857 25.3546L17.2492 21.7228ZM17.0619 21.9L13.7143 18.186C13.711 18.189 13.7096 18.1899 13.7104 18.1894C13.7111 18.1889 13.7133 18.1874 13.7169 18.1855L16.0377 22.6143L18.3585 27.0431C19.0925 26.6584 19.7817 26.1798 20.4094 25.6141L17.0619 21.9ZM16.0377 22.6143L13.7169 18.1855C13.7215 18.1831 13.7238 18.1829 13.7224 18.1832C13.7202 18.1835 13.717 18.1836 13.7143 18.1832C13.7121 18.1829 13.7136 18.1828 13.7176 18.1848C13.7197 18.1858 13.7212 18.1868 13.722 18.1874C13.723 18.1881 13.7214 18.1871 13.7175 18.1831L10.1781 21.7149L6.63883 25.2466C9.81282 28.4274 14.586 29.02 18.3585 27.043L16.0377 22.6143ZM10.1781 21.7149L13.7176 18.1833L6.24406 10.693L2.70458 14.2246L-0.834907 17.7562L6.63866 25.2465L10.1781 21.7149ZM2.70458 14.2246L6.24406 10.693C5.15524 9.60175 5.15741 7.83468 6.248 6.74639L2.7162 3.20712L-0.81559 -0.332147C-5.81594 4.65764 -5.82388 12.756 -0.834906 17.7562L2.70458 14.2246Z" fill="url(#paint0_linear_29_627)" mask="url(#path-1-inside-1_29_627)"/>
-						<defs>
-							<linearGradient id="paint0_linear_29_627" x1="5.47417" y1="0.455319" x2="21.9822" y2="17.0003" gradientUnits="userSpaceOnUse">
-								<stop stop-color="#BD5D5D"/>
-								<stop offset="1" stop-color="#541616"/>
-							</linearGradient>
-						</defs>
-					</svg>
+					<Svg width={28} height={24} viewBox="0 0 28 24" fill="none">
+						<Defs>
+							<LinearGradient
+								id="heartGradient"
+								x1="14"
+								y1="24"
+								x2="14"
+								y2="0"
+								gradientUnits="userSpaceOnUse"
+							>
+								<Stop offset="0" stopColor="#8B0000" />
+								<Stop offset="1" stopColor="#FF3B3B" />
+							</LinearGradient>
+						</Defs>
+						<Path
+							d="M2.7 3.2C5.8 0.2 10.7 0.2 13.7 3.2C16.8 0.2 21.8 0.3 24.8 3.2C27.7 6.2 27.8 10.9 25 14L17.1 21.9C14.1 24.6 10.2 24.1 8.2 22L2.7 14.2C-0.3 11.2 -0.3 6.2 2.7 3.2Z"
+							fill="url(#heartGradient)"
+						/>
+					</Svg>
+				</View>
 				</View>
 			</View>
 		</View>
@@ -43,14 +83,14 @@ const styles = StyleSheet.create({
 		backgroundColor: '#e5f5ff',
 		padding: 16,
 		marginHorizontal: 16,
-		marginBottom: 30,
+		marginBottom: -50,
 		borderRadius: 20,
 		shadowColor: '#000',
 		shadowOpacity: 0.1,
 		shadowOffset: { width: 0, height: 2 },
 		shadowRadius: 6,
 		elevation: 3,
-		paddingBottom: 35,
+		paddingBottom: 5,
 	},
 	author: {
 		fontSize: 14,
@@ -61,13 +101,22 @@ const styles = StyleSheet.create({
 	title: {
 		fontSize: 16,
 		fontWeight: '700',
-		marginBottom: 4,
+		marginBottom: 10,
 		color: '#2a2a2a',
+		marginLeft: 5
 	},
 	content: {
 		fontSize: 15,
 		color: '#444',
 		marginBottom: 8,
+	},
+	contentContainer: {
+		backgroundColor: '#FAFAFF',
+		borderRadius: 15,
+		paddingTop: 15,
+		paddingBottom: 15,
+		paddingLeft: 10,
+		paddingRight: 10
 	},
 	timestamp: {
 		fontSize: 11,
@@ -101,8 +150,48 @@ const styles = StyleSheet.create({
 		shadowOffset: { width: 0, height: 2 },
 		shadowRadius: 6,
 		elevation: 3,
-		transform: [{ translateX: -30 }, { translateY: -65 }],
+		marginLeft: 15
+	},
+	commentButton: {
+		
+	},
+	commentButtonContainer: {
+		backgroundColor: '#FFF',
+		width: 40,
+		height: 40,
+		borderRadius: 50,
+		alignItems: 'center',
+		justifyContent: 'center',
+		shadowColor: '#000',
+		shadowOpacity: 0.1,
+		shadowOffset: { width: 0, height: 2 },
+		shadowRadius: 6,
+		elevation: 3
+	},
+	buttonsContainer: {
 		alignSelf: 'flex-end',
+		alignItems: 'center',
+		justifyContent: 'center',
+		flexDirection: 'row',
+		transform: [
+			{ translateX: -40 },
+			{ translateY: 15 },
+			{ scale: 1.0 }
+		]
+	},
+	statsContainer: {
+		backgroundColor: '#97c9f0',
+		marginTop: 15,
+		marginBottom: 15,
+		padding: 5,
+		paddingLeft: 15,
+		paddingRight: 15,
+		borderRadius: 20,
+		alignSelf: 'flex-start',
+		alignItems: 'center',
+		justifyContent: 'center',
+		flexDirection: 'row',
+		gap: 10,
 	}
 })
 

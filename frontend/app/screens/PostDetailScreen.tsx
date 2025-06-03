@@ -1,7 +1,7 @@
 import React from 'react'
 import { View, Text, ScrollView } from 'react-native'
 import { RouteProp, useRoute } from '@react-navigation/native'
-import { Post } from '../types/Post'
+import { Post } from '../types/post'
 
 type PostDetailRoute = RouteProp<{ params: { post: Post } }, 'params'>
 

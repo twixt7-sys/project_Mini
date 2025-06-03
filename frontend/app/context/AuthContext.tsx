@@ -1,5 +1,5 @@
 import React, { createContext, useState, useEffect, ReactNode } from 'react'
-import { loginUser, registerUser } from '../services/auth'
+import { loginUser, registerUser } from '../../services/auth'
 
 type AuthContextType = {
 	userToken: string | null
