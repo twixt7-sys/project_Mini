@@ -3,6 +3,7 @@ from dotenv import load_dotenv
 from sqlalchemy import create_engine
 from sqlalchemy.orm import DeclarativeBase, registry, sessionmaker, scoped_session
 from flask_jwt_extended import JWTManager
+from config import JWT_SECRET_KEY
 
 models = [
 	"User", "Post", "Comment", "Like", "followers"
@@ -18,6 +19,7 @@ SessionLocal = scoped_session(sessionmaker(bind=engine))
 jwt = JWTManager()
 
 def init_extensions(app):
-	jwt.init_app(app)
-	Base.metadata.create_all(engine)
-	app.session = SessionLocal
+    app.config['JWT_SECRET_KEY'] = JWT_SECRET_KEY
+    jwt.init_app(app)
+    Base.metadata.create_all(engine)
+    app.session = SessionLocal

@@ -1,45 +1,118 @@
-import React, { useEffect, useState, useContext } from 'react'
-import { View, ScrollView, RefreshControl } from 'react-native'
-import { AuthContext } from '../context/AuthContext'
-import { getPosts } from '../services/post'
+import React, { useState } from 'react'
+import {
+	View,
+	ScrollView,
+	RefreshControl,
+	StyleSheet,
+	TouchableOpacity,
+	Text,
+} from 'react-native'
+import { Ionicons } from '@expo/vector-icons'
 import PostCard from '../components/PostCard'
 import { Post } from '../types/Post'
+import ProfileHeader from '../components/ProfileHeader'
+import Svg, { Path } from 'react-native-svg'
+
+const dummyPosts: Post[] = [
+	{
+		id: '1',
+		title: 'Dummy Title 1',
+		content: 'This is my first dummy post.',
+		author: 'username',
+		createdAt: '2025-06-01',
+	},
+	{
+		id: '2',
+		title: 'Dummy Title 2',
+		content: 'Second dummy post content here.',
+		author: 'username',
+		createdAt: '2025-06-01',
+	},
+	{
+		id: '3',
+		title: 'Dummy Title 3',
+		content: 'Third dummy post content here.',
+		author: 'username',
+		createdAt: '2025-06-01',
+	},
+	{
+		id: '4',
+		title: 'Dummy Title 1',
+		content: 'This is my first dummy post.',
+		author: 'username',
+		createdAt: '2025-06-01',
+	},
+	{
+		id: '5',
+		title: 'Dummy Title 2',
+		content: 'Second dummy post content here.',
+		author: 'username',
+		createdAt: '2025-06-01',
+	},
+	{
+		id: '6',
+		title: 'Dummy Title 3',
+		content: 'Third dummy post content here.',
+		author: 'username',
+		createdAt: '2025-06-01',
+	},
+]
 
 const HomeScreen = () => {
-	const { userToken } = useContext(AuthContext)
-	const [posts, setPosts] = useState<Post[]>([])
 	const [refreshing, setRefreshing] = useState(false)
-
-	const fetchPosts = async () => {
-		if (!userToken) return
-		try {
-			const data = await getPosts(userToken)
-			setPosts(data)
-		} catch (err) {
-			console.log('error fetching posts:', err)
-		}
-	}
-
-	useEffect(() => {
-		fetchPosts()
-	}, [])
 
 	const onRefresh = async () => {
 		setRefreshing(true)
-		await fetchPosts()
-		setRefreshing(false)
+		// simulate fetch delay
+		setTimeout(() => {
+			setRefreshing(false)
+		}, 1000)
 	}
 
 	return (
-		<ScrollView
-			refreshControl={
-				<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
-			}>
-			{posts.map((post) => (
-				<PostCard key={post.id} post={post} />
-			))}
-		</ScrollView>
+		<View style={styles.container}>
+			<ScrollView
+				contentContainerStyle={{ paddingBottom: 100 }}
+				refreshControl={
+					<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+				}>
+				<ProfileHeader />
+
+				<View style={{height:120}}></View>
+
+				{dummyPosts.map((post) => (
+					<PostCard key={post.id} post={post}/>
+				))}
+
+			</ScrollView>
+
+			<TouchableOpacity style={styles.fab}>
+				<Ionicons name='camera' size={28} color='#fff' />
+			</TouchableOpacity>
+		</View>
 	)
 }
+
+const styles = StyleSheet.create({
+	container: {
+		flex: 1,
+		backgroundColor: '#314a73', // soft pastel background
+		paddingHorizontal: 16,
+	},
+	fab: {
+		position: 'absolute',
+		right: 20,
+		bottom: 20,
+		backgroundColor: '#5e66ff',
+		padding: 16,
+		borderRadius: 40,
+		elevation: 6,
+		shadowColor: '#000',
+		shadowOffset: { width: 0, height: 2 },
+		shadowOpacity: 0.25,
+		shadowRadius: 3.84,
+	},
+
+})
 
 export default HomeScreen
