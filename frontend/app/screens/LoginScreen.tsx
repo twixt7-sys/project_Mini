@@ -8,7 +8,6 @@ import {
 	StyleSheet,
 	SafeAreaView
 } from 'react-native'
-import BouncyCheckbox from "react-native-bouncy-checkbox";
 import { AuthContext } from '../context/AuthContext'
 import { Ionicons } from '@expo/vector-icons'
 import { router } from 'expo-router';
@@ -21,7 +20,7 @@ const LoginScreen = () => {
 	const [agree, setAgree] = useState(false)
 
 	const handleLogin = () => {
-		router.push('/screens/HomeScreen')
+		router.push('/screens/homescreen')
 		if (!email || !password || !agree) return
 		login(email, password)
 	}
@@ -61,15 +60,13 @@ const LoginScreen = () => {
 			</View>
 
 			<View style={styles.checkboxContainer}>
-				<BouncyCheckbox
-					size={25}
-					fillColor="#5c6fb0"
-					unFillColor="#FFFFFF"
-					iconStyle={{ borderColor: "red" }}
-					innerIconStyle={{ borderWidth: 3 }}
-					textStyle={{ fontFamily: "JosefinSans-Regular" }}
-					onPress={(isChecked: boolean) => {console.log(isChecked)}}
-				/>
+				<TouchableOpacity onPress={() => setAgree(!agree)}>
+					<Ionicons
+						name={agree ? 'checkbox' : 'square-outline'}
+						size={22}
+						color={agree ? '#1c2b59' : '#aaa'}
+					/>
+				</TouchableOpacity>
 				<Text style={styles.checkboxLabel}>
 					I agree to the{' '}
 					<Text style={styles.link}>terms and conditions.</Text>
@@ -103,13 +100,13 @@ const styles = StyleSheet.create({
 		paddingHorizontal: 20,
 	},
 	logo: {
-		width: 150,
-		height: 150,
+		width: 120,
+		height: 120,
 		borderRadius: 100,
 		backgroundColor: '#1c2b59',
 		alignItems: 'center',
 		justifyContent: 'center',
-		marginBottom: 50,
+		marginBottom: 40,
 	},
 	header: {
 		fontSize: 28,
@@ -118,17 +115,17 @@ const styles = StyleSheet.create({
 		marginBottom: 20,
 	},
 	input: {
-		width: '60%',
-		height: 50,
+		width: '80%',
+		height: 40,
 		backgroundColor: '#cdd8f7',
 		borderRadius: 25,
 		paddingHorizontal: 15,
 		paddingVertical: 10,
-		marginBottom: 15,
+		marginBottom: 5,
 	},
 	passwordContainer: {
-		width: '60%',
-		height: 50,
+		width: '80%',
+		height: 40,
 		backgroundColor: '#cdd8f7',
 		borderRadius: 25,
 		paddingHorizontal: 15,
@@ -148,7 +145,7 @@ const styles = StyleSheet.create({
 		marginBottom: 50,
 	},
 	checkboxLabel: {
-		marginLeft: 1,
+		marginLeft: 5,
 		color: '#1c2b59',
 	},
 	link: {

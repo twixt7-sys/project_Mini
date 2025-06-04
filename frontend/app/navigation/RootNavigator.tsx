@@ -8,7 +8,7 @@ import { AuthContext } from '../context/AuthContext'
 // Screens
 import LoginScreen from '../screens/LoginScreen'
 import RegisterScreen from '../screens/RegisterScreen'
-import HomeScreen from '../screens/HomeScreen'
+import HomeScreen from '../screens/homescreen'
 import ProfileScreen from '../screens/ProfileScreen'
 import PostDetailsScreen from '../screens/PostDetailScreen'
 
