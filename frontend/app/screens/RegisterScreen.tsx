@@ -20,14 +20,14 @@ const RegisterScreen = () => {
 	const [confirm_password, setConfirmPassword] = useState('')
 	const [showPassword, setShowPassword] = useState(false)
 
-	const handleRegister = () => {
+	const handleRegister = async () => {
 		if (password !== confirm_password) {
 			alert("Passwords do not match.")
 			return
 		}
 		if (!email || !password || !username) return
-		alert("Registration successful!")
-		register({ username, email, password, confirm_password })
+		await register({ username, email, password, confirm_password })
+		alert("Registration complete!")
 	}
 
 	return (
