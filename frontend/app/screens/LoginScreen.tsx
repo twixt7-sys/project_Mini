@@ -124,21 +124,23 @@ const styles = StyleSheet.create({
 		marginBottom: 5,
 	},
 	passwordContainer: {
-		width: '80%',
-		height: 40,
-		backgroundColor: '#cdd8f7',
-		borderRadius: 25,
-		paddingHorizontal: 15,
-		paddingVertical: 10,
-		marginBottom: 15,
-		flexDirection: 'row',
-		alignItems: 'center',
-		justifyContent: 'space-between',
-	},
-	passwordInput: {
-		flex: 1,
-		color: '#000',
-	},
+        width: '80%',
+        height: 40,
+        backgroundColor: '#cdd8f7',
+        borderRadius: 25,
+        paddingHorizontal: 15,
+        // paddingVertical: 10, // Remove this line
+        marginBottom: 5,
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+    },
+    passwordInput: {
+        flex: 1,
+        color: '#000',
+        fontSize: 16, // Add this line
+        paddingVertical: 0, // Add this line
+    },
 	checkboxContainer: {
 		flexDirection: 'row',
 		alignItems: 'center',
