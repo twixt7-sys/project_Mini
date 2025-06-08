@@ -11,7 +11,6 @@ import { Ionicons } from '@expo/vector-icons'
 import PostCard from '../components/PostCard'
 import { Post } from '../types/Post'
 import ProfileHeader from '../components/ProfileHeader'
-import Svg, { Path } from 'react-native-svg'
 
 const dummyPosts: Post[] = [
 	{
@@ -63,40 +62,35 @@ const HomeScreen = () => {
 
 	const onRefresh = async () => {
 		setRefreshing(true)
-		// simulate fetch delay
-		setTimeout(() => {
-			setRefreshing(false)
-		}, 1000)
+		await new Promise((resolve) => setTimeout(resolve, 1000))
 	}
 
 	return (
 		<View style={styles.container}>
+			<ProfileHeader />
+
 			<ScrollView
-				contentContainerStyle={{ paddingBottom: 100 }}
+				contentContainerStyle={{ paddingTop: 120, paddingBottom: 100 }}
 				refreshControl={
 					<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
 				}>
-				<ProfileHeader />
-
-				<View style={{height:120}}></View>
-
 				{dummyPosts.map((post) => (
-					<PostCard key={post.id} post={post}/>
+					<PostCard key={post.id} post={post} />
 				))}
-
 			</ScrollView>
 
 			<TouchableOpacity style={styles.fab}>
-				<Ionicons name='camera' size={28} color='#fff' />
+				<Ionicons name='add' size={28} color='#fff' />
 			</TouchableOpacity>
 		</View>
+
 	)
 }
 
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
-		backgroundColor: '#314a73', // soft pastel background
+		backgroundColor: '#314a73',
 		paddingHorizontal: 16,
 	},
 	fab: {
@@ -111,8 +105,11 @@ const styles = StyleSheet.create({
 		shadowOffset: { width: 0, height: 2 },
 		shadowOpacity: 0.25,
 		shadowRadius: 3.84,
+		zIndex: 10,
+		marginBottom: 30,
+		marginRight: 5,
 	},
-
 })
+
 
 export default HomeScreen

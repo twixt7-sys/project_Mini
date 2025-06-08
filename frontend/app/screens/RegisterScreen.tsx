@@ -27,7 +27,7 @@ const RegisterScreen = () => {
 		}
 		if (!email || !password || !username) return
 		await register({ username, email, password, confirm_password })
-		alert("Registration complete!")
+		router.push('/screens/homescreen')
 	}
 
 	return (
@@ -158,8 +158,8 @@ const styles = StyleSheet.create({
 		width: '40%',
 		paddingVertical: 12,
 		alignItems: 'center',
-		marginTop: 50,
-		marginBottom: 10,
+		marginTop: 100,
+		marginBottom: 5,
 		shadowColor: '#000',
 		shadowOffset: { width: 0, height: 2 },
 		shadowOpacity: 0.2,
@@ -171,7 +171,7 @@ const styles = StyleSheet.create({
 		width: '40%',
 		paddingVertical: 12,
 		alignItems: 'center',
-		marginBottom: 25,
+		marginBottom: 50,
 		shadowColor: '#000',
 		shadowOffset: { width: 0, height: 2 },
 		shadowOpacity: 0.2,

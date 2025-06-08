@@ -9,11 +9,17 @@ const ProfileHeader = () => {
 				<Ionicons name='person' size={32} color='#4a4a4a' />
 			</View>
 			<View style={styles.infoContainer}>
-				<Text style={styles.username}>@username</Text>
+				<Text style={styles.username}>Bloo</Text>
 				<View style={styles.statsRow}>
-					<Text style={styles.stat}>👥 99M</Text>
-					<Text style={styles.stat}>❤️ 99M</Text>
-					<Text style={styles.stat}>📅 12/31/2025</Text>
+					<View style={styles.capsule1}>
+						<Text style={styles.stat}>📸 99M</Text>
+					</View>
+					<View style={styles.capsule2}>
+						<Text style={styles.stat}>🔗 99M</Text>
+					</View>
+					<View style={styles.capsule3}>
+						<Text style={styles.stat}>📅 12/31/2025</Text>
+					</View>
 				</View>
 			</View>
 		</View>
@@ -23,15 +29,19 @@ const ProfileHeader = () => {
 const styles = StyleSheet.create({
 	container: {
 		position: 'absolute',
+		top: 0,
+		left: 0,
+		right: 0,
+		zIndex: 5,
+		paddingHorizontal: 10,
+		paddingVertical: 10,
 		flexDirection: 'row',
 		alignItems: 'center',
 		backgroundColor: '#aab8ff',
-		padding: 20,
-		paddingTop: 40,
-		borderBottomLeftRadius: 30,
-		borderBottomRightRadius: 30,
-		marginBottom: 12,
-		zIndex: 2
+		margin: 15,
+		marginTop: 40,
+		borderRadius: 50,
+		marginBottom: 12
 	},
 	avatarCircle: {
 		width: 70,
@@ -54,12 +64,31 @@ const styles = StyleSheet.create({
 		marginBottom: 8,
 	},
 	statsRow: {
-		flexDirection: 'row',
-		justifyContent: 'space-between',
+		flexDirection: 'row'
 	},
 	stat: {
 		fontSize: 13,
 		color: '#333',
+	},
+	capsule1: {
+		backgroundColor: '#e0e0ff',
+		borderRadius: 20,
+		paddingVertical: 6,
+		paddingHorizontal: 12,
+		marginRight: 8,
+	},
+	capsule2: {
+		backgroundColor: '#d0d0ff',
+		borderRadius: 20,
+		paddingVertical: 6,
+		paddingHorizontal: 12,
+		marginRight: 8,
+	},
+	capsule3: {
+		backgroundColor: '#c0c0ff',
+		borderRadius: 20,
+		paddingVertical: 6,
+		paddingHorizontal: 12,
 	},
 })
 

@@ -15,7 +15,7 @@ class UserSchema(Schema):
     confirm_password = fields.String(required=True)
 
 class LoginSchema(Schema):
-    username = fields.String(required=True)
+    email = fields.String(required=True)
     password = fields.String(required=True)
 
 # auth routes blueprint
@@ -47,10 +47,14 @@ def register():
     db.add(user)
     db.commit()
     db.refresh(user)
+    access_token = create_access_token(identity={'username': user.username})
     return jsonify({
-        'id': user.id,
-        'username': user.username,
-        'email': user.email
+        'access_token': access_token,
+        'user': {
+            'id': user.id,
+            'username': user.username,
+            'email': user.email
+        }
     }), 201
 
 # User login route
@@ -63,15 +67,19 @@ def login():
     except ValidationError as err:
         return jsonify(err.messages), 400
 
-    username = result['username']
+    email = result['email']
     password = result['password']
 
     db = SessionLocal()
-    
-    user = db.query(u).filter_by(username=username).first()
+
+    user = db.query(u).filter_by(email=email).first()
     if not user or not check_password_hash(user.password, password):
         return jsonify({'message': 'Invalid credentials'}), 401
-    access_token = create_access_token(identity={'username': user.username})
+    access_token = create_access_token(identity={
+        'id': user.id,
+        'username': user.username,
+        'email': user.email
+    })
     return jsonify({
         'access_token': access_token,
         'user': {

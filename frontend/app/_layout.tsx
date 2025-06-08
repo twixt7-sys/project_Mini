@@ -1,17 +1,15 @@
-// _layout.tsx
-import { Platform } from 'react-native'
 import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native'
 import { Stack } from 'expo-router'
 import { useColorScheme } from 'react-native'
 import { TamaguiProvider } from 'tamagui'
 import { tamaguiConfig } from '../tamagui.config'
-import { AuthProvider } from './context/AuthContext' // <-- make sure path is correct
+import { AuthProvider } from './context/AuthContext'
 
 export default function RootLayout() {
 	const colorScheme = useColorScheme()
 
 	return (
-		<AuthProvider>
+		<AuthProvider> {/* Wrapper */}
 			<TamaguiProvider config={tamaguiConfig} defaultTheme={colorScheme!}>
 				<ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
 					<Stack screenOptions={{ headerShown: false }}>

@@ -20,9 +20,12 @@ const LoginScreen = () => {
 	const [agree, setAgree] = useState(false)
 
 	const handleLogin = () => {
-		router.push('/screens/homescreen')
-		if (!email || !password || !agree) return
+		if (!email || !password || !agree){
+			alert("Please fill in all fields and agree to the terms.")
+			return
+		}
 		login(email, password)
+		alert("Login complete!")
 	}
 
 	return (
@@ -64,7 +67,7 @@ const LoginScreen = () => {
 					<Ionicons
 						name={agree ? 'checkbox' : 'square-outline'}
 						size={22}
-						color={agree ? '#1c2b59' : '#aaa'}
+						color={agree ? '#1c2b59' : '#1c2b59'}
 					/>
 				</TouchableOpacity>
 				<Text style={styles.checkboxLabel}>
@@ -145,6 +148,7 @@ const styles = StyleSheet.create({
 		flexDirection: 'row',
 		alignItems: 'center',
 		marginBottom: 50,
+		marginTop: 10
 	},
 	checkboxLabel: {
 		marginLeft: 5,
@@ -160,7 +164,7 @@ const styles = StyleSheet.create({
 		width: '40%',
 		paddingVertical: 12,
 		alignItems: 'center',
-		marginBottom: 10,
+		marginBottom: 5,
 		shadowColor: '#000',
 		shadowOffset: { width: 0, height: 2 },
 		shadowOpacity: 0.2,
@@ -192,9 +196,10 @@ const styles = StyleSheet.create({
 		backgroundColor: '#eee',
 		paddingVertical: 12,
 		paddingHorizontal: 20,
-		borderRadius: 20,
+		borderRadius: 30,
 		alignItems: 'center',
 		gap: 10,
+		transform: [{ scale: 0.90 }],
 	},
 	googleText: {
 		color: '#4267B2',

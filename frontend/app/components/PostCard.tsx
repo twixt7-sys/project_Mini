@@ -1,11 +1,18 @@
 import React from 'react'
 import { View, Text, StyleSheet } from 'react-native'
 import { Post } from '../types/Post'
-import Svg, { Path, Mask, Defs, LinearGradient, Stop } from 'react-native-svg'
+import { Ionicons } from '@expo/vector-icons'
 
-type PostCardProps = {
-	post: Post
-}
+type PostCardProps = { post: Post }
+
+const Stat = ({ iconName, color, count }: { iconName: keyof typeof Ionicons.glyphMap; color: string; count: number }) => (
+	<View style={[styles.stat, { backgroundColor: color }]}>
+		<View style={{ flexDirection: 'row', alignItems: 'center', gap: 4 }}>
+			<Ionicons name={iconName} size={14} color="#000" />
+			<Text style={styles.statText}>{count}</Text>
+		</View>
+	</View>
+)
 
 const PostCard: React.FC<PostCardProps> = ({ post }) => {
 	return (
@@ -13,65 +20,28 @@ const PostCard: React.FC<PostCardProps> = ({ post }) => {
 			<View style={styles.timestampContainer}>
 				<Text style={styles.timestamp}>{post.createdAt}</Text>
 			</View>
+
 			<View style={styles.card}>
 				<Text style={styles.author}>{post.author}</Text>
 				<Text style={styles.title}>{post.title}</Text>
 				<View style={styles.contentContainer}>
 					<Text style={styles.content}>{post.content}</Text>
 				</View>
+
 				<View style={styles.statsContainer}>
-					<Text style={{ color: '#ffffff', fontWeight: 'bold' }}>H: 999</Text>
-					<Text style={{ color: '#ffffff', fontWeight: 'bold' }}>C: 999</Text>
-					<Text style={{ color: '#ffffff', fontWeight: 'bold' }}>V: 999</Text>
+					<Stat iconName="heart" color="#FFB7CE" count={999} />
+					<Stat iconName="chatbubble-ellipses" color="#B7FFD8" count={999} />
+					<Stat iconName="eye" color="#B7D8FF" count={999} />
 				</View>
 			</View>
+
 			<View style={styles.buttonsContainer}>
-				<View style={styles.commentButtonContainer}>
-				<View style={styles.commentButton}>
-					<Svg width={15} height={15} viewBox="0 0 15 15" fill="none">
-						<Defs>
-							<LinearGradient
-								id="commentGradient"
-								x1="7.5"
-								y1="15"
-								x2="7.5"
-								y2="0"
-								gradientUnits="userSpaceOnUse"
-							>
-								<Stop offset="0" stopColor="#19561B" />
-								<Stop offset="1" stopColor="#42A545" />
-							</LinearGradient>
-						</Defs>
-						<Path
-							d="M0 6C0 2.68629 2.68629 0 6 0H9C12.3137 0 15 2.68629 15 6V9C15 12.3137 12.3137 15 9 15H1C0.447715 15 0 14.5523 0 14V6Z"
-							stroke="url(#commentGradient)"
-							strokeWidth={2}
-						/>
-					</Svg>
+				<View style={styles.iconButton}>
+					<Ionicons name="chatbubble" size={20} color="#42A545" />
 				</View>
-				</View>
-				<View style={styles.heartButtonContainer}>
-				<View style={styles.heartButton}>
-					<Svg width={28} height={24} viewBox="0 0 28 24" fill="none">
-						<Defs>
-							<LinearGradient
-								id="heartGradient"
-								x1="14"
-								y1="24"
-								x2="14"
-								y2="0"
-								gradientUnits="userSpaceOnUse"
-							>
-								<Stop offset="0" stopColor="#8B0000" />
-								<Stop offset="1" stopColor="#FF3B3B" />
-							</LinearGradient>
-						</Defs>
-						<Path
-							d="M2.7 3.2C5.8 0.2 10.7 0.2 13.7 3.2C16.8 0.2 21.8 0.3 24.8 3.2C27.7 6.2 27.8 10.9 25 14L17.1 21.9C14.1 24.6 10.2 24.1 8.2 22L2.7 14.2C-0.3 11.2 -0.3 6.2 2.7 3.2Z"
-							fill="url(#heartGradient)"
-						/>
-					</Svg>
-				</View>
+
+				<View style={[styles.iconButton, styles.largeButton]}>
+					<Ionicons name="heart" size={28} color="#FF3B3B" />
 				</View>
 			</View>
 		</View>
@@ -85,44 +55,17 @@ const styles = StyleSheet.create({
 		marginHorizontal: 16,
 		marginBottom: -50,
 		borderRadius: 20,
+		elevation: 3,
 		shadowColor: '#000',
 		shadowOpacity: 0.1,
 		shadowOffset: { width: 0, height: 2 },
 		shadowRadius: 6,
-		elevation: 3,
-		paddingBottom: 5,
 	},
-	author: {
-		fontSize: 14,
-		fontWeight: '600',
-		color: '#5e66ff',
-		marginBottom: 4,
-	},
-	title: {
-		fontSize: 16,
-		fontWeight: '700',
-		marginBottom: 10,
-		color: '#2a2a2a',
-		marginLeft: 5
-	},
-	content: {
-		fontSize: 15,
-		color: '#444',
-		marginBottom: 8,
-	},
-	contentContainer: {
-		backgroundColor: '#FAFAFF',
-		borderRadius: 15,
-		paddingTop: 15,
-		paddingBottom: 15,
-		paddingLeft: 10,
-		paddingRight: 10
-	},
-	timestamp: {
-		fontSize: 11,
-		color: '#FFF',
-		textAlign: 'center',
-	},
+	author: { fontSize: 14, fontWeight: '600', color: '#5e66ff', marginBottom: 4 },
+	title: { fontSize: 16, fontWeight: '700', color: '#2a2a2a', marginBottom: 10, marginLeft: 5 },
+	content: { fontSize: 15, color: '#444' },
+	contentContainer: { backgroundColor: '#FAFAFF', borderRadius: 15, padding: 15 },
+	timestamp: { fontSize: 11, color: '#FFF', textAlign: 'center' },
 	timestampContainer: {
 		backgroundColor: '#97c9f0',
 		padding: 8,
@@ -135,63 +78,46 @@ const styles = StyleSheet.create({
 		transform: [{ translateX: -28 }, { translateY: 40 }],
 		zIndex: 1
 	},
-	heartButton: {
-
+	statsContainer: {
+		marginTop: 10,
+		flexDirection: 'row',
+		gap: 8,
 	},
-	heartButtonContainer: {
-		backgroundColor: '#FFF',
-		width: 60,
-		height: 60,
-		borderRadius: 50,
+	stat: {
+		borderRadius: 25,
+		paddingHorizontal: 10,
+		paddingVertical: 4,
 		alignItems: 'center',
 		justifyContent: 'center',
-		shadowColor: '#000',
-		shadowOpacity: 0.1,
-		shadowOffset: { width: 0, height: 2 },
-		shadowRadius: 6,
-		elevation: 3,
-		marginLeft: 15
 	},
-	commentButton: {
-		
+	statText: {
+		color: '#000',
+		fontWeight: 'bold',
+		fontSize: 12
 	},
-	commentButtonContainer: {
+	buttonsContainer: {
+		alignSelf: 'flex-end',
+		flexDirection: 'row',
+		alignItems: 'center',
+		transform: [{ translateX: -40 }, { translateY: 15 }],
+	},
+	iconButton: {
 		backgroundColor: '#FFF',
 		width: 40,
 		height: 40,
 		borderRadius: 50,
 		alignItems: 'center',
 		justifyContent: 'center',
+		elevation: 3,
 		shadowColor: '#000',
 		shadowOpacity: 0.1,
 		shadowOffset: { width: 0, height: 2 },
 		shadowRadius: 6,
-		elevation: 3
 	},
-	buttonsContainer: {
-		alignSelf: 'flex-end',
-		alignItems: 'center',
-		justifyContent: 'center',
-		flexDirection: 'row',
-		transform: [
-			{ translateX: -40 },
-			{ translateY: 15 },
-			{ scale: 1.0 }
-		]
-	},
-	statsContainer: {
-		backgroundColor: '#97c9f0',
-		marginTop: 15,
-		marginBottom: 15,
-		padding: 5,
-		paddingLeft: 15,
-		paddingRight: 15,
-		borderRadius: 20,
-		alignSelf: 'flex-start',
-		alignItems: 'center',
-		justifyContent: 'center',
-		flexDirection: 'row',
-		gap: 10,
+	largeButton: {
+		width: 60,
+		height: 60,
+		marginLeft: 15
 	}
 })
 

@@ -12,6 +12,7 @@ def create_app():
     app.register_blueprint(auth_routes.auth_bp)
     
     CORS(app)
+
     
     init_extensions(app)
     

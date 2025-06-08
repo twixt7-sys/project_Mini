@@ -1,4 +1,4 @@
-// services/auth.ts
+
 import { BASE_URL } from './config'
 
 export const loginUser = async (email: string, password: string) => {
@@ -22,11 +22,18 @@ export const registerUser = async (user: { username: string; email: string; pass
 		},
 		body: JSON.stringify(user),
 	})
+
+	const responseText = await response.text()
 	console.log("Fetch returned:", response.status)
-	console.log("Status:", response.status)
-	const text = await response.text()
-	console.log("Raw response:", text)
-	if (!response.ok) throw new Error('Registration failed')
+	console.log("Raw response:", responseText)
+
+	if (!response.ok) {
+		throw new Error(`Registration failed: ${response.status} - ${responseText}`)
+	}
+
+	// Parse the responseText manually to JSON
+	const data = JSON.parse(responseText)
 	alert("Registration successful! (auth service)")
-	return await response.json()
+	return data
 }
+
