@@ -9,7 +9,7 @@ const Stat = (
     <View style={[styles.stat, { backgroundColor: colors.c1 }]}>
         <View style={{ flexDirection: 'row', alignItems: 'center', gap: 4 }}>
             <Ionicons name={iconName} size={14} color={colors.c2} />
-            <Txt text={count.toString()} style={{fontSize: 8, fontWeight: 'bold', color: colors.c2}} />
+            <Txt text={count.toString()} style_={{fontSize: 12, color: colors.c2}} />
         </View>
     </View>
 )
@@ -17,8 +17,8 @@ const Stat = (
 const styles = StyleSheet.create({ 
     stat: {
 		borderRadius: 25,
-		paddingHorizontal: 10,
-		paddingVertical: 4,
+        padding: 5,
+        paddingHorizontal: 10,
 		alignItems: 'center',
 		justifyContent: 'center',
 	},

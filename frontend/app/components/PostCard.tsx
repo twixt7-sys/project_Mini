@@ -3,6 +3,7 @@ import { View, Text, StyleSheet } from 'react-native'
 import { Post } from '../types/Post'
 import { Ionicons } from '@expo/vector-icons'
 import Stat from './Stat'
+import Txt from './Txt'
 
 type PostCardProps = { post: Post }
 
@@ -12,12 +13,12 @@ const PostCard: React.FC<PostCardProps> = ({ post }) => {
 			<View style={styles.timestampContainer}>
 				<Text style={styles.timestamp}>{post.createdAt}</Text>
 			</View>
-
+		
 			<View style={styles.card}>
-				<Text style={styles.author}>{post.author}</Text>
-				<Text style={styles.title}>{post.title}</Text>
+				<Txt text={post.author} style_={styles.author}/>
+				<Txt text={post.title} style_={styles.title}/>
 				<View style={styles.contentContainer}>
-					<Text style={styles.content}>{post.content}</Text>
+					<Txt text={post.content} style_={styles.content}/>
 				</View>
 
 				<View style={styles.statsContainer}>
@@ -77,6 +78,7 @@ const styles = StyleSheet.create({
 		marginTop: 10,
 		flexDirection: 'row',
 		gap: 8,
+		opacity: 0.8,
 	},
 	buttonsContainer: {
 		alignSelf: 'flex-end',

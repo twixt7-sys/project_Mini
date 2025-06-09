@@ -1,10 +1,10 @@
 import react from 'react'
 import { View, Text, StyleSheet } from 'react-native'
 
-const Txt = ({ text, style }: { text: string; style?: object }) => {
+const Txt = ({ text, style_ }: { text: string; style_?: object }) => {
     return (
-        <View style={[styles.container, style]}>
-            <Text style={styles.text}>{text}</Text>
+        <View style={styles.container}>
+            <Text style={[styles.text, style_]}>{text}</Text>
         </View>
     )
 }
@@ -16,7 +16,6 @@ const styles = StyleSheet.create({
         // alignItems: 'center',
     },
     text: {
-        fontWeight: 'bold',
         fontFamily: 'Roboto, "Segoe UI", Arial, sans-serif',
         color: '#fff',
     },
