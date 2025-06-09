@@ -13,7 +13,7 @@ const PostCard: React.FC<PostCardProps> = ({ post }) => {
 			<View style={styles.timestampContainer}>
 				<Text style={styles.timestamp}>{post.createdAt}</Text>
 			</View>
-		
+
 			<View style={styles.card}>
 				<Txt text={post.author} style_={styles.author}/>
 				<Txt text={post.title} style_={styles.title}/>
@@ -63,15 +63,13 @@ const styles = StyleSheet.create({
 	contentContainer: { backgroundColor: '#DAE2FF', borderRadius: 15, padding: 15 },
 	timestamp: { fontSize: 11, color: '#FFF', textAlign: 'center' },
 	timestampContainer: {
-		backgroundColor: '#97c9f0',
-		padding: 8,
-		borderTopWidth: 1,
-		borderTopColor: '#e0e0e0',
+		backgroundColor: '#889EF2',
+		padding: 4,
+		paddingHorizontal: 12,
 		alignItems: 'center',
 		alignSelf: 'flex-end',
 		borderRadius: 18,
-		width: 100,
-		transform: [{ translateX: -28 }, { translateY: 40 }],
+		transform: [{ translateX: -30 }, { translateY: 38 }],
 		zIndex: 1
 	},
 	statsContainer: {

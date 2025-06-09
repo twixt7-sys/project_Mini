@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useRef } from 'react'
 import {
 	View,
 	ScrollView,
@@ -11,6 +11,7 @@ import { Ionicons } from '@expo/vector-icons'
 import PostCard from '../components/PostCard'
 import { Post } from '../types/Post'
 import ProfileHeader from '../components/ProfileHeader'
+import { Animated } from 'react-native'
 
 const dummyPosts: Post[] = [
 	{
@@ -59,11 +60,56 @@ const dummyPosts: Post[] = [
 
 const HomeScreen = () => {
 	const [refreshing, setRefreshing] = useState(false)
+	const [isFabOpen, setIsFabOpen] = useState(false)
+	const animation1 = useRef(new Animated.Value(0)).current
+	const animation2 = useRef(new Animated.Value(0)).current
+
+	const toggleFabMenu = () => {
+		const toValue = isFabOpen ? 0 : 1
+
+		Animated.parallel([
+			Animated.spring(animation1, {
+				toValue,
+				useNativeDriver: true,
+			}),
+			Animated.spring(animation2, {
+				toValue,
+				useNativeDriver: true,
+			}),
+		]).start()
+
+		setIsFabOpen(!isFabOpen)
+	}
+
+	const fabStyle1 = {
+		transform: [
+			{
+				translateY: animation1.interpolate({
+					inputRange: [0, 1],
+					outputRange: [0, -70],
+				}),
+			},
+		],
+		opacity: animation1,
+	}
+
+	const fabStyle2 = {
+		transform: [
+			{
+				translateY: animation2.interpolate({
+					inputRange: [0, 1],
+					outputRange: [0, -140],
+				}),
+			},
+		],
+		opacity: animation2,
+	}
 
 	const onRefresh = async () => {
 		setRefreshing(true)
 		await new Promise((resolve) => setTimeout(resolve, 1000))
 	}
+
 
 	return (
 		<View style={styles.container}>
@@ -79,9 +125,23 @@ const HomeScreen = () => {
 				))}
 			</ScrollView>
 
-			<TouchableOpacity style={styles.fab}>
-				<Ionicons name='add' size={28} color='#fff' />
-			</TouchableOpacity>
+			<>
+				<Animated.View style={[styles.fabOption, fabStyle2]}>
+					<TouchableOpacity style={styles.fabButton}>
+						<Ionicons name='image' size={20} color='#fff' />
+					</TouchableOpacity>
+				</Animated.View>
+
+				<Animated.View style={[styles.fabOption, fabStyle1]}>
+					<TouchableOpacity style={styles.fabButton}>
+						<Ionicons name='pencil' size={20} color='#fff' />
+					</TouchableOpacity>
+				</Animated.View>
+
+				<TouchableOpacity style={styles.fab} onPress={toggleFabMenu}>
+					<Ionicons name={isFabOpen ? 'close' : 'add'} size={28} color='#fff' />
+				</TouchableOpacity>
+			</>
 		</View>
 
 	)
@@ -108,6 +168,22 @@ const styles = StyleSheet.create({
 		zIndex: 10,
 		marginBottom: 30,
 		marginRight: 5,
+	},
+		fabOption: {
+		position: 'absolute',
+		right: 27,
+		bottom: 45,
+	},
+
+	fabButton: {
+		width: 56,
+		height: 56,
+		borderRadius: 28,
+		backgroundColor: '#5e66ff',
+		justifyContent: 'center',
+		alignItems: 'center',
+		elevation: 4,
+		marginBottom: 10,
 	},
 })
 

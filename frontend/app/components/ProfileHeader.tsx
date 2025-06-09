@@ -1,6 +1,7 @@
 import React from 'react'
 import { View, Text, StyleSheet } from 'react-native'
 import { Ionicons } from '@expo/vector-icons'
+import Txt from './Txt'
 
 const ProfileHeader = () => {
 	return (
@@ -9,16 +10,16 @@ const ProfileHeader = () => {
 				<Ionicons name='person' size={32} color='#4a4a4a' />
 			</View>
 			<View style={styles.infoContainer}>
-				<Text style={styles.username}>Bloo</Text>
+				<Txt text={"Bloo"} style_={styles.username} />
 				<View style={styles.statsRow}>
 					<View style={styles.capsule1}>
-						<Text style={styles.stat}>📸 99M</Text>
+						<Txt text={"📸 99M"} style_={styles.stat}/>
 					</View>
 					<View style={styles.capsule2}>
-						<Text style={styles.stat}>🔗 99M</Text>
+						<Txt text={"🔗 99M"} style_={styles.stat}/>
 					</View>
 					<View style={styles.capsule3}>
-						<Text style={styles.stat}>📅 12/31/2025</Text>
+						<Txt text={"📅 12/31/2025"} style_={styles.stat}/>
 					</View>
 				</View>
 			</View>
@@ -71,11 +72,12 @@ const styles = StyleSheet.create({
 		color: '#333',
 	},
 	capsule1: {
-		backgroundColor: '#e0e0ff',
+		backgroundColor: '#d0d0ff',
 		borderRadius: 20,
 		paddingVertical: 6,
 		paddingHorizontal: 12,
 		marginRight: 8,
+		transform: [{ scale: 0.9 }],
 	},
 	capsule2: {
 		backgroundColor: '#d0d0ff',
@@ -83,12 +85,14 @@ const styles = StyleSheet.create({
 		paddingVertical: 6,
 		paddingHorizontal: 12,
 		marginRight: 8,
+		transform: [{ scale: 0.9 }],
 	},
 	capsule3: {
-		backgroundColor: '#c0c0ff',
+		backgroundColor: '#d0d0ff',
 		borderRadius: 20,
 		paddingVertical: 6,
 		paddingHorizontal: 12,
+		transform: [{ scale: 0.9 }],
 	},
 })
 
