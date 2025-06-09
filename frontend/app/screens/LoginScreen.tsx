@@ -25,7 +25,7 @@ const LoginScreen = () => {
 			return
 		}
 		login(email, password)
-		alert("Login complete!")
+		router.push('/screens/homescreen')
 	}
 
 	return (

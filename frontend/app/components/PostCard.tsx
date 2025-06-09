@@ -2,17 +2,9 @@ import React from 'react'
 import { View, Text, StyleSheet } from 'react-native'
 import { Post } from '../types/Post'
 import { Ionicons } from '@expo/vector-icons'
+import Stat from './Stat'
 
 type PostCardProps = { post: Post }
-
-const Stat = ({ iconName, color, count }: { iconName: keyof typeof Ionicons.glyphMap; color: string; count: number }) => (
-	<View style={[styles.stat, { backgroundColor: color }]}>
-		<View style={{ flexDirection: 'row', alignItems: 'center', gap: 4 }}>
-			<Ionicons name={iconName} size={14} color="#000" />
-			<Text style={styles.statText}>{count}</Text>
-		</View>
-	</View>
-)
 
 const PostCard: React.FC<PostCardProps> = ({ post }) => {
 	return (
@@ -29,19 +21,22 @@ const PostCard: React.FC<PostCardProps> = ({ post }) => {
 				</View>
 
 				<View style={styles.statsContainer}>
-					<Stat iconName="heart" color="#FFB7CE" count={999} />
-					<Stat iconName="chatbubble-ellipses" color="#B7FFD8" count={999} />
-					<Stat iconName="eye" color="#B7D8FF" count={999} />
+					<Stat iconName="heart" count={999}
+					colors={{c1: '#BD5D5D', c2: '#fff'}}/>
+					<Stat iconName="chatbubble-ellipses" count={999}
+					colors={{c1: '#42A545', c2: '#fff'}}/>
+					<Stat iconName="eye" count={999}
+					colors={{c1: '#5B6EBA', c2: '#fff'}}/>
 				</View>
 			</View>
 
 			<View style={styles.buttonsContainer}>
 				<View style={styles.iconButton}>
-					<Ionicons name="chatbubble" size={20} color="#42A545" />
+					<Ionicons name="chatbubble-outline" size={20} color="#42A545" />
 				</View>
 
 				<View style={[styles.iconButton, styles.largeButton]}>
-					<Ionicons name="heart" size={28} color="#FF3B3B" />
+					<Ionicons name="heart-outline" size={28} color="#FF3B3B" />
 				</View>
 			</View>
 		</View>
@@ -50,7 +45,7 @@ const PostCard: React.FC<PostCardProps> = ({ post }) => {
 
 const styles = StyleSheet.create({
 	card: {
-		backgroundColor: '#e5f5ff',
+		backgroundColor: '#aab8ff',
 		padding: 16,
 		marginHorizontal: 16,
 		marginBottom: -50,
@@ -63,8 +58,8 @@ const styles = StyleSheet.create({
 	},
 	author: { fontSize: 14, fontWeight: '600', color: '#5e66ff', marginBottom: 4 },
 	title: { fontSize: 16, fontWeight: '700', color: '#2a2a2a', marginBottom: 10, marginLeft: 5 },
-	content: { fontSize: 15, color: '#444' },
-	contentContainer: { backgroundColor: '#FAFAFF', borderRadius: 15, padding: 15 },
+	content: { fontSize: 15, color: '#444', },
+	contentContainer: { backgroundColor: '#DAE2FF', borderRadius: 15, padding: 15 },
 	timestamp: { fontSize: 11, color: '#FFF', textAlign: 'center' },
 	timestampContainer: {
 		backgroundColor: '#97c9f0',
@@ -83,18 +78,6 @@ const styles = StyleSheet.create({
 		flexDirection: 'row',
 		gap: 8,
 	},
-	stat: {
-		borderRadius: 25,
-		paddingHorizontal: 10,
-		paddingVertical: 4,
-		alignItems: 'center',
-		justifyContent: 'center',
-	},
-	statText: {
-		color: '#000',
-		fontWeight: 'bold',
-		fontSize: 12
-	},
 	buttonsContainer: {
 		alignSelf: 'flex-end',
 		flexDirection: 'row',
@@ -103,6 +86,8 @@ const styles = StyleSheet.create({
 	},
 	iconButton: {
 		backgroundColor: '#FFF',
+		borderWidth: 2,
+		borderColor: '#77DD7A',
 		width: 40,
 		height: 40,
 		borderRadius: 50,
@@ -115,6 +100,7 @@ const styles = StyleSheet.create({
 		shadowRadius: 6,
 	},
 	largeButton: {
+		borderColor: '#ED9A9A',
 		width: 60,
 		height: 60,
 		marginLeft: 15

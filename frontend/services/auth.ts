@@ -1,4 +1,4 @@
-
+import AsyncStorage from '@react-native-async-storage/async-storage'
 import { BASE_URL } from './config'
 
 export const loginUser = async (email: string, password: string) => {
@@ -10,7 +10,9 @@ export const loginUser = async (email: string, password: string) => {
 		body: JSON.stringify({ email, password }),
 	})
 	if (!response.ok) throw new Error('Login failed')
-	return await response.json()
+	const data = await response.json()
+	await AsyncStorage.setItem('token', data.access_token)
+	return data
 }
 
 export const registerUser = async (user: { username: string; email: string; password: string; confirm_password: string}) => {

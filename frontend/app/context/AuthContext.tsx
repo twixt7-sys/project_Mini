@@ -29,9 +29,9 @@ export const AuthProvider: React.FC<Props> = ({ children }) => {
 		try {
 			const data = await loginUser(email, password)
 			const token = data.access_token
-			await AsyncStorage.setItem('userToken', token)
 			setUserToken(token)
 			setUser(data.user)
+			await AsyncStorage.setItem('userToken', token)
 		} catch (error) {
 			console.error('Login failed', error)
 		}

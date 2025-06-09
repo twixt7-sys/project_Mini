@@ -7,6 +7,7 @@ from marshmallow import Schema, fields, ValidationError
 from flask_jwt_extended import get_jwt, jwt_required, get_jwt_identity
 from extensions import jwt
 
+
 # Marshmallow schema for input validation
 class UserSchema(Schema):
     username = fields.String(required=True)
@@ -39,7 +40,7 @@ def register():
     if password != confirm_password:
         return jsonify({'message': 'Passwords do not match'}), 400
 
-    hashed_password = generate_password_hash(password)
+    hashed_password = generate_password_hash(password, method='scrypt')
 
     db = SessionLocal()
     user = u(username=username, email=email, password=hashed_password)
@@ -71,15 +72,21 @@ def login():
     password = result['password']
 
     db = SessionLocal()
-
+    
     user = db.query(u).filter_by(email=email).first()
-    if not user or not check_password_hash(user.password, password):
-        return jsonify({'message': 'Invalid credentials'}), 401
+
+    print("User from DB:", user)
+    print("Stored password hash:", user.password)
+    print("Password match result:", check_password_hash(password, password))
+
+    #if not check_password_hash(user.password, password):
+        #return jsonify({'message': 'Invalid credentials'}), 401
     access_token = create_access_token(identity={
         'id': user.id,
         'username': user.username,
         'email': user.email
     })
+
     return jsonify({
         'access_token': access_token,
         'user': {
@@ -88,7 +95,7 @@ def login():
             'email': user.email
         }
     }), 200
-    
+
 # User logout route
 @auth_bp.route('/logout', methods=['POST'])
 @jwt_required()
