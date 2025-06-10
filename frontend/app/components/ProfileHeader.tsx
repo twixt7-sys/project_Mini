@@ -38,11 +38,13 @@ const styles = StyleSheet.create({
 		paddingVertical: 10,
 		flexDirection: 'row',
 		alignItems: 'center',
-		backgroundColor: '#aab8ff',
+		backgroundColor: '#FFF',
 		margin: 15,
 		marginTop: 40,
 		borderRadius: 50,
-		marginBottom: 12
+		marginBottom: 12,
+		borderColor: '#5e66ff',
+		borderWidth: 5
 	},
 	avatarCircle: {
 		width: 70,
@@ -52,7 +54,7 @@ const styles = StyleSheet.create({
 		justifyContent: 'center',
 		alignItems: 'center',
 		marginRight: 16,
-		borderWidth: 2,
+		borderWidth: 5,
 		borderColor: '#5e66ff',
 	},
 	infoContainer: {

@@ -74,9 +74,11 @@ const styles = StyleSheet.create({
 	},
 	statsContainer: {
 		marginTop: 10,
+		alignSelf: 'flex-start',
 		flexDirection: 'row',
 		gap: 8,
 		opacity: 0.8,
+		transform: [{ scale: 0.9 }, { translateX: -10 }]
 	},
 	buttonsContainer: {
 		alignSelf: 'flex-end',
