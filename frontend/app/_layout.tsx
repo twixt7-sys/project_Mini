@@ -4,6 +4,7 @@ import { useColorScheme } from 'react-native'
 import { TamaguiProvider } from 'tamagui'
 import { tamaguiConfig } from '../tamagui.config'
 import { AuthProvider } from './context/AuthContext'
+import RootNavigator from './navigation/RootNavigator'
 
 export default function RootLayout() {
 	const colorScheme = useColorScheme()

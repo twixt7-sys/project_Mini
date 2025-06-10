@@ -1,7 +1,7 @@
 import react from 'react'
 import { View, Text, StyleSheet } from 'react-native'
 
-const Txt = ({ text, style_ }: { text: string; style_?: object }) => {
+const Txt = ({ text, style_ }: { text?: string; style_?: object }) => {
     return (
         <View style={styles.container}>
             <Text style={[styles.text, style_]}>{text}</Text>

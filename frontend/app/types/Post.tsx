@@ -4,5 +4,4 @@ export type Post = {
 	content: string
 	author: string
 	createdAt: string
-	// Add any other fields your backend returns
 }
