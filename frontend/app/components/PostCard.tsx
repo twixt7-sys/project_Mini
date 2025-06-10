@@ -1,5 +1,5 @@
-import React from 'react'
-import { View, Text, StyleSheet } from 'react-native'
+import React, { useState, useRef } from 'react'
+import { View, Text, StyleSheet, TouchableHighlight, Animated } from 'react-native'
 import { Post } from '../types/Post'
 import { Ionicons } from '@expo/vector-icons'
 import Stat from './Stat'
@@ -8,6 +8,27 @@ import Txt from './Txt'
 type PostCardProps = { post: Post }
 
 const PostCard: React.FC<PostCardProps> = ({ post }) => {
+	const [liked, setLiked] = useState(false)
+	const scaleAnim = useRef(new Animated.Value(1)).current
+
+	const handleLikePress = () => {
+		setLiked(!liked)
+
+		// animate the scale
+		Animated.sequence([
+			Animated.timing(scaleAnim, {
+				toValue: 1.4,
+				duration: 100,
+				useNativeDriver: true,
+			}),
+			Animated.timing(scaleAnim, {
+				toValue: 1,
+				duration: 100,
+				useNativeDriver: true,
+			})
+		]).start()
+	}
+
 	return (
 		<View>
 			<View style={styles.timestampContainer}>
@@ -32,13 +53,27 @@ const PostCard: React.FC<PostCardProps> = ({ post }) => {
 			</View>
 
 			<View style={styles.buttonsContainer}>
-				<View style={styles.iconButton}>
+				<TouchableHighlight style={styles.iconButton}>
 					<Ionicons name="chatbubble-outline" size={20} color="#42A545" />
-				</View>
+				</TouchableHighlight>
 
-				<View style={[styles.iconButton, styles.largeButton]}>
-					<Ionicons name="heart-outline" size={28} color="#FF3B3B" />
-				</View>
+				<TouchableHighlight
+					style={[styles.iconButton, styles.largeButton]}
+					onPress={handleLikePress}
+					underlayColor="#ffe5e5"
+				>
+					<Animated.View style={{ transform: [{ scale: scaleAnim }] }}>
+						<Ionicons
+							name={liked ? 'heart' : 'heart-outline'}
+							size={liked ? 35 : 28}
+							color="#FF3B3B"
+						/>
+					</Animated.View>
+				</TouchableHighlight>
+			</View>
+
+			<View>
+				{}
 			</View>
 		</View>
 	)
@@ -60,7 +95,7 @@ const styles = StyleSheet.create({
 	author: { fontSize: 14, fontWeight: '600', color: '#5e66ff', marginBottom: 4 },
 	title: { fontSize: 16, fontWeight: '700', color: '#2a2a2a', marginBottom: 10, marginLeft: 5 },
 	content: { fontSize: 15, color: '#444', },
-	contentContainer: { backgroundColor: '#DAE2FF', borderRadius: 15, padding: 15 },
+	contentContainer: { backgroundColor: '#DAE2FF', borderRadius: 8, padding: 15 },
 	timestamp: { fontSize: 11, color: '#FFF', textAlign: 'center' },
 	timestampContainer: {
 		backgroundColor: '#889EF2',
@@ -100,6 +135,7 @@ const styles = StyleSheet.create({
 		shadowOpacity: 0.1,
 		shadowOffset: { width: 0, height: 2 },
 		shadowRadius: 6,
+		marginBottom: 10
 	},
 	largeButton: {
 		borderColor: '#ED9A9A',

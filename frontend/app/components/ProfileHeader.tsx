@@ -1,30 +1,34 @@
 import React from 'react'
-import { View, Text, StyleSheet } from 'react-native'
+import { View, StyleSheet } from 'react-native'
 import { Ionicons } from '@expo/vector-icons'
 import Txt from './Txt'
 
-const ProfileHeader = () => {
-	return (
-		<View style={styles.container}>
-			<View style={styles.avatarCircle}>
-				<Ionicons name='person' size={32} color='#4a4a4a' />
-			</View>
-			<View style={styles.infoContainer}>
-				<Txt text={"Bloo"} style_={styles.username} />
-				<View style={styles.statsRow}>
-					<View style={styles.capsule1}>
-						<Txt text={"📸 99M"} style_={styles.stat}/>
-					</View>
-					<View style={styles.capsule2}>
-						<Txt text={"🔗 99M"} style_={styles.stat}/>
-					</View>
-					<View style={styles.capsule3}>
-						<Txt text={"📅 12/31/2025"} style_={styles.stat}/>
-					</View>
-				</View>
-			</View>
-		</View>
-	)
+type ProfileHeaderProps = {
+    username: string
+}
+
+const ProfileHeader: React.FC<ProfileHeaderProps> = ({ username }) => {
+    return (
+        <View style={styles.container}>
+            <View style={styles.avatarCircle}>
+                <Ionicons name='person' size={32} color='#4a4a4a' />
+            </View>
+            <View style={styles.infoContainer}>
+                <Txt text={username} style_={styles.username} />
+                <View style={styles.statsRow}>
+                    <View style={styles.capsule1}>
+                        <Txt text={"📸 99M"} style_={styles.stat}/>
+                    </View>
+                    <View style={styles.capsule2}>
+                        <Txt text={"🔗 99M"} style_={styles.stat}/>
+                    </View>
+                    <View style={styles.capsule3}>
+                        <Txt text={"📅 12/31/2025"} style_={styles.stat}/>
+                    </View>
+                </View>
+            </View>
+        </View>
+    )
 }
 
 const styles = StyleSheet.create({
@@ -38,12 +42,12 @@ const styles = StyleSheet.create({
 		paddingVertical: 10,
 		flexDirection: 'row',
 		alignItems: 'center',
-		backgroundColor: '#FFF',
+		backgroundColor: '#EEF',
 		margin: 15,
 		marginTop: 40,
 		borderRadius: 50,
 		marginBottom: 12,
-		borderColor: '#5e66ff',
+		borderColor: '#8899dd',
 		borderWidth: 5
 	},
 	avatarCircle: {

@@ -113,10 +113,10 @@ const HomeScreen = () => {
 
 	return (
 		<View style={styles.container}>
-			<ProfileHeader />
+			<ProfileHeader username='@username'/>
 
 			<ScrollView
-				contentContainerStyle={{ paddingTop: 120, paddingBottom: 100 }}
+				contentContainerStyle={{ paddingTop: 135, paddingBottom: 100 }}
 				refreshControl={
 					<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
 				}>
