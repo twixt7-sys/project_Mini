@@ -63,19 +63,33 @@ const CommentSection: React.FC<CommentSectionProps> = ({ isCollapsed, setIsColla
 						placeholder="Write a comment..."
 						value={inputValue}
 						onChangeText={setInputValue}
-						style={[styles.inputField, { margin: 5, borderRadius: 10 }]}
+						style={[styles.inputField, { margin: 10, borderRadius: 25, marginVertical: 5, marginRight: 5 }]}
 						placeholderTextColor="#666"
 					/>
 					<TouchableHighlight
-						style={{ marginRight: 10 }}
+						style={{
+							marginRight: 5,
+							alignItems: 'center',
+							backgroundColor: '#44E',
+							borderRadius: 25,
+							width: 65,
+							transform: [{ scale: 0.8 }],
+						}}
 						onPress={() => {
 							if (inputValue.trim()) {
-								// Handle comment submission logic here
+								// Handle comment submission logic
 								setInputValue('')
 							}
 						}}
-						underlayColor="#e0e0e0"
-					/>
+						underlayColor="#99F"
+					>
+						<Ionicons
+							name='send'
+							size={25}
+							color="#aab8ff"
+							style={{ margin: 10 }}
+						/>
+					</TouchableHighlight>
 				</View>
 				
 			</View>
@@ -307,7 +321,6 @@ const styles = StyleSheet.create({
 	inputField: {
 		backgroundColor: '#fff',
 		flex: 1,
-		height: '100%',
 		paddingHorizontal: 15,
 		color: '#000',
 		fontSize: 15,
