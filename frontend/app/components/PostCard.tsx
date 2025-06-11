@@ -6,6 +6,7 @@ import { Ionicons } from '@expo/vector-icons'
 import Stat from './Stat'
 import Txt from './Txt'
 import dummyComments from '../dummy_data/dummy_comments'
+import { TextInput } from 'react-native'
 
 interface PostCardProps {
 	post: Post
@@ -18,6 +19,8 @@ interface CommentSectionProps {
 
 const CommentSection: React.FC<CommentSectionProps> = ({ isCollapsed, setIsCollapsed }) => {
 	const collapseAnim = useRef(new Animated.Value(0)).current
+	const scrollViewRef = useRef<ScrollView>(null)
+	const [inputValue, setInputValue] = useState('')
 
 	useEffect(() => {
 		const toValue = isCollapsed ? 425 : 0
@@ -36,16 +39,45 @@ const CommentSection: React.FC<CommentSectionProps> = ({ isCollapsed, setIsColla
 				</View>
 				<View style={styles.commentContent}>
 					<View style={styles.commentBox}>
-						<ScrollView showsVerticalScrollIndicator={false}>
-							<Txt text="* Comment Section *" />
-							{/* Add mapped comments here if needed */}
-
+						<ScrollView
+							ref={scrollViewRef}
+							style={{ width: '100%', maxHeight: 350 }} // Bounded height
+							contentContainerStyle={{ paddingBottom: 20 }}
+							showsVerticalScrollIndicator={false}
+							showsHorizontalScrollIndicator={false}
+						>
+							{dummyComments.map((comment, index) => (
+								<View key={comment.id} style={styles.commentItem}>
+									<Txt text={comment.author} style_={{ marginBottom: 5 }} />
+									<Txt key={index} text={comment.content} />
+								</View>
+							))}
 						</ScrollView>
 					</View>
 				</View>
 			</View>
+
 			<View style={styles.commentInputBox}>
-				<Txt />
+				<View style={{ flexDirection: 'row', alignItems: 'center', height: '100%' }}>
+					<TextInput
+						placeholder="Write a comment..."
+						value={inputValue}
+						onChangeText={setInputValue}
+						style={[styles.inputField, { margin: 5, borderRadius: 10 }]}
+						placeholderTextColor="#666"
+					/>
+					<TouchableHighlight
+						style={{ marginRight: 10 }}
+						onPress={() => {
+							if (inputValue.trim()) {
+								// Handle comment submission logic here
+								setInputValue('')
+							}
+						}}
+						underlayColor="#e0e0e0"
+					/>
+				</View>
+				
 			</View>
 		</Animated.View>
 	)
@@ -264,7 +296,23 @@ const styles = StyleSheet.create({
 		width: '97.5%',
 		height: 50,
 		marginTop: 15
-	}
+	},
+	commentItem: {
+		marginBottom: 10,
+		backgroundColor: '#DfD3',
+		borderRadius: 10,
+		padding: 10,
+		paddingVertical: 20
+	},
+	inputField: {
+		backgroundColor: '#fff',
+		flex: 1,
+		height: '100%',
+		paddingHorizontal: 15,
+		color: '#000',
+		fontSize: 15,
+	},
+
 })
 
 export default PostCard
