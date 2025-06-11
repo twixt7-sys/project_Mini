@@ -12,51 +12,8 @@ import PostCard from '../components/PostCard'
 import { Post } from '../types/Post'
 import ProfileHeader from '../components/ProfileHeader'
 import { Animated } from 'react-native'
-
-const dummyPosts: Post[] = [
-	{
-		id: '1',
-		title: 'Dummy Title 1',
-		content: 'This is my first dummy post.',
-		author: 'username',
-		createdAt: '2025-06-01',
-	},
-	{
-		id: '2',
-		title: 'Dummy Title 2',
-		content: 'Second dummy post content here.',
-		author: 'username',
-		createdAt: '2025-06-01',
-	},
-	{
-		id: '3',
-		title: 'Dummy Title 3',
-		content: 'Third dummy post content here.',
-		author: 'username',
-		createdAt: '2025-06-01',
-	},
-	{
-		id: '4',
-		title: 'Dummy Title 1',
-		content: 'This is my first dummy post.',
-		author: 'username',
-		createdAt: '2025-06-01',
-	},
-	{
-		id: '5',
-		title: 'Dummy Title 2',
-		content: 'Second dummy post content here.',
-		author: 'username',
-		createdAt: '2025-06-01',
-	},
-	{
-		id: '6',
-		title: 'Dummy Title 3',
-		content: 'Third dummy post content here.',
-		author: 'username',
-		createdAt: '2025-06-01',
-	},
-]
+import dummyPosts from '../dummy_data/dummy_posts'
+import dummyUsers from '../dummy_data/dummy_users'
 
 const HomeScreen = () => {
 	const [isFabOpen, setIsFabOpen] = useState(false)
@@ -106,7 +63,7 @@ const HomeScreen = () => {
 
 	return (
 		<View style={styles.container}>
-			<ProfileHeader username='@username'/>
+			<ProfileHeader username={dummyUsers[0].username} />
 
 			<ScrollView
 				contentContainerStyle={{ paddingTop: 135, paddingBottom: 100 }}>

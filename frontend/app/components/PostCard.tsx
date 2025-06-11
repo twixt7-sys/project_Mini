@@ -5,6 +5,7 @@ import { Post } from '../types/Post'
 import { Ionicons } from '@expo/vector-icons'
 import Stat from './Stat'
 import Txt from './Txt'
+import dummyComments from '../dummy_data/dummy_comments'
 
 interface PostCardProps {
 	post: Post
@@ -38,6 +39,7 @@ const CommentSection: React.FC<CommentSectionProps> = ({ isCollapsed, setIsColla
 						<ScrollView showsVerticalScrollIndicator={false}>
 							<Txt text="* Comment Section *" />
 							{/* Add mapped comments here if needed */}
+
 						</ScrollView>
 					</View>
 				</View>
