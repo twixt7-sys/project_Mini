@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react'
-import { View, Text, StyleSheet, TouchableHighlight, Animated, ScrollView } from 'react-native'
+import { View, Text, StyleSheet, TouchableHighlight, Animated, FlatList } from 'react-native'
 import { Audio } from 'expo-av'
 import { Post } from '../types/Post'
 import { Ionicons } from '@expo/vector-icons'
@@ -19,8 +19,9 @@ interface CommentSectionProps {
 
 const CommentSection: React.FC<CommentSectionProps> = ({ isCollapsed, setIsCollapsed }) => {
 	const collapseAnim = useRef(new Animated.Value(0)).current
-	const scrollViewRef = useRef<ScrollView>(null)
+	const flatListRef = useRef<FlatList>(null)
 	const [inputValue, setInputValue] = useState('')
+	const [comments, setComments] = useState(dummyComments)
 
 	useEffect(() => {
 		const toValue = isCollapsed ? 425 : 0
@@ -31,6 +32,21 @@ const CommentSection: React.FC<CommentSectionProps> = ({ isCollapsed, setIsColla
 		}).start()
 	}, [isCollapsed])
 
+	const handleAddComment = () => {
+		if (inputValue.trim()) {
+			const newComment = {
+				id: Date.now().toString(),
+				author: 'You',
+				content: inputValue.trim()
+			}
+			setComments(prev => [...prev, newComment])
+			setInputValue('')
+			setTimeout(() => {
+				flatListRef.current?.scrollToEnd({ animated: true })
+			}, 100)
+		}
+	}
+
 	return (
 		<Animated.View style={{ height: collapseAnim, overflow: 'hidden' }}>
 			<View style={styles.commentWrapper}>
@@ -39,20 +55,21 @@ const CommentSection: React.FC<CommentSectionProps> = ({ isCollapsed, setIsColla
 				</View>
 				<View style={styles.commentContent}>
 					<View style={styles.commentBox}>
-						<ScrollView
-							ref={scrollViewRef}
-							style={{ width: '100%', maxHeight: 350 }} // Bounded height
+						<FlatList
+							ref={flatListRef}
+							data={comments}
+							keyExtractor={(item) => item.id}
+							style={{ width: '100%', maxHeight: 350 }}
 							contentContainerStyle={{ paddingBottom: 20 }}
 							showsVerticalScrollIndicator={false}
-							showsHorizontalScrollIndicator={false}
-						>
-							{dummyComments.map((comment, index) => (
-								<View key={comment.id} style={styles.commentItem}>
-									<Txt text={comment.author} style_={{ marginBottom: 5 }} />
-									<Txt key={index} text={comment.content} />
+							nestedScrollEnabled={true}
+							renderItem={({ item }) => (
+								<View style={styles.commentItem}>
+									<Txt text={item.author} style_={{ marginBottom: 5 }} />
+									<Txt text={item.content} />
 								</View>
-							))}
-						</ScrollView>
+							)}
+						/>
 					</View>
 				</View>
 			</View>
@@ -75,12 +92,7 @@ const CommentSection: React.FC<CommentSectionProps> = ({ isCollapsed, setIsColla
 							width: 65,
 							transform: [{ scale: 0.8 }],
 						}}
-						onPress={() => {
-							if (inputValue.trim()) {
-								// Handle comment submission logic
-								setInputValue('')
-							}
-						}}
+						onPress={handleAddComment}
 						underlayColor="#99F"
 					>
 						<Ionicons
@@ -91,7 +103,6 @@ const CommentSection: React.FC<CommentSectionProps> = ({ isCollapsed, setIsColla
 						/>
 					</TouchableHighlight>
 				</View>
-				
 			</View>
 		</Animated.View>
 	)
