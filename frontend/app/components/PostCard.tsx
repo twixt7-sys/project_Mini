@@ -1,12 +1,16 @@
 import React, { useState, useRef, useEffect, FC } from 'react'
-import { View, Text, StyleSheet, TouchableHighlight, Animated } from 'react-native'
+import { View, Text, StyleSheet, TouchableHighlight, Animated, ScrollView } from 'react-native'
 import { Audio } from 'expo-av'
 import { Post } from '../types/Post'
 import { Ionicons } from '@expo/vector-icons'
 import Stat from './Stat'
 import Txt from './Txt'
 
-const PostCard: React.FC<PostCardProps> = ({ post }) => {
+interface PostCardProps {
+	post: Post
+}
+
+const PostCard: React.FC<PostCardProps> = ( { post } ) => {
 	const [liked, setLiked] = useState(false)
 	const [isCollapsed, setIsCollapsed] = useState(false)
 	const scaleAnim = useRef(new Animated.Value(1)).current
@@ -52,7 +56,7 @@ const PostCard: React.FC<PostCardProps> = ({ post }) => {
 	}
 
 	const toggleCollapse = () => {
-		const toValue = isCollapsed ? 0 : 500
+		const toValue = isCollapsed ? 0 : 425
 		setIsCollapsed(!isCollapsed)
 
 		Animated.timing(collapseAnim, {
@@ -110,13 +114,19 @@ const PostCard: React.FC<PostCardProps> = ({ post }) => {
 			</View>
 
 			<Animated.View style={{ height: collapseAnim, overflow: 'hidden' }}>
-				<View style={{ flex: 1, padding: 10, marginHorizontal: 6, flexDirection: 'column', gap: 5}}>
-					<View style={{backgroundColor: '#42A545', borderRadius: 5, alignSelf: 'flex-start', width: '2%', height: '100%', opacity: 0.8}}>
+				<View style={{ flex: 1, padding: 10, marginHorizontal: 6, flexDirection: 'row', gap: 5}}>
+					<View style={{backgroundColor: '#CFC', borderRadius: 5, alignSelf: 'flex-start', width: '2%', height: '100%', opacity: 0.5}}>
 						<Txt/>
 					</View>
-					<View style={{backgroundColor: '#42A545', borderRadius: 5, alignSelf: 'flex-start', width: '80%'}}>
-						<Txt/>
+					<View style={{flex: 1, gap: '2%'}}>
+						<View style={{ borderWidth: 0, alignSelf: 'center', width: '90%', height: "100%", marginLeft: '2.5%', alignItems: 'center', justifyContent: 'center'}}>
+							{/*Scrollview here*/}
+							<Txt text="* Comment Section *"/>
+						</View>
 					</View>
+				</View>
+				<View style={{backgroundColor: '#aab8ff', borderRadius: 20, alignSelf: 'center', width: '97.5%', height: 50, marginTop: 15}}>
+					<Txt/>
 				</View>
 			</Animated.View>
 		</View>

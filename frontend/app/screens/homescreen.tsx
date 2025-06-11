@@ -59,11 +59,10 @@ const dummyPosts: Post[] = [
 ]
 
 const HomeScreen = () => {
-	const [refreshing, setRefreshing] = useState(false)
 	const [isFabOpen, setIsFabOpen] = useState(false)
 	const animation1 = useRef(new Animated.Value(0)).current
 	const animation2 = useRef(new Animated.Value(0)).current
-
+	
 	const toggleFabMenu = () => {
 		const toValue = isFabOpen ? 0 : 1
 
@@ -105,23 +104,14 @@ const HomeScreen = () => {
 		opacity: animation2,
 	}
 
-	const onRefresh = async () => {
-		setRefreshing(true)
-		await new Promise((resolve) => setTimeout(resolve, 1000))
-	}
-
-
 	return (
 		<View style={styles.container}>
 			<ProfileHeader username='@username'/>
 
 			<ScrollView
-				contentContainerStyle={{ paddingTop: 135, paddingBottom: 100 }}
-				refreshControl={
-					<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
-				}>
-				{dummyPosts.map((post) => (
-					<PostCard key={post.id} post={post} />
+				contentContainerStyle={{ paddingTop: 135, paddingBottom: 100 }}>
+				{dummyPosts.map((p) => (
+					<PostCard key={p.id} post={p} />
 				))}
 			</ScrollView>
 
