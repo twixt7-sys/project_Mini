@@ -2,33 +2,49 @@ import React from 'react'
 import { View, StyleSheet } from 'react-native'
 import { Ionicons } from '@expo/vector-icons'
 import Txt from './Txt'
+import { User } from '../types/User'
 
 type ProfileHeaderProps = {
-    username: string
+	user: User
 }
 
-const ProfileHeader: React.FC<ProfileHeaderProps> = ({ username }) => {
-    return (
-        <View style={styles.container}>
-            <View style={styles.avatarCircle}>
-                <Ionicons name='person' size={32} color='#4a4a4a' />
-            </View>
-            <View style={styles.infoContainer}>
-                <Txt text={username} style_={styles.username} />
-                <View style={styles.statsRow}>
-                    <View style={styles.capsule1}>
-                        <Txt text={"📸 99M"} style_={styles.stat}/>
-                    </View>
-                    <View style={styles.capsule2}>
-                        <Txt text={"🔗 99M"} style_={styles.stat}/>
-                    </View>
-                    <View style={styles.capsule3}>
-                        <Txt text={"📅 12/31/2025"} style_={styles.stat}/>
-                    </View>
-                </View>
-            </View>
-        </View>
-    )
+const statData = [
+	{ icon: 'camera', label: '99M' },
+	{ icon: 'link', label: '99M' },
+	{ icon: 'calendar', label: '12/31/2025' }
+]
+
+const ProfileHeader: React.FC<ProfileHeaderProps> = ({ user }) => {
+	return (
+		<>
+			<View style={styles.avatarCircle}>
+				<Ionicons name='person' size={32} color='#4a4a4a' />
+			</View>
+
+			<View style={[styles.bgRibbon, { backgroundColor: '#DDF', marginLeft: -125, zIndex: 7 }]} />
+			<View style={[styles.bgRibbon, { backgroundColor: '#99E', marginLeft: -75, zIndex: 6 }]} />
+
+			<View style={styles.container}>
+				<View style={styles.infoContainer}>
+					<View style={{ marginBottom: 5 }}>
+						<Txt text={user.username} style_={styles.username} />
+						<Txt text={user.email} style_={styles.email} />
+					</View>
+
+					<View style={styles.statsRow}>
+						{statData.map((stat, index) => (
+							<View key={index} style={styles.capsule}>
+								<View style={{ flexDirection: 'row', alignItems: 'center' }}>
+									<Ionicons name={stat.icon as any} size={14} color="#5555D0" style={{ marginRight: 4 }} />
+									<Txt text={stat.label} style_={styles.stat} />
+								</View>
+							</View>
+						))}
+					</View>
+				</View>
+			</View>
+		</>
+	)
 }
 
 const styles = StyleSheet.create({
@@ -42,13 +58,23 @@ const styles = StyleSheet.create({
 		paddingVertical: 10,
 		flexDirection: 'row',
 		alignItems: 'center',
-		backgroundColor: '#EEF',
-		margin: 15,
-		marginTop: 40,
-		borderRadius: 50,
-		marginBottom: 12,
-		borderColor: '#8899dd',
-		borderWidth: 5
+		justifyContent: 'center',
+		backgroundColor: '#5555D0',
+		height: 70
+	},
+	bgRibbon: {
+		width: 300,
+		height: 75,
+		position: 'absolute',
+		top: 0,
+		left: 0,
+		borderRadius: 25,
+		transform: [{ rotate: '-45deg' }],
+		marginTop: -37.5,
+		shadowColor: '#5555D0',
+		shadowOffset: { width: 0, height: 0 },
+		shadowOpacity: 0.5,
+		shadowRadius: 50,
 	},
 	avatarCircle: {
 		width: 70,
@@ -60,46 +86,46 @@ const styles = StyleSheet.create({
 		marginRight: 16,
 		borderWidth: 5,
 		borderColor: '#5e66ff',
+		zIndex: 100,
+		elevation: 3,
+		shadowColor: '#000',
+		shadowOffset: { width: 0, height: 2 },
+		shadowRadius: 6,
+		transform: [{ translateY: 25 }, { translateX: 15 }, { scale: 1.5 }],
 	},
 	infoContainer: {
 		flex: 1,
+		transform: [{ translateY: 23 }, { translateX: 113 }]
 	},
 	username: {
-		fontSize: 22,
-		fontWeight: '700',
-		color: '#2e2e2e',
-		marginBottom: 8,
+		fontSize: 30,
+		fontWeight: 'bold',
+		color: '#EEF',
+		marginBottom: -5,
+		marginLeft: 5
+	},
+	email: {
+		fontSize: 16,
+		color: '#BBF',
+		marginLeft: 7
 	},
 	statsRow: {
-		flexDirection: 'row'
+		flexDirection: 'row',
+		marginTop: 10
 	},
 	stat: {
 		fontSize: 13,
-		color: '#333',
+		color: '#5555D0',
+		fontWeight: 'bold',
 	},
-	capsule1: {
-		backgroundColor: '#d0d0ff',
+	capsule: {
+		backgroundColor: '#DDF',
 		borderRadius: 20,
-		paddingVertical: 6,
+		paddingVertical: 3,
 		paddingHorizontal: 12,
-		marginRight: 8,
-		transform: [{ scale: 0.9 }],
-	},
-	capsule2: {
-		backgroundColor: '#d0d0ff',
-		borderRadius: 20,
-		paddingVertical: 6,
-		paddingHorizontal: 12,
-		marginRight: 8,
-		transform: [{ scale: 0.9 }],
-	},
-	capsule3: {
-		backgroundColor: '#d0d0ff',
-		borderRadius: 20,
-		paddingVertical: 6,
-		paddingHorizontal: 12,
-		transform: [{ scale: 0.9 }],
-	},
+		marginRight: 2,
+		transform: [{ scale: 0.9 }]
+	}
 })
 
 export default ProfileHeader

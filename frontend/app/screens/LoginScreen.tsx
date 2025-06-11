@@ -10,7 +10,7 @@ import {
 } from 'react-native'
 import { AuthContext } from '../context/AuthContext'
 import { Ionicons } from '@expo/vector-icons'
-import { router } from 'expo-router';
+import { router } from 'expo-router'
 
 const LoginScreen = () => {
 	const { login } = useContext(AuthContext)
@@ -20,8 +20,8 @@ const LoginScreen = () => {
 	const [agree, setAgree] = useState(false)
 
 	const handleLogin = () => {
-		if (!email || !password || !agree){
-			alert("Please fill in all fields and agree to the terms.")
+		if (!email || !password || !agree) {
+			alert('Please fill in all fields and agree to the terms.')
 			return
 		}
 		login(email, password)
@@ -30,12 +30,19 @@ const LoginScreen = () => {
 
 	return (
 		<SafeAreaView style={styles.container}>
+			<View style={styles.ribbons}>
+				<View style={styles.ribbonDark} />
+				<View style={styles.ribbonLight} />
+			</View>
+
 			<Image
 				source={require('../../assets/images/Mini Logo.png')}
 				style={styles.logo}
-				resizeMode="contain"
+				resizeMode='contain'
 			/>
+
 			<Text style={styles.header}>Log-in</Text>
+
 			<TextInput
 				style={styles.input}
 				placeholder='email or username'
@@ -67,7 +74,7 @@ const LoginScreen = () => {
 					<Ionicons
 						name={agree ? 'checkbox' : 'square-outline'}
 						size={22}
-						color={agree ? '#1c2b59' : '#1c2b59'}
+						color='#1c2b59'
 					/>
 				</TouchableOpacity>
 				<Text style={styles.checkboxLabel}>
@@ -102,6 +109,34 @@ const styles = StyleSheet.create({
 		justifyContent: 'center',
 		paddingHorizontal: 20,
 	},
+	ribbons: {
+		position: 'absolute',
+		top: 0,
+		left: 0,
+		right: 0,
+		bottom: 0,
+		zIndex: -1,
+	},
+	ribbonDark: {
+		position: 'absolute',
+		width: 300,
+		height: 600,
+		backgroundColor: '#1c2b59',
+		borderRadius: 100,
+		transform: [{ rotate: '-45deg' }],
+		top: -150,
+		left: -100,
+	},
+	ribbonLight: {
+		position: 'absolute',
+		width: 300,
+		height: 600,
+		backgroundColor: '#cdd8f7',
+		borderRadius: 100,
+		transform: [{ rotate: '-45deg' }],
+		top: -100,
+		right: -100,
+	},
 	logo: {
 		width: 120,
 		height: 120,
@@ -123,32 +158,30 @@ const styles = StyleSheet.create({
 		backgroundColor: '#cdd8f7',
 		borderRadius: 25,
 		paddingHorizontal: 15,
-		paddingVertical: 10,
 		marginBottom: 5,
 	},
 	passwordContainer: {
-        width: '80%',
-        height: 40,
-        backgroundColor: '#cdd8f7',
-        borderRadius: 25,
-        paddingHorizontal: 15,
-        // paddingVertical: 10, // Remove this line
-        marginBottom: 5,
-        flexDirection: 'row',
-        alignItems: 'center',
-        justifyContent: 'space-between',
-    },
-    passwordInput: {
-        flex: 1,
-        color: '#000',
-        fontSize: 16, // Add this line
-        paddingVertical: 0, // Add this line
-    },
+		width: '80%',
+		height: 40,
+		backgroundColor: '#cdd8f7',
+		borderRadius: 25,
+		paddingHorizontal: 15,
+		marginBottom: 5,
+		flexDirection: 'row',
+		alignItems: 'center',
+		justifyContent: 'space-between',
+	},
+	passwordInput: {
+		flex: 1,
+		color: '#000',
+		fontSize: 16,
+		paddingVertical: 0,
+	},
 	checkboxContainer: {
 		flexDirection: 'row',
 		alignItems: 'center',
 		marginBottom: 50,
-		marginTop: 10
+		marginTop: 10,
 	},
 	checkboxLabel: {
 		marginLeft: 5,
@@ -199,7 +232,7 @@ const styles = StyleSheet.create({
 		borderRadius: 30,
 		alignItems: 'center',
 		gap: 10,
-		transform: [{ scale: 0.90 }],
+		transform: [{ scale: 0.9 }],
 	},
 	googleText: {
 		color: '#4267B2',
