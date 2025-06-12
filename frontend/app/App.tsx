@@ -1,5 +1,5 @@
 import React from 'react'
-import RootNavigator from './navigation/RootNavigator'
+import RootNavigator from './RootNavigator'
 import AuthProvider from './context/AuthContext'
 
 const App = () => {

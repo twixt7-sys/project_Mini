@@ -1,4 +1,6 @@
-import React, { useState, useContext } from 'react'
+import type { NativeStackScreenProps } from '@react-navigation/native-stack';
+import type { RootStackParamList } from '../types/RootStackParamList';
+import React, { useState, useContext } from 'react';
 import {
 	View,
 	Text,
@@ -6,29 +8,28 @@ import {
 	TextInput,
 	TouchableOpacity,
 	StyleSheet,
-	SafeAreaView
-} from 'react-native'
-import { AuthContext } from '../context/AuthContext'
-import { Ionicons } from '@expo/vector-icons'
-import { router } from 'expo-router'
-import { useNavigation } from '@react-navigation/native'
+	SafeAreaView,
+} from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
+import { AuthContext } from '../context/AuthContext';
 
-const Login = () => {
-	const navigation = useNavigation()
-	const { login } = useContext(AuthContext)
-	const [email, setEmail] = useState('')
-	const [password, setPassword] = useState('')
-	const [showPassword, setShowPassword] = useState(false)
-	const [agree, setAgree] = useState(false)
+type Props = NativeStackScreenProps<RootStackParamList, 'Login'>;
+
+export default function Login({ navigation }: Props) {
+	const { login } = useContext(AuthContext);
+	const [email, setEmail] = useState('');
+	const [password, setPassword] = useState('');
+	const [showPassword, setShowPassword] = useState(false);
+	const [agree, setAgree] = useState(false);
 
 	const handleLogin = async () => {
 		if (!email || !password || !agree) {
-			alert('Please fill in all fields and agree to the terms.')
-			return
+			alert('Please fill in all fields and agree to the terms.');
+			return;
 		}
-		await login(email, password)
-		//navigation.navigate('homescreen')
-	}
+		await login(email, password);
+		// navigation.navigate('HomeScreen'); // Uncomment and adjust if needed
+	};
 
 	return (
 		<SafeAreaView style={styles.container}>
@@ -40,15 +41,15 @@ const Login = () => {
 			<Image
 				source={require('../../assets/images/Mini Logo.png')}
 				style={styles.logo}
-				resizeMode='contain'
+				resizeMode="contain"
 			/>
 
 			<Text style={styles.header}>Log-in</Text>
 
 			<TextInput
 				style={styles.input}
-				placeholder='email or username'
-				placeholderTextColor='#aaa'
+				placeholder="email or username"
+				placeholderTextColor="#aaa"
 				value={email}
 				onChangeText={setEmail}
 			/>
@@ -56,18 +57,14 @@ const Login = () => {
 			<View style={styles.passwordContainer}>
 				<TextInput
 					style={styles.passwordInput}
-					placeholder='password'
-					placeholderTextColor='#aaa'
+					placeholder="password"
+					placeholderTextColor="#aaa"
 					secureTextEntry={!showPassword}
 					value={password}
 					onChangeText={setPassword}
 				/>
 				<TouchableOpacity onPress={() => setShowPassword(!showPassword)}>
-					<Ionicons
-						name={showPassword ? 'eye-off' : 'eye'}
-						size={22}
-						color='#333'
-					/>
+					<Ionicons name={showPassword ? 'eye-off' : 'eye'} size={22} color="#333" />
 				</TouchableOpacity>
 			</View>
 
@@ -76,12 +73,11 @@ const Login = () => {
 					<Ionicons
 						name={agree ? 'checkbox' : 'square-outline'}
 						size={22}
-						color='#1c2b59'
+						color="#1c2b59"
 					/>
 				</TouchableOpacity>
 				<Text style={styles.checkboxLabel}>
-					I agree to the{' '}
-					<Text style={styles.link}>terms and conditions.</Text>
+					I agree to the <Text style={styles.link}>terms and conditions.</Text>
 				</Text>
 			</View>
 
@@ -89,18 +85,21 @@ const Login = () => {
 				<Text style={styles.buttonText}>Log-in</Text>
 			</TouchableOpacity>
 
-			<TouchableOpacity style={styles.buttonSecondary} onPress={() => router.push('/screens/RegisterScreen')}>
+			<TouchableOpacity
+				style={styles.buttonSecondary}
+				onPress={() => navigation.navigate('Register')}
+			>
 				<Text style={styles.buttonText}>Register</Text>
 			</TouchableOpacity>
 
 			<Text style={styles.orText}>or</Text>
 
 			<TouchableOpacity style={styles.googleButton}>
-				<Ionicons name='logo-google' size={20} color='#4267B2' />
+				<Ionicons name="logo-google" size={20} color="#4267B2" />
 				<Text style={styles.googleText}>Log-in with Google</Text>
 			</TouchableOpacity>
 		</SafeAreaView>
-	)
+	);
 }
 
 const styles = StyleSheet.create({
@@ -240,6 +239,4 @@ const styles = StyleSheet.create({
 		color: '#4267B2',
 		fontWeight: 'bold',
 	},
-})
-
-export default Login
+});

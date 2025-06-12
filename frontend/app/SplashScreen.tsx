@@ -1,17 +1,17 @@
+import type { NativeStackScreenProps } from '@react-navigation/native-stack';
+import type { RootStackParamList } from '../types/RootStackParamList';
 import React, { useEffect, useRef } from 'react';
 import {
 	SafeAreaView,
-	View,
 	Image,
 	StyleSheet,
 	Dimensions,
 	Animated,
 } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native'
+type SplashScreenProps = NativeStackScreenProps<RootStackParamList, 'SplashScreen'>;
 
-const SplashScreen = () => {
-	const navigation = useNavigation();
-
+export default function SplashScreen({ navigation }: SplashScreenProps) {
 	const fadeAnim = useRef(new Animated.Value(0)).current;
 
 	useEffect(() => {
@@ -22,7 +22,7 @@ const SplashScreen = () => {
 		}).start();
 
 		const timer = setTimeout(() => {
-			navigation.navigate('Login');
+			navigation.navigate("Login");
 		}, 2000);
 
 		return () => clearTimeout(timer);
@@ -39,7 +39,7 @@ const SplashScreen = () => {
 			</Animated.View>
 		</SafeAreaView>
 	);
-};
+}
 
 const { width } = Dimensions.get('window');
 
@@ -68,5 +68,3 @@ const styles = StyleSheet.create({
 		height: '80%',
 	},
 });
-
-export default SplashScreen;

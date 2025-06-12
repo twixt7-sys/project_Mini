@@ -10,7 +10,6 @@ import {
 } from 'react-native'
 import { AuthContext } from '../context/AuthContext'
 import { Ionicons } from '@expo/vector-icons'
-import { router } from 'expo-router';
 
 const RegisterScreen = () => {
 	const { register } = useContext(AuthContext)

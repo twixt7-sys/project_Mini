@@ -1,7 +1,6 @@
 import React, { createContext, useState, useEffect, ReactNode } from 'react'
 import { loginUser, registerUser } from '../../services/auth'
 import AsyncStorage from '@react-native-async-storage/async-storage'
-import { useNavigation } from '@react-navigation/native'
 
 type AuthContextType = {
 	userToken: string | null
