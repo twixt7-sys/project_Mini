@@ -68,9 +68,9 @@ const PostCard: React.FC<PostCardProps> = ({ post }) => {
 				</View>
 
 				<View style={styles.statsContainer}>
-					<Stat iconName="heart" count={999} colors={{ c1: '#BD5D5D', c2: '#fff' }} />
-					<Stat iconName="chatbubble-ellipses" count={999} colors={{ c1: '#42A545', c2: '#fff' }} />
-					<Stat iconName="eye" count={999} colors={{ c1: '#5B6EBA', c2: '#fff' }} />
+					<Stat iconName="heart" count={post.likes} colors={{ c1: '#BD5D5D', c2: '#fff' }} />
+					<Stat iconName="chatbubble-ellipses" count={post.comments.length} colors={{ c1: '#42A545', c2: '#fff' }} />
+					<Stat iconName="eye" count={post.views} colors={{ c1: '#5B6EBA', c2: '#fff' }} />
 				</View>
 			</View>
 
