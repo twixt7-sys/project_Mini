@@ -33,9 +33,7 @@ export const registerUser = async (user: { username: string; email: string; pass
 		throw new Error(`Registration failed: ${response.status} - ${responseText}`)
 	}
 
-	// Parse the responseText manually to JSON
 	const data = JSON.parse(responseText)
-	alert("Registration successful! (auth service)")
 	return data
 }
 

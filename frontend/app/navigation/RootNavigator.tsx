@@ -1,42 +1,21 @@
-// RootNavigator.tsx
-
-import React, { useContext } from 'react'
-import { createStackNavigator } from '@react-navigation/stack'
 import { NavigationContainer } from '@react-navigation/native'
-import { AuthContext } from '../context/AuthContext'
-
-// Screens
-import LoginScreen from '../screens/LoginScreen'
-import RegisterScreen from '../screens/RegisterScreen'
+import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import HomeScreen from '../screens/homescreen'
-import ProfileScreen from '../screens/ProfileScreen'
-import PostDetailsScreen from '../screens/PostDetailScreen'
+import Login from '../screens/Login'
+import RegisterScreen from '../screens/RegisterScreen'
+import SplashScreen from '../screens/SplashScreen'
 
-const Stack = createStackNavigator()
+const Stack = createNativeStackNavigator()
 
-const RootNavigator = () => {
-  const { user } = useContext(AuthContext)
-
-  return (
+export default function RootNavigator() {
+  return(
     <NavigationContainer>
       <Stack.Navigator>
-        {user ? (
-          // If the user is authenticated, show the app's main flow
-          <>
-            <Stack.Screen name="Feed" component={HomeScreen} />
-            <Stack.Screen name="Profile" component={ProfileScreen} />
-            <Stack.Screen name="PostDetails" component={PostDetailsScreen} />
-          </>
-        ) : (
-          // If the user isn't authenticated, show the login and register screens
-          <>
-            <Stack.Screen name="Login" component={LoginScreen} />
-            <Stack.Screen name="Register" component={RegisterScreen} />
-          </>
-        )}
+        <Stack.Screen name="Splash" component={SplashScreen} options={{headerShown: false}}/>
+        <Stack.Screen name="Login" component={Login} options={{headerShown: false}}/>
+        <Stack.Screen name="Register" component={RegisterScreen} options={{headerShown: false}}/>
+        <Stack.Screen name="Home" component={HomeScreen} options={{headerShown: false}}/>
       </Stack.Navigator>
     </NavigationContainer>
   )
 }
-
-export default RootNavigator

@@ -47,8 +47,9 @@ const FormModal = ({
 }) => (
   <View style={styles.modalContainer}>
     <Txt text="Create Post" style_={styles.modalTitle} />
+    <View style={{ height: 3, backgroundColor: '#77C', width: '100%', borderRadius: 1.5, opacity: 0.8}} />
     <TextInput
-      style={styles.input}
+      style={[styles.input, { marginTop: 15}]}
       placeholder="Enter title"
       placeholderTextColor="#aaa"
       value={title}
@@ -273,7 +274,8 @@ const styles = StyleSheet.create({
     fontSize: 26,
     fontWeight: "bold",
     color: "#1c2b59",
-    marginBottom: 30,
+    marginTop: 25,
+    marginBottom: 25,
   },
   input: {
     width: "100%",
@@ -292,7 +294,8 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     width: "100%",
-    marginTop: 35,
+    marginTop: 25,
+    marginBottom: 25
   },
   button: {
     flex: 1,

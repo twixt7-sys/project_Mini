@@ -1,29 +1,32 @@
-import React, { useState, useRef } from 'react'
-import {
-	View,
-	ScrollView,
-	StyleSheet,
-} from 'react-native'
+import React, { useRef } from 'react'
+import { View, StyleSheet, Animated } from 'react-native'
 import PostCard from '../components/PostCard'
 import ProfileHeader from '../components/ProfileHeader'
 import dummyPosts from '../dummy_data/dummy_posts'
 import dummyUsers from '../dummy_data/dummy_users'
 import FAB from '../components/FAB'
 
-
-
 const HomeScreen = () => {
+	const scrollY = useRef(new Animated.Value(0)).current
+
 	return (
 		<View style={styles.container}>
-			<ProfileHeader user={dummyUsers[0]} />
+			<ProfileHeader user={dummyUsers[0]} scrollY={scrollY} />
 
-			<ScrollView contentContainerStyle={{ paddingTop: 40, paddingBottom: 100 }}>
+			<Animated.ScrollView
+				contentContainerStyle={{ paddingTop: 110, paddingBottom: 100 }}
+				scrollEventThrottle={16}
+				onScroll={Animated.event(
+					[{ nativeEvent: { contentOffset: { y: scrollY } } }],
+					{ useNativeDriver: true }
+				)}
+			>
 				{dummyPosts.map((p) => (
 					<PostCard key={p.id} post={p} />
 				))}
-			</ScrollView>
+			</Animated.ScrollView>
 
-			<FAB/>
+			<FAB />
 		</View>
 	)
 }

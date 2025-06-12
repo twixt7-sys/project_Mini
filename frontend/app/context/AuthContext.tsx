@@ -1,6 +1,7 @@
 import React, { createContext, useState, useEffect, ReactNode } from 'react'
 import { loginUser, registerUser } from '../../services/auth'
 import AsyncStorage from '@react-native-async-storage/async-storage'
+import { useNavigation } from '@react-navigation/native'
 
 type AuthContextType = {
 	userToken: string | null
@@ -55,8 +56,6 @@ export const AuthProvider: React.FC<Props> = ({ children }) => {
 	}
 
 	const [user, setUser] = useState<{ username: string; email: string } | null>(null)
-
-	// optional: retrieve token from storage on first load
 
 	// optional: retrieve token from storage on first load
 	useEffect(() => {

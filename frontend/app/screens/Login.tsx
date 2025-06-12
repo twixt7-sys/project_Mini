@@ -11,21 +11,23 @@ import {
 import { AuthContext } from '../context/AuthContext'
 import { Ionicons } from '@expo/vector-icons'
 import { router } from 'expo-router'
+import { useNavigation } from '@react-navigation/native'
 
-const LoginScreen = () => {
+const Login = () => {
+	const navigation = useNavigation()
 	const { login } = useContext(AuthContext)
 	const [email, setEmail] = useState('')
 	const [password, setPassword] = useState('')
 	const [showPassword, setShowPassword] = useState(false)
 	const [agree, setAgree] = useState(false)
 
-	const handleLogin = () => {
+	const handleLogin = async () => {
 		if (!email || !password || !agree) {
 			alert('Please fill in all fields and agree to the terms.')
 			return
 		}
-		login(email, password)
-		router.push('/screens/homescreen')
+		await login(email, password)
+		//navigation.navigate('homescreen')
 	}
 
 	return (
@@ -240,4 +242,4 @@ const styles = StyleSheet.create({
 	},
 })
 
-export default LoginScreen
+export default Login

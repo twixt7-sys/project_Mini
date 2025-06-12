@@ -1,11 +1,13 @@
-import React from 'react'
-import { View, StyleSheet } from 'react-native'
+import React, { useMemo } from 'react'
+import { View, StyleSheet, Animated } from 'react-native'
 import { Ionicons } from '@expo/vector-icons'
 import Txt from './Txt'
 import { User } from '../types/User'
+import { transform } from '@babel/core'
 
 type ProfileHeaderProps = {
 	user: User
+	scrollY: Animated.Value
 }
 
 const statData = [
@@ -14,24 +16,70 @@ const statData = [
 	{ icon: 'calendar', label: '12/31/2025' }
 ]
 
-const ProfileHeader: React.FC<ProfileHeaderProps> = ({ user }) => {
+const ProfileHeader: React.FC<ProfileHeaderProps> = ({ user, scrollY }) => {
+	const avatarAnimatedStyle = useMemo(() => ({
+		transform: [
+			{ translateY: scrollY.interpolate({ inputRange: [0, 100], outputRange: [25, -5], extrapolate: 'clamp' }) },
+			{ translateX: scrollY.interpolate({ inputRange: [0, 100], outputRange: [15, 0], extrapolate: 'clamp' }) },
+			{ scale: scrollY.interpolate({ inputRange: [0, 100], outputRange: [1.5, 0.7], extrapolate: 'clamp' }) }
+		],
+	}), [scrollY])
+
+	const ribbonAnimatedStyle = useMemo(() => ({
+		opacity: scrollY.interpolate({ inputRange: [0, 60], outputRange: [1, 1], extrapolate: 'clamp' }),
+		transform: [
+			{ scale: scrollY.interpolate({ inputRange: [0, 100], outputRange: [1, 0.95], extrapolate: 'clamp' }) },
+			{ translateX: scrollY.interpolate({ inputRange: [0, 100], outputRange: [0, -100], extrapolate: 'clamp' }), },
+			{ rotate: '-45deg' }
+		]
+	}), [scrollY])
+
+	const containerTranslateY = useMemo(() =>
+		scrollY.interpolate({ inputRange: [0, 100], outputRange: [-85, -103], extrapolate: 'clamp' })
+	, [scrollY])
+
+	const infoAnimatedStyle = useMemo(() => ({
+		transform: [
+			{ translateY: scrollY.interpolate({ inputRange: [0, 100], outputRange: [38, 27], extrapolate: 'clamp' }) },
+			{ translateX: scrollY.interpolate({ inputRange: [0, 100], outputRange: [113 ,10], extrapolate: 'clamp' }) },
+			{ scale: scrollY.interpolate({ inputRange: [0, 100], outputRange: [1, 0.70], extrapolate: 'clamp' }) }
+		]
+	}), [scrollY])
+
+	const capsulesOpacity = useMemo(() =>
+		scrollY.interpolate({ inputRange: [0, 80], outputRange: [1, 0], extrapolate: 'clamp' })
+	, [scrollY])
+
 	return (
-		<>
-			<View style={styles.avatarCircle}>
+		<View style={styles.root}>
+			<Animated.View style={[styles.avatarCircle, avatarAnimatedStyle]}>
 				<Ionicons name='person' size={32} color='#4a4a4a' />
-			</View>
+			</Animated.View>
 
-			<View style={[styles.bgRibbon, { backgroundColor: '#DDF', marginLeft: -125, zIndex: 7 }]} />
-			<View style={[styles.bgRibbon, { backgroundColor: '#99E', marginLeft: -75, zIndex: 6 }]} />
-
-			<View style={styles.container}>
-				<View style={styles.infoContainer}>
-					<View style={{ marginBottom: 5 }}>
+			<Animated.View style={[styles.bgRibbon, { backgroundColor: '#DDF', marginLeft: -125, zIndex: 7 }, ribbonAnimatedStyle]} />
+			<Animated.View style={[styles.bgRibbon, { backgroundColor: '#99E', marginLeft: -75, zIndex: 6 }, ribbonAnimatedStyle]} />
+			<Animated.View style={[styles.bgRibbon, { backgroundColor: '#338', marginLeft: 290, zIndex: 5 }, ribbonAnimatedStyle,
+				{transform: [{ translateX: scrollY.interpolate({ inputRange: [0, 100], outputRange: [40, -20], extrapolate: 'clamp' }) },
+							{ translateY: scrollY.interpolate({ inputRange: [0, 100], outputRange: [60, 30], extrapolate: 'clamp' })  },
+							{ scale: scrollY.interpolate({ inputRange: [0, 100], outputRange: [1.05, 0.55], extrapolate: 'clamp' })   }]}
+			]}>
+				<View style={{transform: [], margin: 20}}>
+					<Ionicons name='notifications' size={32} color='#fff'/>
+				</View>
+			</Animated.View>
+			<Animated.View style={[styles.container, { transform: [{ translateY: containerTranslateY }] }]}>
+				<Animated.View style={[styles.infoContainer]}>
+					<Animated.View style={{
+						transform: [{ scale: scrollY.interpolate({ inputRange: [0, 100], outputRange: [1, 0.7], extrapolate: 'clamp' }) },
+					{ translateY: scrollY.interpolate({ inputRange: [0, 100], outputRange: [38, 55], extrapolate: 'clamp' }) },
+					{ translateX: scrollY.interpolate({ inputRange: [0, 100], outputRange: [113, 14], extrapolate: 'clamp' }) }] }}>
 						<Txt text={user.username} style_={styles.username} />
 						<Txt text={user.email} style_={styles.email} />
-					</View>
+					</Animated.View>
 
-					<View style={styles.statsRow}>
+					<Animated.View style={[styles.statsRow, { opacity: capsulesOpacity, marginLeft: 105,
+						transform: [{ translateY: 45}]
+					 }]}>
 						{statData.map((stat, index) => (
 							<View key={index} style={styles.capsule}>
 								<View style={{ flexDirection: 'row', alignItems: 'center' }}>
@@ -40,27 +88,29 @@ const ProfileHeader: React.FC<ProfileHeaderProps> = ({ user }) => {
 								</View>
 							</View>
 						))}
-					</View>
-				</View>
-			</View>
-		</>
+					</Animated.View>
+				</Animated.View>
+			</Animated.View>
+		</View>
 	)
 }
 
 const styles = StyleSheet.create({
-	container: {
+	root: {
 		position: 'absolute',
 		top: 0,
 		left: 0,
 		right: 0,
 		zIndex: 5,
+	},
+	container: {
 		paddingHorizontal: 10,
 		paddingVertical: 10,
 		flexDirection: 'row',
 		alignItems: 'center',
 		justifyContent: 'center',
 		backgroundColor: '#5555D0',
-		height: 70
+		transform: [{ translateY: -75 }],
 	},
 	bgRibbon: {
 		width: 300,
@@ -68,13 +118,8 @@ const styles = StyleSheet.create({
 		position: 'absolute',
 		top: 0,
 		left: 0,
-		borderRadius: 25,
-		transform: [{ rotate: '-45deg' }],
+		borderRadius: 50,
 		marginTop: -37.5,
-		shadowColor: '#5555D0',
-		shadowOffset: { width: 0, height: 0 },
-		shadowOpacity: 0.5,
-		shadowRadius: 50,
 	},
 	avatarCircle: {
 		width: 70,
@@ -84,6 +129,7 @@ const styles = StyleSheet.create({
 		justifyContent: 'center',
 		alignItems: 'center',
 		marginRight: 16,
+		marginLeft: 15,
 		borderWidth: 5,
 		borderColor: '#5e66ff',
 		zIndex: 100,
@@ -91,27 +137,26 @@ const styles = StyleSheet.create({
 		shadowColor: '#000',
 		shadowOffset: { width: 0, height: 2 },
 		shadowRadius: 6,
-		transform: [{ translateY: 25 }, { translateX: 15 }, { scale: 1.5 }],
 	},
 	infoContainer: {
 		flex: 1,
-		transform: [{ translateY: 23 }, { translateX: 113 }]
+		transform: [{ translateY: -10 }],
 	},
 	username: {
 		fontSize: 30,
 		fontWeight: 'bold',
 		color: '#EEF',
 		marginBottom: -5,
-		marginLeft: 5
+		marginLeft: 5,
 	},
 	email: {
 		fontSize: 16,
 		color: '#BBF',
-		marginLeft: 7
+		marginLeft: 7,
 	},
 	statsRow: {
 		flexDirection: 'row',
-		marginTop: 10
+		marginTop: 10,
 	},
 	stat: {
 		fontSize: 13,
@@ -122,10 +167,10 @@ const styles = StyleSheet.create({
 		backgroundColor: '#DDF',
 		borderRadius: 20,
 		paddingVertical: 3,
-		paddingHorizontal: 12,
-		marginRight: 2,
-		transform: [{ scale: 0.9 }]
-	}
+		paddingHorizontal: 8,
+		marginRight: 0,
+		transform: [{ scale: 0.9 }],
+	},
 })
 
 export default ProfileHeader

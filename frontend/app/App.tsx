@@ -1,6 +1,13 @@
 import React from 'react'
-import { Slot } from 'expo-router'
+import RootNavigator from './navigation/RootNavigator'
+import AuthProvider from './context/AuthContext'
 
-export default function App() {
-	return <Slot />
+const App = () => {
+	return(
+		<AuthProvider>
+			<RootNavigator />
+		</AuthProvider>
+	)
 }
+
+export default App
