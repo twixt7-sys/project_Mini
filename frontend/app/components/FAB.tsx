@@ -183,8 +183,6 @@ const FAB = () => {
               },
             ]}
           >
-            <TouchableOpacity style={styles.modalClose} onPress={closeModal}>
-            </TouchableOpacity>
             <FormModal
               title={title}
               content={content}
@@ -196,6 +194,8 @@ const FAB = () => {
               }}
               onCancel={closeModal}
             />
+            <TouchableOpacity style={styles.modalClose} onPress={closeModal}>
+            </TouchableOpacity>
           </Animated.View>
         </Animated.View>
       )}
