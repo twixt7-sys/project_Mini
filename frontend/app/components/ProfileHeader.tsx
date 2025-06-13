@@ -59,15 +59,18 @@ const ProfileHeader: React.FC<ProfileHeaderProps> = ({ user, scrollY }) => {
 
 			<Animated.View style={[styles.bgRibbon, { backgroundColor: '#DDF', marginLeft: -125, zIndex: 7 }, ribbonAnimatedStyle]} />
 			<Animated.View style={[styles.bgRibbon, { backgroundColor: '#99E', marginLeft: -75, zIndex: 6 }, ribbonAnimatedStyle]} />
+
+			{/*Notifications Ribbon*/}
 			<Animated.View style={[styles.bgRibbon, { backgroundColor: '#338', marginLeft: 290, zIndex: 5 }, ribbonAnimatedStyle,
 				{transform: [{ translateX: scrollY.interpolate({ inputRange: [0, 100], outputRange: [40, -20], extrapolate: 'clamp' }) },
 							{ translateY: scrollY.interpolate({ inputRange: [0, 100], outputRange: [60, 30], extrapolate: 'clamp' })  },
-							{ scale: scrollY.interpolate({ inputRange: [0, 100], outputRange: [1.05, 0.55], extrapolate: 'clamp' })   }]}
+							{ scale: scrollY.interpolate({ inputRange: [0, 100], outputRange: [1.05, 0.55], extrapolate: 'clamp' })  },], }
 			]}>
 				<View style={{transform: [], margin: 20}}>
 					<Ionicons name='notifications' size={32} color='#fff'/>
 				</View>
 			</Animated.View>
+
 			<Animated.View style={[styles.container, { transform: [{ translateY: containerTranslateY }] }]}>
 				<Animated.View style={[styles.infoContainer]}>
 					<Animated.View style={{
@@ -121,6 +124,11 @@ const styles = StyleSheet.create({
 		left: 0,
 		borderRadius: 50,
 		marginTop: -37.5,
+		shadowColor: '#000',
+		shadowOpacity: 0.5,
+		shadowOffset: { width: 0, height: 0 },
+		shadowRadius: 100,
+		elevation: 3,
 	},
 	avatarCircle: {
 		width: 70,
@@ -134,7 +142,7 @@ const styles = StyleSheet.create({
 		borderWidth: 5,
 		borderColor: '#5e66ff',
 		zIndex: 100,
-		elevation: 3,
+		elevation: 5,
 		shadowColor: '#000',
 		shadowOffset: { width: 0, height: 2 },
 		shadowRadius: 6,
