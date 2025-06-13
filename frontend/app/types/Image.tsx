@@ -4,3 +4,5 @@ export type Image = {
   type?: string
   size?: number
 }
+
+export default []

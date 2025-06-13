@@ -14,3 +14,5 @@ export type Comment = {
     replies: SubComment[],
     createdAt: string,
 }
+
+export default []

@@ -13,3 +13,6 @@ export type Post = {
   images?: Image[]
   createdAt: string
 }
+
+
+export default [] as Post[]

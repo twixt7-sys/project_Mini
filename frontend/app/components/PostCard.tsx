@@ -1,5 +1,8 @@
 import React, { useState, useRef, useEffect } from 'react'
-import { View, Text, StyleSheet, TouchableHighlight, Animated } from 'react-native'
+import {
+		View, Text, StyleSheet, TouchableHighlight, Animated,
+		KeyboardAvoidingView, Platform, TouchableWithoutFeedback, ScrollView, Keyboard,
+	} from 'react-native'
 import { Audio } from 'expo-av'
 import { Post } from '../types/Post'
 import { Ionicons } from '@expo/vector-icons'
@@ -7,7 +10,6 @@ import Stat from './Stat'
 import Txt from './Txt'
 import CommentSection from './CommentSection'
 import AvatarIcon from './AvatarIcon'
-import { getFontSize } from 'tamagui'
 
 interface PostCardProps {
 	post: Post

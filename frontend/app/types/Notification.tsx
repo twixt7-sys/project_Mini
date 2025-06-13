@@ -4,3 +4,5 @@ export type Notification = {
     body: string;
     createdAt: Date | string;
 }
+
+export default [] as Notification[]

@@ -14,3 +14,5 @@ export type User = {
     following: User[],
     joinDate: Date | string,
 }
+
+export default [] as User[]
