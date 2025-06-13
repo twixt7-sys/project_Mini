@@ -1,4 +1,7 @@
-import React, { useState, useRef, useCallback } from "react";
+import React, { useState, useRef, useCallback, useContext } from "react";
+import type { RootStackParamList } from '../types/RootStackParamList';
+import type { NativeStackScreenProps } from '@react-navigation/native-stack';
+import { useNavigation } from '@react-navigation/native';
 import {
   TextInput,
   TouchableOpacity,
@@ -8,6 +11,7 @@ import {
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import Txt from "./Txt";
+import { AuthContext } from '../context/AuthContext';
 
 const FABButton = ({
   style,
@@ -76,7 +80,11 @@ const FormModal = ({
   </View>
 );
 
+type Props = NativeStackScreenProps<RootStackParamList, 'Home'>;
+
 const FAB = () => {
+  const navigation = useNavigation();
+  const { logout } = useContext(AuthContext);
   const [isFabOpen, setIsFabOpen] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [title, setTitle] = useState("");
@@ -131,8 +139,11 @@ const FAB = () => {
   const verticalFABs = [
     { distance: -80, icon: "pencil", action: openModal },
     { distance: -150, icon: "image" },
-    { distance: -220, icon: "test" },
-    { distance: -290, icon: "test" },
+    { distance: -220, icon: "star" },
+    { distance: -290, icon: "log-out", action: async () => {
+    await logout()
+    navigation.goBack()
+    }},
   ];
 
   const horizontalFABs = [
