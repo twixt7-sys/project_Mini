@@ -54,6 +54,7 @@
     "react-native-webview": "13.13.5"
   },
   "devDependencies": {
+    "@react-native-community/cli": "latest",
     "@babel/core": "^7.25.2",
     "@tamagui/cli": "^1.126.13",
     "@tsconfig/react-native": "^3.0.5",

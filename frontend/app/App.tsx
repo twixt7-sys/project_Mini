@@ -6,9 +6,9 @@ import UserProvider from './context/UserContext'
 const App = () => {
 	return(
 		<AuthProvider>
-			<UserProvider>
+			{/*<UserProvider>*/}
 				<RootNavigator />
-			</UserProvider>
+			{/*</UserProvider>*/}
 		</AuthProvider>
 	)
 }

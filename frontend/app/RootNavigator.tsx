@@ -11,7 +11,7 @@ const Stack = createNativeStackNavigator<RootStackParamList>()
 
 export default function RootNavigator() {
   return(
-      <Stack.Navigator initialRouteName='SplashScreen'>
+      <Stack.Navigator initialRouteName='SplashScreen' >
         <Stack.Screen name="SplashScreen" component={SplashScreen} options={{headerShown: false}}/>
         <Stack.Screen name="Login" component={Login} options={{headerShown: false}}/>
         <Stack.Screen name="Register" component={Register} options={{headerShown: false}}/>
