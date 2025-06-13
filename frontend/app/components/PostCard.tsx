@@ -7,6 +7,7 @@ import Stat from './Stat'
 import Txt from './Txt'
 import CommentSection from './CommentSection'
 import AvatarIcon from './AvatarIcon'
+import { getFontSize } from 'tamagui'
 
 interface PostCardProps {
 	post: Post
@@ -62,9 +63,12 @@ const PostCard: React.FC<PostCardProps> = ({ post }) => {
 			</View>
 
 			<View style={styles.card}>
-				<View>
+				<View style={{flexDirection: "row", marginBottom: 10}}>
 					<AvatarIcon uri={post.author.displayPicture?.uri as string} size={40}/>
-					<Txt text={post.author.username} style_={styles.author} />
+					<View style={{flexDirection: "column"}}>
+						<Txt text={post.author.username} style_={styles.author} />
+						<Txt text="Active now" style_={{marginLeft: 6, color: "#ddf", fontSize: 10, fontWeight: 'bold'}}/>
+					</View>
 				</View>
 				<Txt text={post.title} style_={styles.title} />
 				<View style={styles.contentContainer}>
@@ -121,10 +125,11 @@ const styles = StyleSheet.create({
 		shadowRadius: 6,
 	},
 	author: {
-		fontSize: 14,
-		fontWeight: '600',
-		color: '#5e66ff',
-		marginBottom: 4
+		fontSize: 18,
+		fontWeight: 'bold',
+		color: '#eef',
+		marginLeft: 6,
+		marginTop: 0
 	},
 	title: {
 		fontSize: 16,
