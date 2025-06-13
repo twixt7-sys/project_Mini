@@ -67,7 +67,7 @@ const PostCard: React.FC<PostCardProps> = ({ post }) => {
 					<AvatarIcon uri={post.author.displayPicture?.uri as string} size={40}/>
 					<View style={{flexDirection: "column"}}>
 						<Txt text={post.author.username} style_={styles.author} />
-						<Txt text="Active now" style_={{marginLeft: 6, color: "#ddf", fontSize: 10, fontWeight: 'bold'}}/>
+						<Txt text="Active now" style_={{marginLeft: 6, color: "#cfc", fontSize: 10, fontWeight: 'bold'}}/>
 					</View>
 				</View>
 				<Txt text={post.title} style_={styles.title} />
@@ -127,7 +127,7 @@ const styles = StyleSheet.create({
 	author: {
 		fontSize: 18,
 		fontWeight: 'bold',
-		color: '#eef',
+		color: '#4455dd',
 		marginLeft: 6,
 		marginTop: 0
 	},
