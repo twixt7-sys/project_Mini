@@ -1,7 +1,7 @@
 import { User } from '../types/User'
 import { dummyNotifications } from './dummy_notifications'
 import { dummyImage, dummyCover } from './dummy_image'
-import { dummyPosts } from './dummy_posts'
+import dummyPosts from './dummy_posts'
 
 const dummyUsers: User[] = [
     {
