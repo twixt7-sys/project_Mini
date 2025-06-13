@@ -2,10 +2,12 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import Home from './screens/Home'
 import Register from './screens/Register'
-import Login from './screens/Login'
+import Login  from './screens/Login'
 import SplashScreen from './SplashScreen'
+import CreatePost from './screens/CreatePost'
+import { RootStackParamList } from './types/RootStackParamList'
 
-const Stack = createNativeStackNavigator()
+const Stack = createNativeStackNavigator<RootStackParamList>()
 
 export default function RootNavigator() {
   return(

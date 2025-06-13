@@ -28,7 +28,7 @@ export default function Login({ navigation }: Props) {
 			return;
 		}
 		await login(email, password);
-		// navigation.navigate('HomeScreen'); // Uncomment and adjust if needed
+		navigation.navigate('Home');
 	};
 
 	return (
