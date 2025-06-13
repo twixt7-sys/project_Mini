@@ -3,5 +3,4 @@ export type RootStackParamList = {
     Login: undefined;
     Register: undefined;
     HomeScreen: undefined;
-  // add other screens here
 };

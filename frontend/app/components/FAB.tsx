@@ -25,7 +25,7 @@ const FABButton = ({
       style={[styles.fabButton, shape === "square" && styles.fabButtonSquare]}
       onPress={onPress}
     >
-      <Ionicons name={icon} size={20} color="#fff" />
+      <Ionicons name={icon as any} size={20} color="#fff" />
     </TouchableOpacity>
   </Animated.View>
 );

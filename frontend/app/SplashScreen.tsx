@@ -1,5 +1,5 @@
 import type { NativeStackScreenProps } from '@react-navigation/native-stack';
-import type { RootStackParamList } from '../types/RootStackParamList';
+import type { RootStackParamList } from './types/RootStackParamList';
 import React, { useEffect, useRef } from 'react';
 import {
 	SafeAreaView,
@@ -8,7 +8,7 @@ import {
 	Dimensions,
 	Animated,
 } from 'react-native';
-import { useNavigation } from '@react-navigation/native'
+
 type SplashScreenProps = NativeStackScreenProps<RootStackParamList, 'SplashScreen'>;
 
 export default function SplashScreen({ navigation }: SplashScreenProps) {
