@@ -1,6 +1,6 @@
 import { Notification } from "../types/Notification";
 
-export const dummyNotifications: Notification[] = [
+const dummyNotifications: Notification[] = [
     {
         id: 1,
         title: "New message",
@@ -8,3 +8,5 @@ export const dummyNotifications: Notification[] = [
         createdAt: "12/31/25"
     },
 ]
+
+export default dummyNotifications

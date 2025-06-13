@@ -13,3 +13,5 @@ export const dummyCover: Image = {
     type: "image/png",
     size: 123456,
 }
+
+export default []

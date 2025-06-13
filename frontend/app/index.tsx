@@ -9,3 +9,5 @@ const Root = () => {
 }
 
 AppRegistry.registerComponent("ProjectMini", () => Root)
+
+export default Root

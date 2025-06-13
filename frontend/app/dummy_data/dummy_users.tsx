@@ -1,5 +1,5 @@
 import { User } from '../types/User'
-import { dummyNotifications } from './dummy_notifications'
+import dummyNotifications from './dummy_notifications'
 import { dummyImage, dummyCover } from './dummy_image'
 import dummyPosts from './dummy_posts'
 
@@ -13,7 +13,7 @@ const dummyUsers: User[] = [
         notifications: [],
         followers: [],
         following: [],
-        posts: dummyPosts,
+        posts: [],
         joinDate: '2022-01-01',
     },
     {
@@ -25,7 +25,7 @@ const dummyUsers: User[] = [
         notifications: dummyNotifications,
         followers: [],
         following: [],
-        posts: dummyPosts,
+        posts: [],
         joinDate: '2022-01-01',
     }
 
