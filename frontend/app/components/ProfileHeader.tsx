@@ -11,7 +11,7 @@ type ProfileHeaderProps = {
 }
 
 const statData = [
-	{ icon: 'camera', label: '99M' },
+	{ icon: 'paper', label: '99M' },
 	{ icon: 'link', label: '99M' },
 	{ icon: 'calendar', label: '12/31/2025' }
 ]

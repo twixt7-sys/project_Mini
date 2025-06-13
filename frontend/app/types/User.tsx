@@ -7,6 +7,7 @@ export type User = {
     email: string,
     displayPicture: Image,
     coverPicture: Image,
+    notifications: Notification[],
     posts: Post[],
     followers: User[],
     following: User[],
