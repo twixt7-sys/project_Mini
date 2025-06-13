@@ -1,5 +1,5 @@
-import React, { useRef } from 'react'
-import { View, StyleSheet, Animated } from 'react-native'
+import React, { useRef, useState } from 'react'
+import { View, StyleSheet, Animated, RefreshControl } from 'react-native'
 import PostCard from '../components/PostCard'
 import ProfileHeader from '../components/ProfileHeader'
 import dummyPosts from '../dummy_data/dummy_posts'
@@ -9,12 +9,27 @@ import FAB from '../components/FAB'
 const Home = () => {
 	const scrollY = useRef(new Animated.Value(0)).current
 
+	const [refreshing, setRefreshing] = useState(false)
+
+	const onRefresh = () => {
+	setRefreshing(true)
+
+	setTimeout(() => {
+		setRefreshing(false)
+	}, 1500)
+	}
+
 	return (
 		<View style={styles.container}>
 			<ProfileHeader user={dummyUsers[0]} scrollY={scrollY} />
 
 			<Animated.ScrollView
 				contentContainerStyle={{ paddingTop: 110, paddingBottom: 100 }}
+				showsVerticalScrollIndicator={false}
+				refreshControl={
+					<RefreshControl refreshing={refreshing} onRefresh={onRefresh} tintColor="#fff"
+					progressViewOffset={100} />
+				}
 				scrollEventThrottle={16}
 				onScroll={Animated.event(
 					[{ nativeEvent: { contentOffset: { y: scrollY } } }],
