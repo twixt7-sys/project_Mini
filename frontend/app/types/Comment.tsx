@@ -1,7 +1,16 @@
-export type Comment = {
+export type SubComment = {
     id: string,
-    postId: string, // foreign key
     content: string,
     author: string,
+    likes: number,
+    createdAt: string,
+}
+
+export type Comment = {
+    id: string,
+    content: string,
+    author: string,
+    likes: number,
+    replies: SubComment[],
     createdAt: string,
 }
