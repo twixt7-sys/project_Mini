@@ -27,7 +27,7 @@ export default function Login({ navigation }: Props) {
 			alert('Please fill in all fields and agree to the terms.');
 			return;
 		}
-		await login(email, password);
+		//await login(email, password);
 		navigation.navigate('Home');
 	};
 
