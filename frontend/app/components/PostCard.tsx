@@ -37,7 +37,7 @@ const PostCard: React.FC<PostCardProps> = ({ post }) => {
 
 	const handleLikePress = async () => {
 		setLiked(!liked)
-
+		post.likes += liked ? -1 : 1
 		try {
 			await sound.current?.replayAsync()
 		} catch (error) {

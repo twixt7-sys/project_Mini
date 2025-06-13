@@ -141,7 +141,7 @@ const FAB = () => {
     { distance: -150, icon: "image" },
     { distance: -220, icon: "star" },
     { distance: -290, icon: "log-out", action: async () => {
-    await logout()
+    //await logout()
     navigation.goBack()
     }},
   ];

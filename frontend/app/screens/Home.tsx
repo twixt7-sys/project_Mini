@@ -1,10 +1,16 @@
 import React, { useRef, useState } from 'react'
-import { View, StyleSheet, Animated, RefreshControl } from 'react-native'
+import { View, StyleSheet, Animated, RefreshControl, FlatList } from 'react-native'
 import PostCard from '../components/PostCard'
 import ProfileHeader from '../components/ProfileHeader'
 import dummyPosts from '../dummy_data/dummy_posts'
 import dummyUsers from '../dummy_data/dummy_users'
 import FAB from '../components/FAB'
+import { LogBox } from 'react-native'
+
+LogBox.ignoreLogs([
+  'VirtualizedLists should never be nested'
+])
+
 
 const Home = () => {
 	const scrollY = useRef(new Animated.Value(0)).current

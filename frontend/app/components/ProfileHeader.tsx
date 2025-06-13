@@ -3,7 +3,6 @@ import { View, StyleSheet, Animated } from 'react-native'
 import { Ionicons } from '@expo/vector-icons'
 import Txt from './Txt'
 import { User } from '../types/User'
-import { transform } from '@babel/core'
 import dummyUsers from '../dummy_data/dummy_users'
 import dummyPosts from '../dummy_data/dummy_posts'
 
@@ -16,8 +15,8 @@ type ProfileHeaderProps = {
 const ProfileHeader: React.FC<ProfileHeaderProps> = ({ user, scrollY }) => {
 	const statData = [
 		{ icon: 'document', label: dummyPosts.length },
-		{ icon: 'people', label: dummyUsers[0].followers.length.toString() },
-		{ icon: 'people-outline', label: dummyUsers[0].following.length.toString() }
+		{ icon: 'people', label: user.followers.length.toString() },
+		{ icon: 'people-outline', label: user.following.length.toString() }
 	]
 
 	const avatarAnimatedStyle = useMemo(() => ({
