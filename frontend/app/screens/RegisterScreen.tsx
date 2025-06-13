@@ -1,104 +1,109 @@
 import React, { useState, useContext } from 'react'
 import {
-	View,
-	Text,
-	Image,
-	TextInput,
-	TouchableOpacity,
-	StyleSheet,
-	SafeAreaView
+    View,
+    Text,
+    Image,
+    TextInput,
+    TouchableOpacity,
+    StyleSheet,
+    SafeAreaView
 } from 'react-native'
+import type { NativeStackScreenProps } from '@react-navigation/native-stack'
+import type { RootStackParamList } from '../types/RootStackParamList'
 import { AuthContext } from '../context/AuthContext'
 import { Ionicons } from '@expo/vector-icons'
 
-const RegisterScreen = () => {
-	const { register } = useContext(AuthContext)
-	const [username, setUsername] = useState('')
-	const [email, setEmail] = useState('')
-	const [password, setPassword] = useState('')
-	const [confirm_password, setConfirmPassword] = useState('')
-	const [showPassword, setShowPassword] = useState(false)
+// Add props type for navigation
+type Props = NativeStackScreenProps<RootStackParamList, 'Register'>
 
-	const handleRegister = async () => {
-		if (password !== confirm_password) {
-			alert("Passwords do not match.")
-			return
-		}
-		if (!email || !password || !username) return
-		await register({ username, email, password, confirm_password })
-		router.push('/screens/homescreen')
-	}
+const RegisterScreen = ({ navigation }: Props) => {
+    const { register } = useContext(AuthContext)
+    const [username, setUsername] = useState('')
+    const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('')
+    const [confirm_password, setConfirmPassword] = useState('')
+    const [showPassword, setShowPassword] = useState(false)
 
-	return (
-		<SafeAreaView style={styles.container}>
-			<Image
-				source={require('../../assets/images/Mini Logo.png')}
-				style={styles.logo}
-				resizeMode="contain"
-			/>
-			<Text style={styles.header}>Register</Text>
+    const handleRegister = async () => {
+        if (password !== confirm_password) {
+            alert("Passwords do not match.")
+            return
+        }
+        if (!email || !password || !username) return
+        await register({ username, email, password, confirm_password })
+        navigation.navigate('HomeScreen')
+    }
 
-			<TextInput
-				style={styles.input}
-				placeholder='username'
-				placeholderTextColor='#aaa'
-				value={username}
-				onChangeText={setUsername}
-			/>
+    return (
+        <SafeAreaView style={styles.container}>
+            <Image
+                source={require('../../assets/images/Mini Logo.png')}
+                style={styles.logo}
+                resizeMode="contain"
+            />
+            <Text style={styles.header}>Register</Text>
 
-			<TextInput
-				style={styles.input}
-				placeholder='email'
-				placeholderTextColor='#aaa'
-				value={email}
-				onChangeText={setEmail}
-			/>
+            <TextInput
+                style={styles.input}
+                placeholder='username'
+                placeholderTextColor='#aaa'
+                value={username}
+                onChangeText={setUsername}
+            />
 
-			<View style={styles.passwordContainer}>
-				<TextInput
-					style={styles.passwordInput}
-					placeholder='password'
-					placeholderTextColor='#aaa'
-					secureTextEntry={!showPassword}
-					value={password}
-					onChangeText={setPassword}
-				/>
-				<TouchableOpacity onPress={() => setShowPassword(!showPassword)}>
-					<Ionicons
-						name={showPassword ? 'eye-off' : 'eye'}
-						size={22}
-						color='#333'
-					/>
-				</TouchableOpacity>
-			</View>
+            <TextInput
+                style={styles.input}
+                placeholder='email'
+                placeholderTextColor='#aaa'
+                value={email}
+                onChangeText={setEmail}
+            />
 
-			<View style={styles.passwordContainer}>
-				<TextInput
-					style={styles.passwordInput}
-					placeholder='confirm password'
-					placeholderTextColor='#aaa'
-					secureTextEntry={!showPassword}
-					value={confirm_password}
-					onChangeText={setConfirmPassword}
-				/>
-				<TouchableOpacity onPress={() => setShowPassword(!showPassword)}>
-					<Ionicons
-						name={showPassword ? 'eye-off' : 'eye'}
-						size={22}
-						color='#333'
-					/>
-				</TouchableOpacity>
-			</View>
+            <View style={styles.passwordContainer}>
+                <TextInput
+                    style={styles.passwordInput}
+                    placeholder='password'
+                    placeholderTextColor='#aaa'
+                    secureTextEntry={!showPassword}
+                    value={password}
+                    onChangeText={setPassword}
+                />
+                <TouchableOpacity onPress={() => setShowPassword(!showPassword)}>
+                    <Ionicons
+                        name={showPassword ? 'eye-off' : 'eye'}
+                        size={22}
+                        color='#333'
+                    />
+                </TouchableOpacity>
+            </View>
 
-			<TouchableOpacity style={styles.button} onPress={handleRegister}>
-				<Text style={styles.buttonText}>Register</Text>
-			</TouchableOpacity>
+            <View style={styles.passwordContainer}>
+                <TextInput
+                    style={styles.passwordInput}
+                    placeholder='confirm password'
+                    placeholderTextColor='#aaa'
+                    secureTextEntry={!showPassword}
+                    value={confirm_password}
+                    onChangeText={setConfirmPassword}
+                />
+                <TouchableOpacity onPress={() => setShowPassword(!showPassword)}>
+                    <Ionicons
+                        name={showPassword ? 'eye-off' : 'eye'}
+                        size={22}
+                        color='#333'
+                    />
+                </TouchableOpacity>
+            </View>
 
-			<TouchableOpacity style={styles.buttonSecondary} onPress={() => router.push('/screens/LoginScreen')}>
-				<Text style={styles.buttonText}>Back to Login</Text>
-			</TouchableOpacity>
-		</SafeAreaView>
-	)
+            <TouchableOpacity style={styles.button} onPress={handleRegister}>
+                <Text style={styles.buttonText}>Register</Text>
+            </TouchableOpacity>
+
+            <TouchableOpacity style={styles.buttonSecondary} onPress={() => navigation.navigate('Login')}>
+                <Text style={styles.buttonText}>Back to Login</Text>
+            </TouchableOpacity>
+        </SafeAreaView>
+    )
 }
 
 const styles = StyleSheet.create({
