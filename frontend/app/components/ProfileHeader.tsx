@@ -10,13 +10,14 @@ type ProfileHeaderProps = {
 	scrollY: Animated.Value
 }
 
-const statData = [
-	{ icon: 'paper', label: '99M' },
-	{ icon: 'link', label: '99M' },
-	{ icon: 'calendar', label: '12/31/2025' }
-]
 
 const ProfileHeader: React.FC<ProfileHeaderProps> = ({ user, scrollY }) => {
+	const statData = [
+		{ icon: 'document', label: '99'},
+		{ icon: 'people', label: '99' },
+		{ icon: 'people-outline', label: '99' }
+	]
+
 	const avatarAnimatedStyle = useMemo(() => ({
 		transform: [
 			{ translateY: scrollY.interpolate({ inputRange: [0, 100], outputRange: [25, -5], extrapolate: 'clamp' }) },

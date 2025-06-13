@@ -61,7 +61,7 @@ const PostCard: React.FC<PostCardProps> = ({ post }) => {
 			</View>
 
 			<View style={styles.card}>
-				<Txt text={post.author} style_={styles.author} />
+				<Txt text={post.author.username} style_={styles.author} />
 				<Txt text={post.title} style_={styles.title} />
 				<View style={styles.contentContainer}>
 					<Txt text={post.content} style_={styles.content} />
