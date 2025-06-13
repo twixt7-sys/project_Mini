@@ -30,7 +30,7 @@ const Register = ({ navigation }: Props) => {
             return
         }
         if (!email || !password || !username) return
-        await register({ username, email, password, confirm_password })
+        //await register({ username, email, password, confirm_password })
         navigation.navigate('Home')
     }
 

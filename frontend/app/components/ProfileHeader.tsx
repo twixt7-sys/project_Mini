@@ -4,6 +4,8 @@ import { Ionicons } from '@expo/vector-icons'
 import Txt from './Txt'
 import { User } from '../types/User'
 import { transform } from '@babel/core'
+import dummyUsers from '../dummy_data/dummy_users'
+import dummyPosts from '../dummy_data/dummy_posts'
 
 type ProfileHeaderProps = {
 	user: User
@@ -13,9 +15,9 @@ type ProfileHeaderProps = {
 
 const ProfileHeader: React.FC<ProfileHeaderProps> = ({ user, scrollY }) => {
 	const statData = [
-		{ icon: 'document', label: '99'},
-		{ icon: 'people', label: '99' },
-		{ icon: 'people-outline', label: '99' }
+		{ icon: 'document', label: dummyPosts.length },
+		{ icon: 'people', label: dummyUsers[0].followers.length.toString() },
+		{ icon: 'people-outline', label: dummyUsers[0].following.length.toString() }
 	]
 
 	const avatarAnimatedStyle = useMemo(() => ({
@@ -88,7 +90,7 @@ const ProfileHeader: React.FC<ProfileHeaderProps> = ({ user, scrollY }) => {
 							<View key={index} style={styles.capsule}>
 								<View style={{ flexDirection: 'row', alignItems: 'center' }}>
 									<Ionicons name={stat.icon as any} size={14} color="#5555D0" style={{ marginRight: 4 }} />
-									<Txt text={stat.label} style_={styles.stat} />
+									<Txt text={stat.label as string} style_={styles.stat} />
 								</View>
 							</View>
 						))}
