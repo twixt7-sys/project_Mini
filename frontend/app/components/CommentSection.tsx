@@ -33,6 +33,8 @@ const CommentSection: React.FC<CommentSectionProps> = ({ isCollapsed, setIsColla
                 author: 'You',
                 content: inputValue.trim(),
                 createdAt: new Date().toISOString(),
+                likes: 0,
+                replies: []
             }
             setComments(prev => [...prev, newComment])
             setInputValue('')

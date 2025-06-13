@@ -6,6 +6,7 @@ import { Ionicons } from '@expo/vector-icons'
 import Stat from './Stat'
 import Txt from './Txt'
 import CommentSection from './CommentSection'
+import AvatarIcon from './AvatarIcon'
 
 interface PostCardProps {
 	post: Post
@@ -61,7 +62,10 @@ const PostCard: React.FC<PostCardProps> = ({ post }) => {
 			</View>
 
 			<View style={styles.card}>
-				<Txt text={post.author.username} style_={styles.author} />
+				<View>
+					<AvatarIcon uri={post.author.displayPicture?.uri as string} size={40}/>
+					<Txt text={post.author.username} style_={styles.author} />
+				</View>
 				<Txt text={post.title} style_={styles.title} />
 				<View style={styles.contentContainer}>
 					<Txt text={post.content} style_={styles.content} />
