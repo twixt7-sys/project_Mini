@@ -1,0 +1,12 @@
+{
+  "expo": {
+    "extra": {
+      "eas": {
+        "projectId": "9fc02d74-77de-4604-9605-d2c1bf0c8c5a"
+      }
+    },
+    "android": {
+      "package": "com.busbloo7.project_mini"
+    }
+  }
+}
