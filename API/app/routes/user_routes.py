@@ -27,6 +27,7 @@ def get_all_users():
             "message": str(e)
         }), 500
 
+# TODO: test
 @user_bp.route('<string:user_id>', methods=['GET'])
 def get_user(user_id):
     try:
@@ -50,15 +51,36 @@ def get_user(user_id):
             "message": str(e)
         }), 500
 
+# TODO: test
 @user_bp.route('<string:user_id>', methods=['PUT'])
 def update_user(user_id):
     try:
         user_ref = db.collection('users').document(user_id) # reference document
         user_ref.update(request.json)                       # update document
-        user = user_ref.get().to_dict()                            # convert document to python dictionary
+        user = user_ref.get().to_dict()                     # convert document to python dictionary
         return jsonify({
             "status": "success",
             "message": "User updated",
+            "data": {
+                "user": user
+            }
+        })
+    except Exception as e:
+        return jsonify({
+            "status": "error",
+            "message": str(e)
+        }), 500
+
+# TODO: delete user
+@user_bp.route('<string:user_id>', methods=['DELETE'])
+def delete_user(user_id):
+    try:
+        user_ref = db.collection('users').document(user_id) # reference document
+        user = user_ref.get().to_dict()                     # convert document to python dictionary
+        user_ref.delete()                                   # delete document
+        return jsonify({
+            "status": "success",
+            "message": "User deleted",
             "data": {
                 "user": user
             }
