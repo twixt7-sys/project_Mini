@@ -8,8 +8,6 @@ auth_bp = Blueprint('auth', __name__)
 @auth_bp.route('/register', methods=['POST'])
 def register():
     
-    # TODO: Register new user
-    
     try:
         data = request.get_json()   # get request
         user_id = str(uuid.uuid4()) # generate id
