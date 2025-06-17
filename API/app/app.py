@@ -15,39 +15,38 @@ def index():
         "message": "API is running.",
         "endpoints": {
             "auth": {
-                "POST": "/auth/login",
-                "POST": "/auth/register",
-                "POST": "/auth/logout"
+                "POST": "api/auth/login",
+                "POST": "api/auth/register",
+                "POST": "api/auth/logout"
             },
             "users": {
-                "GET": "/users",
-                "POST": "/users",
-                "PUT": "/users/<id>",
-                "DELETE": "/users/<id>"
+                "GET": "api/users",
+                "PUT": "api/users/<id>",
+                "DELETE": "api/users/<id>"
             },
             "posts": {
-                "GET": "/posts",
-                "POST": "/posts",
-                "PUT": "/posts/<id>",
-                "DELETE": "/posts/<id>"
+                "GET": "api/posts",
+                "POST": "api/posts",
+                "PUT": "api/posts/<id>",
+                "DELETE": "api/posts/<id>"
             },
             "comments": {
-                "GET": "/comments",
-                "POST": "/comments",
-                "PUT": "/comments/<id>",
-                "DELETE": "/comments/<id>"
+                "GET": "api/comments",
+                "POST": "api/comments",
+                "PUT": "api/comments/<id>",
+                "DELETE": "api/comments/<id>"
             },
             "likes": {
-                "GET": "/likes",
-                "POST": "/likes",
-                "PUT": "/likes/<id>",
-                "DELETE": "/likes/<id>"
+                "GET": "api/likes",
+                "POST": "api/likes",
+                "PUT": "api/likes/<id>",
+                "DELETE": "api/likes/<id>"
             },
             "follows": {
-                "GET": "/follows",
-                "POST": "/follows",
-                "PUT": "/follows/<id>",
-                "DELETE": "/follows/<id>"
+                "GET": "api/follows",
+                "POST": "api/follows",
+                "PUT": "api/follows/<id>",
+                "DELETE": "api/follows/<id>"
             }
         }
     }
