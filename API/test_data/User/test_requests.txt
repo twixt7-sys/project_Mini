@@ -1,0 +1,29 @@
+### POST api/auth/register
+{
+    "email": "diana@example.com",
+    "username": "diana_dev",
+    "bio": "Full-stack dev & coffee lover",
+    "profile_pic": "https://example.com/diana.jpg",
+    "cover_pic": "https://example.com/cover_diana.jpg",
+    "followers": [],
+    "following": [],
+    "posts": [],
+    "password": "dianapass123",
+    "created_at": "2025-06-17T10:14:53.079830"
+}
+
+### GET /api/users
+(No body)
+
+### GET /api/users/user001
+(No body)
+
+### PUT /api/users/user001
+{
+    "bio": "Updated bio for Alice.",
+    "profile_pic": "https://example.com/updated_alice.jpg"
+}
+
+### DELETE /api/users/user001
+(No body)
+

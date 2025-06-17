@@ -2,7 +2,7 @@ from flask import Blueprint, request, jsonify
 from app.models.User import User
 import uuid
 from datetime import datetime as dt
-from utilities.Utils import response
+from app.utilities.Utils import response
 
 auth_bp = Blueprint('auth', __name__, url_prefix='/api/auth')
 

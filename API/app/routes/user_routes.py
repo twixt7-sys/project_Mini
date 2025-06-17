@@ -27,7 +27,6 @@ def get_all_users():
             "message": str(e)
         }), 500
 
-# TODO: test
 @user_bp.route('<string:user_id>', methods=['GET'])
 def get_user(user_id):
     try:
@@ -51,7 +50,6 @@ def get_user(user_id):
             "message": str(e)
         }), 500
 
-# TODO: test
 @user_bp.route('<string:user_id>', methods=['PUT'])
 def update_user(user_id):
     try:
@@ -71,7 +69,7 @@ def update_user(user_id):
             "message": str(e)
         }), 500
 
-# TODO: delete user
+# TODO: test
 @user_bp.route('<string:user_id>', methods=['DELETE'])
 def delete_user(user_id):
     try:
