@@ -31,8 +31,8 @@ class User(BaseModel):
             "created_at": self.created_at.isoformat()
         }
 
-    def save_to_firestore(self):
+    def save(self):
         users_ref = db.collection("users")
         doc_ref = users_ref.document(self.id)
         doc_ref.set(self.to_dict())
-        return doc_ref
+        return doc_ref.get().to_dict()
