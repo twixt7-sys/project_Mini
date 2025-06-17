@@ -1,26 +1,38 @@
 from pydantic import BaseModel, EmailStr, Field
-from typing import Optional
+from typing import Optional, List
 from datetime import datetime
 from services.frebase_service import db
 
-# user attributes: id, email, username, bio, profile_pic, cover_pic, followers, following, posts, password, created_at
 class User(BaseModel):
     id: str
     email: EmailStr
     username: str
-    bio: Optional[str]
-    profile_pic: Optional[str]
-    cover_pic: Optional[str]
-    followers: Optional[list]
-    following: Optional[list]
-    posts: Optional[list]
+    bio: Optional[str] = ""
+    profile_pic: Optional[str] = ""
+    cover_pic: Optional[str] = ""
+    followers: List[str] = Field(default_factory=list)
+    following: List[str] = Field(default_factory=list)
+    posts: List[str] = Field(default_factory=list)
     password: str
     created_at: datetime = Field(default_factory=datetime.now)
 
-# adding user document
-def create_user(data):
-    users = db.collection('users')
-    doc_ref = users.add({
-        ""
-    })
-    return doc_ref
+    def to_dict(self):
+        return {
+            "id": self.id,
+            "email": self.email,
+            "username": self.username,
+            "bio": self.bio,
+            "profile_pic": self.profile_pic,
+            "cover_pic": self.cover_pic,
+            "followers": self.followers,
+            "following": self.following,
+            "posts": self.posts,
+            "password": self.password,
+            "created_at": self.created_at.isoformat()
+        }
+
+    def save_to_firestore(self):
+        users_ref = db.collection("users")
+        doc_ref = users_ref.document(self.id)
+        doc_ref.set(self.to_dict())
+        return doc_ref
