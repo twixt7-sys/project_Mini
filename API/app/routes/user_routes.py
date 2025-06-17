@@ -26,3 +26,45 @@ def get_all_users():
             "status": "error",
             "message": str(e)
         }), 500
+
+@user_bp.route('<string:user_id>', methods=['GET'])
+def get_user(user_id):
+    try:
+        user_ref = db.collection('users').document(user_id) # reference document
+        doc = user_ref.get()                                # get document
+        if doc.exists:
+            data = doc.to_dict()                            # convert document to python dictionary
+            return jsonify({
+                "status": "success",
+                "message": "Retrieved user",
+                "data": data
+            }), 200
+        else:
+            return jsonify({
+                "status": "error",
+                "message": "User not found"
+            }), 404
+    except Exception as e:
+        return jsonify({
+            "status": "error",
+            "message": str(e)
+        }), 500
+
+@user_bp.route('<string:user_id>', methods=['PUT'])
+def update_user(user_id):
+    try:
+        user_ref = db.collection('users').document(user_id) # reference document
+        user_ref.update(request.json)                       # update document
+        user = user_ref.get().to_dict()                            # convert document to python dictionary
+        return jsonify({
+            "status": "success",
+            "message": "User updated",
+            "data": {
+                "user": user
+            }
+        })
+    except Exception as e:
+        return jsonify({
+            "status": "error",
+            "message": str(e)
+        }), 500
