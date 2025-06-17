@@ -4,7 +4,6 @@ from datetime import datetime
 from app.services.frebase_service import db
 from app.models.User import User
 
-# post model attributes: id, title, content, author, photos, likes, comments, created_at
 class Post(BaseModel):
     id: str
     title: str
