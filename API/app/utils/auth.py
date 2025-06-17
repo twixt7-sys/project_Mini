@@ -1,13 +1,12 @@
 from flask import Blueprint, request, jsonify
-from models.User import User
+from app.models.User import User
 import uuid
 from datetime import datetime as dt
 
-auth_bp = Blueprint('auth', __name__)
+auth_bp = Blueprint('auth', __name__, url_prefix='/api/auth')
 
 @auth_bp.route('/register', methods=['POST'])
 def register():
-    
     try:
         data = request.get_json()   # get request
         user_id = str(uuid.uuid4()) # generate id

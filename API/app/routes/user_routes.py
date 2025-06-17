@@ -1,8 +1,8 @@
 from flask import Blueprint, request, jsonify
 from app.models import User
-from services.frebase_service import db
+from app.services.frebase_service import db
 
-user_bp = Blueprint('users', __name__, url_prefix='/users')
+user_bp = Blueprint('users', __name__, url_prefix='/api/users')
 
 @user_bp.route('', methods=['GET'])
 def get_all_users():

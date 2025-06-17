@@ -1,7 +1,7 @@
 from pydantic import BaseModel, EmailStr, Field
 from typing import Optional, List
 from datetime import datetime
-from services.frebase_service import db
+from app.services.frebase_service import db
 
 class User(BaseModel):
     id: str
