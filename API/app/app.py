@@ -1,12 +1,14 @@
 from flask import Flask, jsonify
 from app.routes.user_routes import user_bp
 from app.routes.auth_routes import auth_bp
+from app.routes.post_routes import post_bp
 
 app = Flask(__name__)
 
 def initialize():
     app.register_blueprint(user_bp)
     app.register_blueprint(auth_bp)
+    app.register_blueprint(post_bp)
 
 @app.route('/')
 def index():

@@ -4,7 +4,6 @@ from app.utilities.Utils import response, error
 
 post_bp = Blueprint('posts', __name__, url_prefix='/api/posts')
 
-# TODO: test
 @post_bp.route('/', methods=['GET'])
 def get_posts():
     try:# get posts -> add in list -> return response

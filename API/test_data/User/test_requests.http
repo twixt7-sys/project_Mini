@@ -1,0 +1,36 @@
+### Register a new user
+POST http://localhost:5000/api/auth/register
+Content-Type: application/json
+
+{
+  "email": "diana@example.com",
+  "username": "diana_dev",
+  "bio": "Full-stack dev & coffee lover",
+  "profile_pic": "https://example.com/diana.jpg",
+  "cover_pic": "https://example.com/cover_diana.jpg",
+  "followers": [],
+  "following": [],
+  "posts": [],
+  "password": "dianapass123",
+  "created_at": "2025-06-17T10:14:53.079830"
+}
+
+### Get all users
+GET http://localhost:5000/api/users
+Accept: application/json
+
+### Get a specific user
+GET http://localhost:5000/api/users/user001
+Accept: application/json
+
+### Update user details
+PUT http://localhost:5000/api/users/user001
+Content-Type: application/json
+
+{
+  "bio": "Updated bio for Alice.",
+  "profile_pic": "https://example.com/updated_alice.jpg"
+}
+
+### Delete a user
+DELETE http://localhost:5000/api/users/user001
