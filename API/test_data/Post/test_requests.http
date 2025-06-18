@@ -5,14 +5,12 @@ POST http://127.0.0.1:5000/api/posts/
 Content-Type: application/json
 
 {
-  "id": "test_post",
   "title": "Test Post",
   "content": "Testing create endpoint",
-  "user_id": "test_user",
+  "author": "test_user",
   "photos": [],
   "likes": [],
-  "comments": [],
-  "created_at": "2023-01-01T00:00:00Z"
+  "comments": []
 }
 
 ### Get all posts

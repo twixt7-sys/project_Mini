@@ -2,13 +2,12 @@ from pydantic import BaseModel, Field
 from typing import Optional, List
 from datetime import datetime
 from app.services.frebase_service import db
-from app.models.User import User
 
 class Post(BaseModel):
     id: str
     title: str
     content: str
-    author: User = Field(default_factory=User.to_dict())
+    author: str
     photos: Optional[List[str]] = Field(default_factory=list)
     likes: List[str] = Field(default_factory=list)
     comments: List[str] = Field(default_factory=list)
