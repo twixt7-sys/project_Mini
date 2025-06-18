@@ -53,3 +53,10 @@ def delete_post(post_id):
     except Exception as e:
         return error("error" , str(e))
 
+@post_bp.route('/<user_id>/', methods=['GET'])
+def get_user_posts(user_id):
+    try:# get posts -> return response
+        posts = db.collection('posts').where('user_id', '==', user_id).get()
+        return response("success", "Retrieved posts", [post.to_dict() for post in posts])
+    except Exception as e:
+        return error("error" , str(e))
