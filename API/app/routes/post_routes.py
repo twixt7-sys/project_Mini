@@ -14,19 +14,19 @@ def get_posts():
     except Exception as e:
         return error("error" , str(e), 500)
 
-@post_bp.route('/<post_id>', methods=['GET'])
-def get_post(post_id):
-    try:# get post -> return response
-        doc = db.collection('posts').document(post_id).get()
-        return response("success", "Retrieved post", doc.to_dict())
-    except Exception as e:
-        return error("error" , str(e))
-
 @post_bp.route('/', methods=['POST'])
 def create_post():
     try:# create post -> return response
         db.collection('posts').add(request.json)
         return response("success", "Created post", request.json)
+    except Exception as e:
+        return error("error" , str(e))
+
+@post_bp.route('/<post_id>', methods=['GET'])
+def get_post(post_id):
+    try:# get post -> return response
+        doc = db.collection('posts').document(post_id).get()
+        return response("success", "Retrieved post", doc.to_dict())
     except Exception as e:
         return error("error" , str(e))
 
