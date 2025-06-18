@@ -13,7 +13,6 @@ def get_posts():
     except Exception as e:
         return error("error" , str(e))
 
-# TODO: test
 @post_bp.route('/', methods=['POST'])
 def create_post():
     try:
@@ -23,7 +22,6 @@ def create_post():
     except Exception as e:
         return error("error", str(e))
 
-# TODO: test
 @post_bp.route('/<post_id>', methods=['GET'])
 def get_post(post_id):
     try:
@@ -38,7 +36,6 @@ def get_post(post_id):
     except Exception as e:
         return error("error", str(e), 500)
 
-# TODO: test
 @post_bp.route('/<post_id>', methods=['PUT'])
 def update_post(post_id):
     try:# get post -> update post -> return response
@@ -49,7 +46,6 @@ def update_post(post_id):
     except Exception as e:
         return error("error" , str(e))
 
-# TODO: test
 @post_bp.route('/<post_id>', methods=['DELETE'])
 def delete_post(post_id):
     try:# get post -> delete post -> return response
@@ -59,7 +55,6 @@ def delete_post(post_id):
     except Exception as e:
         return error("error" , str(e))
 
-# TODO: test
 @post_bp.route('/<user_id>/', methods=['GET'])
 def get_user_posts(user_id):
     try:# get posts -> return response
