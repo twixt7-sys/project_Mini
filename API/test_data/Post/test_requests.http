@@ -1,0 +1,35 @@
+# test_requests.http
+
+### Create a new post
+POST http://localhost:5000/api/posts/
+Content-Type: application/json
+
+{
+  "title": "Test Post",
+  "content": "Testing create endpoint",
+  "user_id": "test_user",
+  "photos": [],
+  "likes": [],
+  "comments": []
+}
+
+### Get all posts
+GET http://localhost:5000/api/posts/
+
+### Get a single post
+GET http://localhost:5000/api/posts/{post_id}
+
+### Update a post
+PUT http://localhost:5000/api/posts/{post_id}
+Content-Type: application/json
+
+{
+  "title": "Updated Title",
+  "content": "Updated content"
+}
+
+### Delete a post
+DELETE http://localhost:5000/api/posts/{post_id}
+
+### Get posts by user
+GET http://localhost:5000/api/posts/{user_id}/
