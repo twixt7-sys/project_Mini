@@ -1,0 +1,50 @@
+[
+    {
+        "id": "user001",
+        "email": "alice@example.com",
+        "username": "alice",
+        "bio": "Hi, I'm Alice!",
+        "profile_pic": "https://example.com/alice.jpg",
+        "cover_pic": "https://example.com/cover_alice.jpg",
+        "followers": [],
+        "following": [],
+        "posts": [],
+        "password": "alicepass123",
+        "created_at": "2025-06-17T10:12:42.270205"
+    },
+    {
+        "id": "user002",
+        "email": "bob@example.com",
+        "username": "bobby",
+        "bio": "Lover of coffee and code.",
+        "profile_pic": "https://example.com/bob.jpg",
+        "cover_pic": "https://example.com/cover_bob.jpg",
+        "followers": [
+            "user001"
+        ],
+        "following": [
+            "user001"
+        ],
+        "posts": [],
+        "password": "bobpass456",
+        "created_at": "2025-06-17T10:12:42.270216"
+    },
+    {
+        "id": "user003",
+        "email": "carol@example.com",
+        "username": "carol_88",
+        "bio": "Carol here, nice to meet you.",
+        "profile_pic": "https://example.com/carol.jpg",
+        "cover_pic": "https://example.com/cover_carol.jpg",
+        "followers": [
+            "user001",
+            "user002"
+        ],
+        "following": [
+            "user001"
+        ],
+        "posts": [],
+        "password": "carol789",
+        "created_at": "2025-06-17T10:12:42.270220"
+    }
+]
