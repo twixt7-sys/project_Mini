@@ -1,6 +1,9 @@
 from flask import Blueprint, request
 from app.services.frebase_service import db
 from app.utilities.Utils import response, error
+from app.models.Post import Post
+import uuid
+from datetime import datetime
 
 post_bp = Blueprint('posts', __name__, url_prefix='/api/posts')
 
@@ -13,12 +16,24 @@ def get_posts():
     except Exception as e:
         return error("error" , str(e))
 
+# TODO: test
 @post_bp.route('/', methods=['POST'])
 def create_post():
     try:
         data = request.get_json()  # or simply use request.json
-        db.collection('posts').add(data)
-        return response("success", "Created post", data)
+        post_id = str(uuid.uuid4())
+        post = Post(
+            id=post_id,
+            title=data['title'],
+            content=data['content'],
+            author=data['author'],
+            photos=data['photos'],
+            likes=data['likes'],
+            comments=data['comments'],
+            created_at=datetime.now()
+            )
+        db.collection('posts').add(post.to_dict())
+        return response("success", "Created post", post.to_dict())
     except Exception as e:
         return error("error", str(e))
 
