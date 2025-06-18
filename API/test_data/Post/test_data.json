@@ -1,0 +1,18 @@
+[
+  {
+    "title": "First Post",
+    "content": "This is the first post",
+    "user_id": "user_123",
+    "photos": ["https://example.com/image1.jpg"],
+    "likes": [],
+    "comments": []
+  },
+  {
+    "title": "Second Post",
+    "content": "This is the second post",
+    "user_id": "user_123",
+    "photos": ["https://example.com/image2.jpg"],
+    "likes": ["user_456"],
+    "comments": [{"user_id": "user_456", "text": "Nice post!"}]
+  }
+]
