@@ -53,6 +53,7 @@ def delete_post(post_id):
     except Exception as e:
         return error("error" , str(e))
 
+# TODO: test
 @post_bp.route('/<user_id>/', methods=['GET'])
 def get_user_posts(user_id):
     try:# get posts -> return response
