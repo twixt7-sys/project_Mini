@@ -8,28 +8,35 @@ post_bp = Blueprint('posts', __name__, url_prefix='/api/posts')
 def get_posts():
     try:# get posts -> add in list -> return response
         docs = db.collection('posts').stream()
-        posts = [posts.append(doc.to_dict()) for doc in docs]
+        posts = [doc.to_dict() for doc in docs]
         return response("success", "Retrieved all posts", posts)
     except Exception as e:
-        return error("error" , str(e), 500)
+        return error("error" , str(e))
 
 # TODO: test
 @post_bp.route('/', methods=['POST'])
 def create_post():
-    try:# create post -> return response
-        db.collection('posts').add(request.json)
-        return response("success", "Created post", request.json)
+    try:
+        data = request.get_json()  # or simply use request.json
+        db.collection('posts').add(data)
+        return response("success", "Created post", data)
     except Exception as e:
-        return error("error" , str(e))
+        return error("error", str(e))
 
 # TODO: test
 @post_bp.route('/<post_id>', methods=['GET'])
 def get_post(post_id):
-    try:# get post -> return response
-        doc = db.collection('posts').document(post_id).get()
-        return response("success", "Retrieved post", doc.to_dict())
+    try:
+        doc_ref = db.collection('posts').document(post_id)
+        doc = doc_ref.get()
+
+        if not doc.exists:
+            return error("not_found", f"Post with ID '{post_id}' not found", 404)
+
+        post = {"id": doc.id, **doc.to_dict()}
+        return response("success", "Retrieved post", post)
     except Exception as e:
-        return error("error" , str(e))
+        return error("error", str(e), 500)
 
 # TODO: test
 @post_bp.route('/<post_id>', methods=['PUT'])

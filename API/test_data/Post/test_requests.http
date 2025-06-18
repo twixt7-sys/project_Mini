@@ -19,10 +19,10 @@ Content-Type: application/json
 GET http://127.0.0.1:5000/api/posts/
 
 ### Get a single post
-GET http://127.0.0.1:5000/api/posts/{post_id}
+GET http://127.0.0.1:5000/api/posts/test_post
 
 ### Update a post
-PUT http://127.0.0.1:5000/api/posts/{post_id}
+PUT http://127.0.0.1:5000/api/posts/test_post
 Content-Type: application/json
 
 {
@@ -31,7 +31,7 @@ Content-Type: application/json
 }
 
 ### Delete a post
-DELETE http://127.0.0.1:5000/api/posts/{post_id}
+DELETE http://127.0.0.1:5000/api/posts/test_post
 
 ### Get posts by user
-GET http://127.0.0.1:5000/api/posts/{user_id}/
+GET http://127.0.0.1:5000/api/posts/test_user/
