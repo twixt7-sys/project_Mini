@@ -33,14 +33,14 @@
   <th align="center" width="300"> Frontend </th>
   <th align="center" width="300"> Database </th>
 <tr align="center">
-    <td width="300">
-        <img src="https://img.shields.io/badge/Flask-000000?style=for-the-badge&logo=flask&logoColor=white" height="80"/>
+    <td width="300" height="150">
+        <img src="https://img.shields.io/badge/Flask-000000?style=for-the-badge&logo=flask&logoColor=white" width="150"/>
     </td>
     <td width="300"> 
-        <img src="https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB" height="80"/>
+        <img src="https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB" width="150"/>
     </td>
     <td width="300"> 
-        <img src="https://img.shields.io/badge/Firebase-FFCA28?style=for-the-badge&logo=firebase&logoColor=white" height="80"/>
+        <img src="https://img.shields.io/badge/Firebase-FFCA28?style=for-the-badge&logo=firebase&logoColor=white" width="180"/>
     </td>
 </tr>
 </table>
