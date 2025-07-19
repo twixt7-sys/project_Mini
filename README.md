@@ -41,13 +41,8 @@
     </td>
     <td width="300"> 
         <img src="https://img.shields.io/badge/Firebase-FFCA28?style=for-the-badge&logo=firebase&logoColor=white" height="80"/>
-     </td>
-  </tr>
-    <tr align="center">
-    <td width="300"> * </td>
-    <td width="300"> * </td>
-    <td width="300"> * </td>
-  </tr>
+    </td>
+</tr>
 </table>
 
 ---
