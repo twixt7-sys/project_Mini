@@ -1,5 +1,7 @@
 # Project: Mini
 
+<img align="center"> ![alt text](screenshots/logo.png) </img>
+
 ---
 
 A Fullstack Mobile Application using ReactNative, Flask, and Firebase
@@ -44,6 +46,7 @@ A Fullstack Mobile Application using ReactNative, Flask, and Firebase
 
 ## Screenshots 📱
 
+![alt text](screenshots/index.png)
 
 -- to add
 
