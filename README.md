@@ -1,4 +1,8 @@
-# Mini: A Fullstack Mobile Application using ReactNative, Flask, and Firebase
+# Project: Mini
+
+---
+
+A Fullstack Mobile Application using ReactNative, Flask, and Firebase
 
 ---
 
@@ -19,8 +23,7 @@
 
 ---
 
-# Tech Stack ⚙️
-
+<h3 align="center">⚙️------ Tech Stack ------⚙️</h3>
 <table align="center">
   <th align="center" width="300"> Backend </th>
   <th align="center" width="300"> Frontend </th>
@@ -39,14 +42,14 @@
 
 ---
 
-# Screenshots 📱
+## Screenshots 📱
 
 
 -- to add
 
 ---
 
-# Instructions 📜
+## Instructions 📜
 
 -- to add
 
