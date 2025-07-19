@@ -77,32 +77,6 @@
         </td>
     </tr>
 </table>
-<hr>
-<table>
-    <tr>
-        <td width="300">
-            <h6 align="center">login</h6>
-        </td>
-        <td width="300">
-            <h6 align="center">register</h6>
-        </td>
-        <td width="300">
-            <h6 align="center">homapage</h6>
-        </td>
-        <td width="300">
-            <h6 align="center">FAB</h6>
-        </td>
-        <td width="300">
-            <h6 align="center">comment</h6>
-        </td>
-        <td width="300">
-            <h6 align="center">collapsed</h6>
-        </td>
-        <td width="300">
-            <h6 align="center">createpost</h6>
-        </td>
-    </tr>
-</table>
 
 ---
 
