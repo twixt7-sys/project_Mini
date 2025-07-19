@@ -2,11 +2,24 @@
 
 ---
 
-A basic fullstack mobile social media application that fosters simple features: writing posts, liking, commenting, as well as handling basic user authentication and error handling.
+    A basic fullstack mobile social media application that fosters simple functions: 
+    
+      📝: writing posts
+      ❤️: liking
+      💬: commenting
+    
+---
+
+    other features include:
+    
+      👤: basic user authentication
+      🔐: ensured security
+      ✅: proper error handling
+      ⚡: fast and responsive UI
 
 ---
 
-# Tech Stack
+# Tech Stack ⚙️
 
 <table align="center">
   <th align="center" width="300"> Backend </th>
@@ -23,3 +36,18 @@ A basic fullstack mobile social media application that fosters simple features: 
     <td width="300"> * </td>
   </tr>
 </table>
+
+---
+
+# Screenshots 📱
+
+
+-- to add
+
+---
+
+# Instructions 📜
+
+-- to add
+
+---
