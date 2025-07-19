@@ -1,10 +1,16 @@
 # Project: Mini
 
-<img align="center"> ![alt text](screenshots/logo.png) </img>
-
----
-
-A Fullstack Mobile Application using ReactNative, Flask, and Firebase
+<table  align="center">
+    <tr>
+        <td width="100" align="center">
+            <img src="screenshots/logo.jpg" width="50"/>
+        </td>
+        <td>
+            A Fullstack Mobile Application using
+            ReactNative, Flask, and Firebase
+        </td>
+    </tr>
+</table>
 
 ---
 
@@ -30,7 +36,7 @@ A Fullstack Mobile Application using ReactNative, Flask, and Firebase
   <th align="center" width="300"> Backend </th>
   <th align="center" width="300"> Frontend </th>
   <th align="center" width="300"> Database </th>
-    <tr align="center">
+<tr align="center">
     <td width="300"> * </td>
     <td width="300"> * </td>
     <td width="300"> * </td>
@@ -46,9 +52,57 @@ A Fullstack Mobile Application using ReactNative, Flask, and Firebase
 
 ## Screenshots 📱
 
-![alt text](screenshots/index.png)
-
--- to add
+<table>
+    <tr>
+        <td>
+            <img src="screenshots/login.jpg" width="300"/>
+        </td>
+        <td>
+            <img src="screenshots/register.jpg" width="300"/>
+        </td>
+        <td>
+            <img src="screenshots/homepage.jpg" width="300"/>
+        </td>
+        <td>
+            <img src="screenshots/FAB.jpg" width="300"/>
+        </td>
+        <td>
+            <img src="screenshots/comment.jpg" width="300"/>
+        </td>
+        <td>
+            <img src="screenshots/comment2.jpg" width="300"/>
+        </td>
+        <td>
+            <img src="screenshots/createpost.jpg" width="300"/>
+        </td>
+    </tr>
+</table>
+<hr>
+<table>
+    <tr>
+        <td width="300">
+            <h6 align="center">login</h6>
+        </td>
+        <td width="300">
+            <h6 align="center">register</h6>
+        </td>
+        <td width="300">
+            <h6 align="center">homapage</h6>
+        </td>
+        <td width="300">
+            <h6 align="center">FAB</h6>
+        </td>
+        <td width="300">
+            <h6 align="center">comment</h6>
+        </td>
+        <td width="300">
+            <h6 align="center">collapsed</h6>
+        </td>
+        <td width="300">
+            <h6 align="center">createpost</h6>
+        </td>
+    </tr>
+</table>
 
 ---
 
