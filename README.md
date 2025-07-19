@@ -1,16 +1,12 @@
-# Project: Mini
+# Project: Mini 📱
 
-<table  align="center">
-    <tr>
-        <td width="100" align="center">
-            <img src="screenshots/logo.jpg" width="50"/>
-        </td>
-        <td>
-            A Fullstack Mobile Application using
-            ReactNative, Flask, and Firebase
-        </td>
-    </tr>
-</table>
+---
+
+<p align="center">
+    <img src="screenshots/logo.jpg" width="150"/><br><br>
+    A Fullstack Mobile Application using <br>
+    ReactNative, Flask, and Firebase
+</p>
 
 ---
 
