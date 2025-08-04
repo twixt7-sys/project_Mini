@@ -1,7 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react'
 import {
 		View, Text, StyleSheet, TouchableHighlight, Animated,
-		KeyboardAvoidingView, Platform, TouchableWithoutFeedback, ScrollView, Keyboard,
 	} from 'react-native'
 import { Audio } from 'expo-av'
 import { Post } from '../types/Post'
@@ -21,6 +20,7 @@ const PostCard: React.FC<PostCardProps> = ({ post }) => {
 	const scaleAnim = useRef(new Animated.Value(1)).current
 	const sound = useRef<Audio.Sound | null>(null)
 
+	// To analyze==========================================
 	useEffect(() => {
 		const loadSound = async () => {
 			const { sound: loadedSound } = await Audio.Sound.createAsync(
@@ -38,11 +38,16 @@ const PostCard: React.FC<PostCardProps> = ({ post }) => {
 	const handleLikePress = async () => {
 		setLiked(!liked)
 		post.likes += liked ? -1 : 1
-		try {
-			await sound.current?.replayAsync()
-		} catch (error) {
-			console.log('Sound play error:', error)
+
+		if (sound.current) {
+			try {
+				await sound.current?.replayAsync()
+			} catch (error) {
+				console.log('Sound play error:', error)
+			}
 		}
+
+	// =====================================================
 
 		Animated.sequence([
 			Animated.timing(scaleAnim, {

@@ -1,5 +1,6 @@
-import React, { useState } from 'react'
-import { View, StyleSheet } from 'react-native'
+import React, { useState, useRef, useEffect } from 'react'
+import { View, StyleSheet, Animated, TouchableHighlight } from 'react-native'
+import { Audio } from 'expo-av'
 import { Ionicons } from '@expo/vector-icons'
 import Txt from './Txt'
 import AvatarIcon from './AvatarIcon'
@@ -14,11 +15,47 @@ interface CommentProps{
 
 const CommentComponent: React.FC<CommentProps> = ({ comment }) => {
     const [isLiked, setIsLiked] = useState(false)
-    
+        const scaleAnim = useRef(new Animated.Value(1)).current
+    const sound = useRef<Audio.Sound | null>(null)
+
+    useEffect(() => {
+        const loadSound = async () => {
+            const { sound: loadedSound } = await Audio.Sound.createAsync(
+                require('../../assets/audio/pop.mp3')
+            )
+            sound.current = loadedSound
+        }
+        loadSound()
+
+        return () => {
+            sound.current?.unloadAsync()
+        }
+    }, [])
+
     const handleLikePress = async () => {
         setIsLiked(!isLiked)
         comment.likes += isLiked ? -1 : 1
+        if (sound.current) {
+            try {
+                await sound.current?.replayAsync()
+            } catch (error) {
+                console.log('Sound play error:', error)
+            }
+        }
     }
+
+    Animated.sequence([
+        Animated.timing(scaleAnim, {
+            toValue: 1.4,
+            duration: 100,
+            useNativeDriver: true,
+        }),
+        Animated.timing(scaleAnim, {
+            toValue: 1,
+            duration: 100,
+            useNativeDriver: true,
+        })
+    ]).start()
 
     return (
         <>
@@ -30,7 +67,11 @@ const CommentComponent: React.FC<CommentProps> = ({ comment }) => {
                 <Txt text={comment.content} />
                 <View style={styles.footer}>
                     <Ionicons name='chatbubble-outline' size={18} color='#ffffff' style = {{ marginRight: 10 }} />
-                    <Ionicons name='heart-outline' size={20} color='#ffffff' style = {{ marginRight: 10 }} />
+                    <TouchableHighlight onPress={handleLikePress} underlayColor="transparent">
+                        <Animated.View style={{ transform: [{ scale: scaleAnim }] }}>
+                            <Ionicons name={isLiked ? 'heart' : 'heart-outline'} size={22} color='#ffffff' />
+                        </Animated.View>
+                    </TouchableHighlight>
                 </View>
             </View>
         </>
