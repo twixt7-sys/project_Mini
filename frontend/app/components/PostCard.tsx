@@ -108,7 +108,7 @@ const PostCard: React.FC<PostCardProps> = ({ post }) => {
 				</TouchableHighlight>
 			</View>
 
-			<CommentSection isCollapsed={isCollapsed} setIsCollapsed={setIsCollapsed} />
+			<CommentSection isCollapsed={isCollapsed} setIsCollapsed={setIsCollapsed}/>
 		</View>
 	)
 }

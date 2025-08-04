@@ -3,7 +3,10 @@ import { View, TextInput, TouchableHighlight, FlatList, Animated, StyleSheet } f
 import { Ionicons } from '@expo/vector-icons'
 import dummyComments from '../dummy_data/dummy_comments'
 import Txt from '../components/Txt'
-
+import AvatarIcon from './AvatarIcon'
+import { Comment } from '../types/Comment'
+import dummyUsers from '../dummy_data/dummy_users'
+import CommentComponent from './CommentComponent'
 
 interface CommentSectionProps {
     isCollapsed: boolean
@@ -30,7 +33,7 @@ const CommentSection: React.FC<CommentSectionProps> = ({ isCollapsed, setIsColla
             const newComment = {
                 id: (comments.length + 1).toString(),
                 postId: '1',
-                author: 'You',
+                author: dummyUsers[0],
                 content: inputValue.trim(),
                 createdAt: new Date().toISOString(),
                 likes: 0,
@@ -61,10 +64,7 @@ const CommentSection: React.FC<CommentSectionProps> = ({ isCollapsed, setIsColla
                             showsVerticalScrollIndicator={false}
                             nestedScrollEnabled={true}
                             renderItem={({ item }) => (
-                                <View style={styles.commentItem}>
-                                    <Txt text={item.author} style_={{ marginBottom: 5, fontWeight: 'bold'}} />
-                                    <Txt text={item.content} />
-                                </View>
+                                <CommentComponent comment={item}/>
                             )}
                         />
                     </View>
@@ -141,13 +141,6 @@ const styles = StyleSheet.create({
 		width: '97.5%',
 		height: 50,
 		marginTop: 15
-	},
-	commentItem: {
-		marginBottom: 10,
-		backgroundColor: '#DfD3',
-		borderRadius: 10,
-		padding: 10,
-		paddingVertical: 20
 	},
 	inputField: {
 		backgroundColor: '#fff',

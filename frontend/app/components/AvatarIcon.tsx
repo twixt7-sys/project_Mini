@@ -2,13 +2,34 @@ import React from "react";
 import { View, StyleSheet, Image } from "react-native";
 
 const AvatarIcon = ({ uri, size }: { uri: string; size: number }) => {
+  const statusSize = size * 0.30;   // 24% of avatar size
+  const statusOffset = size * 0.00; // 0% from bottom/right
+
   return (
     <>
       {/*Avatar*/}
-      <View style={[styles.container, { width: size, height: size, borderRadius: size / 2 }]}>
+      <View style={[
+        styles.container,
+        { width: size, height: size, borderRadius: size / 2 }
+      ]}>
         {/*Active status button*/}
-        <View style={{ position: "absolute", bottom: 25, right: 25, width: 12, height: 12, borderRadius: 6, backgroundColor: "#2C2", zIndex: 1, borderColor: '#9E9', borderWidth: 2, shadowColor: '#000', elevation: 3, shadowRadius: 10}} />
-
+        <View
+          style={{
+            position: "absolute",
+            bottom: statusOffset,
+            right: statusOffset,
+            width: statusSize,
+            height: statusSize,
+            borderRadius: statusSize / 2,
+            backgroundColor: "#2C2",
+            zIndex: 1,
+            borderColor: '#9E9',
+            borderWidth: 2,
+            shadowColor: '#000',
+            elevation: 3,
+            shadowRadius: 10
+          }}
+        />
         <Image
           source={{ uri }}
           style={[styles.image, { borderRadius: size / 2 }]}

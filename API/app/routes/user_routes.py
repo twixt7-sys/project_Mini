@@ -1,4 +1,4 @@
-from flask import Blueprint, request, jsonify
+from flask import Blueprint, request
 from app.services.frebase_service import db
 from app.utilities.Utils import response, error
 
