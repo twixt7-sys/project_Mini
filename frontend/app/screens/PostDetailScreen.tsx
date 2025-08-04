@@ -1,7 +1,7 @@
 import React from 'react'
 import { View, Text, ScrollView } from 'react-native'
 import { RouteProp, useRoute } from '@react-navigation/native'
-import { Post } from '../types/post'
+import { Post } from '../types/Post'
 
 type PostDetailRoute = RouteProp<{ params: { post: Post } }, 'params'>
 
@@ -13,7 +13,7 @@ const PostDetailScreen = () => {
 		<ScrollView contentContainerStyle={{ padding: 20 }}>
 			<Text style={{ fontSize: 24, fontWeight: 'bold' }}>{post.title}</Text>
 			<Text>{post.content}</Text>
-			<Text>By: {post.author}</Text>
+			<Text>By: {post.author.username}</Text>
 		</ScrollView>
 	)
 }
