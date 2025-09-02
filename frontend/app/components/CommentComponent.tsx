@@ -15,7 +15,7 @@ interface CommentProps{
 
 const CommentComponent: React.FC<CommentProps> = ({ comment }) => {
     const [isLiked, setIsLiked] = useState(false)
-        const scaleAnim = useRef(new Animated.Value(1)).current
+    const scaleAnim = useRef(new Animated.Value(1)).current
     const sound = useRef<Audio.Sound | null>(null)
 
     useEffect(() => {
@@ -32,8 +32,8 @@ const CommentComponent: React.FC<CommentProps> = ({ comment }) => {
         }
     }, [])
 
-    const handleLikePress = async () => {
-        setIsLiked(!isLiked)
+    const handleLike = async () => {
+        setIsLiked(!isCommentLiked)
         comment.likes += isLiked ? -1 : 1
         if (sound.current) {
             try {
