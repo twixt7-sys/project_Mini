@@ -67,7 +67,7 @@ const CommentComponent: React.FC<CommentProps> = ({ comment }) => {
                 <Txt text={comment.content} />
                 <View style={styles.footer}>
                     <Ionicons name='chatbubble-outline' size={18} color='#ffffff' style = {{ marginRight: 10 }} />
-                    <TouchableHighlight onPress={handleLikePress} underlayColor="transparent">
+                    <TouchableHighlight onPress={handleLike} underlayColor="transparent">
                         <Animated.View style={{ transform: [{ scale: scaleAnim }] }}>
                             <Ionicons name={isLiked ? 'heart' : 'heart-outline'} size={22} color='#ffffff' />
                         </Animated.View>
